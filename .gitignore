@@ -3,5 +3,6 @@
 a.js
 *.log
 
+dist
 coverage
 node_modules
