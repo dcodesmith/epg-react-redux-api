@@ -1,0 +1,7 @@
+.DS_Store
+*.txt
+a.js
+*.log
+
+coverage
+node_modules
