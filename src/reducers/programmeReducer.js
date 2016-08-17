@@ -9,16 +9,19 @@ import initialState from './initialState';
 
 export default function programmeReducer(state = initialState.programmes, action) {
   switch (action.type) {
-    case LOAD_PROGRAMMES_SUCCESS:
+    case LOAD_PROGRAMMES_SUCCESS: {
       return action.programmes;
+    }
 
-    case CREATE_PROGRAMMES_SUCCESS:
+    case CREATE_PROGRAMMES_SUCCESS: {
       return [ ...state, ...action.programmes ];
+    }
 
-    case DELETE_PROGRAMMES_SUCCESS:
+    case DELETE_PROGRAMMES_SUCCESS: {
       let s = [...state];
       console.log('s', s);
       return [];
+    }
 
     // case UPDATE_COURSE_SUCCESS:
     //   return [
