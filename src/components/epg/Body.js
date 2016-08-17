@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-
 import ProgrammeItem from './ProgrammeItem';
 
 const Body = ({ programmes, transformStyle }) => {
@@ -10,29 +9,30 @@ const Body = ({ programmes, transformStyle }) => {
     'epg-fade': channels.length > 0
   });
 
+  const getProgrammesNodes = (channel) => {
+    return programmes[channel].map((programme, index) =>
+      <ProgrammeItem programme={programme} key={index}/>
+    );
+  };
+
+  const channelsNodes = channels.map((channel, index) =>
+
+    <div key={index} className="programme-guide__row">
+      <div className="programme-guide__row__header">
+        {channel}
+      </div>
+
+      <div className="programme-guide__row__items" style={transformStyle}>
+        <ul className="schedule">
+          {getProgrammesNodes(channel)}
+        </ul>
+      </div>
+    </div>
+  );
+
   return (
     <div className={klass}>
-
-      {channels.map((channel, index) =>
-
-        // <ChannelRow channel={channel} programmes={programmes}/>
-
-        <div key={index} className="programme-guide__row">
-
-          <div className="programme-guide__row__header">
-            {channel}
-          </div>
-
-          <div className="programme-guide__row__items" style={transformStyle}>
-            <ul className="schedule">
-              {programmes[channel].map((programme, id) =>
-                <ProgrammeItem programme={programme} key={id}/>
-              )}
-            </ul>
-          </div>
-
-        </div>
-      )}
+      {channelsNodes}
     </div>
   );
 };

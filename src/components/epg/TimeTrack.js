@@ -20,13 +20,15 @@ const TimeTrack = ({ times }) => {
     }
   };
 
+  const timeNodes = times.map((time, index) =>
+    <li key={index} className="programme-guide__showtimes__time">
+      {formatTrackTime(time)}
+    </li>
+  );
+
   return (
     <ul className="programme-guide__showtimes">
-      {times.map((time, index) =>
-        <li key={index} className="programme-guide__showtimes__time">
-          {formatTrackTime(time)}
-        </li>
-      )}
+      {timeNodes}
     </ul>
   );
 };

@@ -18,17 +18,19 @@ const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
     WebkitTransform: 'translate3d(' + (ITEM_WIDTH * selectedDateIndex) + 'px, 0, 0)'
   };
 
+  const dateNodes = dates.map((date, index) =>
+    <li key={index} className={isActive(index)}>
+      <button className="date" onClick={onSelect.bind(null, index)}>
+        <span>{moment(date.value).format("dddd")}</span>
+        <span>{moment(date.value).format("Do")}</span>
+      </button>
+    </li>
+  );
+
   return (
     <div className="date-selector">
       <ul className="date-selector__list">
-        {dates.map((date, index) =>
-          <li key={index} className={isActive(index)}>
-            <button className="date" onClick={onSelect.bind(null, index)}>
-              <span>{moment(date.value).format("dddd")}</span>
-              <span>{moment(date.value).format("Do")}</span>
-            </button>
-          </li>
-        )}
+        {dateNodes}
       </ul>
       <span style={transitionStyle} className="date-selector__list__item--underlined"/>
     </div>
