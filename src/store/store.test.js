@@ -12,8 +12,8 @@ describe('Store', () => {
     const action = createProgrammeSuccess(course);
     store.dispatch(action);
 
-    const actual = store.getState().programmes[0];
-    const expected = {};
+    const actual = store.getState().programmes;
+    const expected = [];
 
     expect(actual).toEqual(expected);
   });
