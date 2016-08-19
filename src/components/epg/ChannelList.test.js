@@ -3,7 +3,7 @@ import expect from 'expect';
 import { shallow } from 'enzyme';
 import ChannelList from './ChannelList';
 
-describe.only('ChannelList', () => {
+describe('ChannelList', () => {
 
   describe('Given there are 4 channels', () => {
     let channels = [{id: 1, name: 'name', code: '0lo08w'}];
