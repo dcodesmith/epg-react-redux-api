@@ -3,7 +3,7 @@ import expect from 'expect';
 import { shallow } from 'enzyme';
 import DateSelector from './DateSelector';
 
-describe('DateSelector', () => {
+describe.skip('DateSelector', () => {
 
   describe('Given ...', () => {
 

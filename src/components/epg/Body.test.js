@@ -3,7 +3,7 @@ import expect from 'expect';
 import { shallow } from 'enzyme';
 import Body from './Body';
 
-describe('Body', () => {
+describe.skip('Body', () => {
 
   describe('Given ...', () => {
 

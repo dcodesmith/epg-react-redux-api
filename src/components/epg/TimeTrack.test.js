@@ -3,7 +3,7 @@ import expect from 'expect';
 import { shallow } from 'enzyme';
 import TImeTrack from './TImeTrack';
 
-describe('TImeTrack', () => {
+describe.skip('TImeTrack', () => {
 
   describe('Given ...', () => {
 

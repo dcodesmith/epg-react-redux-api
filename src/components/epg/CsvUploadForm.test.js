@@ -3,7 +3,7 @@ import expect from 'expect';
 import { shallow } from 'enzyme';
 import CsvUploadForm from './CsvUploadForm';
 
-describe('CsvUploadForm', () => {
+describe.skip('CsvUploadForm', () => {
 
   describe('Given ...', () => {
 

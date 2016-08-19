@@ -54,6 +54,8 @@ class Index extends Component {
   onNavigate(direction) {
     const HOUR_WIDTH = 150;
 
+    console.log('inna hia');
+
     let offset = this.state.offset + direction;
     let abscissa = `${-offset * HOUR_WIDTH}px`;
     let style = {
