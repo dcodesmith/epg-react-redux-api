@@ -68,7 +68,7 @@ describe('Controls', () => {
       });
     });
 
-    describe('And the offset value is greater than 0 and less than ...', () => {
+    describe('And the offset value is greater than 0 and less than the last offset', () => {
       let offset = 1;
 
       describe('When the component is rendered', () => {
@@ -116,7 +116,7 @@ describe('Controls', () => {
       });
     });
 
-    describe('And the offset value is equal than 0 and less than ...', () => {
+    describe('And the offset value is equal to or greater than the last offset', () => {
       let offset = 6;
 
       describe('When the component is rendered', () => {
