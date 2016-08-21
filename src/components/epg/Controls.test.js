@@ -37,7 +37,6 @@ describe('Controls', () => {
         });
 
         describe('And the next button is clicked', () => {
-
           before(() => {
             component.find('.next').simulate('click');
           });
@@ -53,7 +52,6 @@ describe('Controls', () => {
         });
 
         describe('And the previous button is clicked', () => {
-
           before(() => {
             component.find('.previous').simulate('click');
           });
@@ -68,7 +66,6 @@ describe('Controls', () => {
           });
         });
       });
-
     });
 
     describe('And the offset value is greater than 0 and less than ...', () => {
@@ -166,7 +163,5 @@ describe('Controls', () => {
         });
       });
     });
-
   });
-
 });
