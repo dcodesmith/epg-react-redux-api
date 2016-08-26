@@ -8,7 +8,7 @@ const CsvUploadForm = ({ onUpload, isUploading, label, onFileChange }) => {
         <div className="form-group">
           <label className="col-sm-3 control-label" htmlFor="file_selector">Choose CSV File</label>
           <div className="col-sm-9">
-            <div className="file-chooser ng-isolate-scope">
+            <div className="file-chooser">
 
               <input
                 onChange={onFileChange}
