@@ -2,8 +2,8 @@
 // always reset spy() after event trigger
 
 import React from 'react';
-import expect from 'expect';
 import sinon from 'sinon';
+import expect from 'expect';
 import { mount } from 'enzyme';
 import Controls from './Controls';
 
