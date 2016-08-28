@@ -76,7 +76,6 @@ describe.only('CsvUploadForm', () => {
         });
       });
 
-
       describe('AND a CSV file is being uploaded', () => {
         let form;
         let uploading = true;
