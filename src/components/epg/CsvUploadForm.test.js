@@ -60,9 +60,9 @@ describe.only('CsvUploadForm', () => {
           expect(onFileChange.calledOnce).toEqual(true);
         });
 
-        describe('AND the form is submitted', () => {
+        describe('WHEN the form is submitted', () => {
           before(() => {
-            form.simulate('submit');
+            form.find('button').simulate('click');
           });
 
           after(() => {
@@ -72,6 +72,36 @@ describe.only('CsvUploadForm', () => {
           it('should call `onUpload()` once', () => {
             expect(onUpload.callCount).toEqual(1);
             expect(onUpload.calledOnce).toEqual(true);
+          });
+        });
+      });
+
+
+      describe('AND a CSV file is being uploaded', () => {
+        let form;
+        let uploading = true;
+
+        before(() => {
+          component = render(uploading);
+          form = component.find('form');
+        });
+
+        it('should have a disabled Submit button', () => {
+          expect(form.find('button').prop('disabled')).toBe(true);
+        });
+
+        describe('WHEN the form is submitted', () => {
+          before(() => {
+            form.find('button').simulate('click');
+          });
+
+          after(() => {
+            onUpload.reset();
+          });
+
+          it('should NOT call `onUpload()`', () => {
+            expect(onUpload.callCount).toEqual(0);
+            expect(onUpload.calledOnce).toEqual(false);
           });
         });
       });
