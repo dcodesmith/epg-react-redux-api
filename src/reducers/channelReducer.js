@@ -8,18 +8,6 @@ export default function channelReducer(state = initialState.channels, action) {
     case LOAD_CHANNELS_SUCCESS:
       return action.channels;
 
-    // case CREATE_COURSE_SUCCESS:
-    //   return [
-    //     ...state,
-    //     Object.assign({}, action.course)
-    //   ];
-    //
-    // case UPDATE_COURSE_SUCCESS:
-    //   return [
-    //     ...state.filter(course => course.id !== action.course.id),
-    //     Object.assign({}, action.course)
-    //   ];
-
     default:
       return state;
   }
