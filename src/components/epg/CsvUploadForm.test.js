@@ -14,7 +14,7 @@ function render(isUploading = false, label = 'Text') {
   return mount(<CsvUploadForm {...props} />);
 }
 
-describe.only('CsvUploadForm', () => {
+describe('CsvUploadForm', () => {
 
   describe('Given an Upload CSV Form Component', () => {
 
