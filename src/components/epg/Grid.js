@@ -10,7 +10,7 @@ const Grid = ({ programmes, offset, onNavigate, times, transformStyle, onClear }
 
   return (
     <div className="programme-guide">
-      <Header times={times}/>
+      <Header times={times} transformStyle={transformStyle}/>
       <Body programmes={programmes} transformStyle={transformStyle}/>
       <Controls onNavigate={onNavigate} offset={offset} times={times}/>
       <Toolbar onClear={onClear}/>
