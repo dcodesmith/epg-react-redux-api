@@ -7,10 +7,10 @@ const Controls = ({ onNavigate, offset, times }) => {
 
   return (
     <div className="programme-guide__controls">
-      <button className="previous" disabled={!offset} onClick={onNavigate.bind(null, -1)}>
+      <button title="Previous 1 hr" className="previous" disabled={!offset} onClick={onNavigate.bind(null, -1)}>
         <span>&laquo;</span>
       </button>
-      <button className="next" disabled={offset >= LAST_OFFSET} onClick={onNavigate.bind(null, 1)}>
+      <button title="Next 1 hr" className="next" disabled={offset >= LAST_OFFSET} onClick={onNavigate.bind(null, 1)}>
         <span>&raquo;</span>
       </button>
     </div>
