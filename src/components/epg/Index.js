@@ -15,10 +15,21 @@ const FILE_CHOOSER_LABEL = 'No File Chosen';
 class Index extends Component {
   constructor(props, context) {
     super(props, context);
-
+    let initialOffest;
     const HOUR_WIDTH = 150;
+    const currentHour = (new Date()).getHours();
 
-    let offset = 0;
+    if (currentHour >= 21) {
+      initialOffest = 18;
+    } else if (currentHour <= 6) {
+      initialOffest = 0;
+    } else {
+      initialOffest = currentHour - 3;
+    }
+
+    // on load, offset should be set by getting the hour in the day
+
+    let offset = initialOffest;
     let abscissa = `${-offset * HOUR_WIDTH}px`;
 
     this.state = {
@@ -26,7 +37,7 @@ class Index extends Component {
       label: FILE_CHOOSER_LABEL,
       selectedDateIndex: 0,
       offset: offset,
-      sytle: {
+      style: {
         transform: `translate3d(${abscissa}, 0, 0)`,
         WebkitTransform: `translate3d(${abscissa}, 0, 0)`
       }
@@ -37,7 +48,6 @@ class Index extends Component {
     this.onFileChange = this.onFileChange.bind(this);
     this.onUploadCSV = this.onUploadCSV.bind(this);
     this.onClear = this.onClear.bind(this);
-
   }
 
   onSelectDate(selectedDateIndex) {
@@ -53,8 +63,6 @@ class Index extends Component {
 
   onNavigate(direction) {
     const HOUR_WIDTH = 150;
-
-    console.log('inna hia');
 
     let offset = this.state.offset + direction;
     let abscissa = `${-offset * HOUR_WIDTH}px`;
