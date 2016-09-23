@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import moment from 'moment';
 
-const TimeTrack = ({ times }) => {
+const TimeTrack = ({ times, transformStyle }) => {
 
   const formatTrackTime = (timestamp) => {
     let time = pad(timestamp.toString());
@@ -27,14 +27,15 @@ const TimeTrack = ({ times }) => {
   );
 
   return (
-    <ul className="programme-guide__showtimes">
+    <ul className="programme-guide__showtimes" style={transformStyle}>
       {timeNodes}
     </ul>
   );
 };
 
 TimeTrack.propTypes = {
-  times: PropTypes.array.isRequired
+  times: PropTypes.array.isRequired,
+  transformStyle: PropTypes.object
 };
 
 export default TimeTrack;
