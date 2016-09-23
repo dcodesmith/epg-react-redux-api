@@ -18,6 +18,8 @@ const Body = ({ programmes, transformStyle }) => {
   const channelsNodes = channels.map((channel, index) =>
 
     <div key={index} className="programme-guide__row">
+      <div className="indicator">Afees Adedamola Kolawole</div>
+    
       <div className="programme-guide__row__header">
         {channel}
       </div>
