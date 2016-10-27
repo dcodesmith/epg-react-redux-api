@@ -16,9 +16,7 @@ describe.skip('Header', () => {
       });
 
       it('should ....', () => {
-        console.log(component.html());
       });
-
     });
   });
 });

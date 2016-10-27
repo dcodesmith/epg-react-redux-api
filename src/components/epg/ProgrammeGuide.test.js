@@ -16,7 +16,6 @@ describe.skip('ProgrammeGuide', () => {
       });
 
       it('should ....', () => {
-        console.log(component.html());
       });
 
     });

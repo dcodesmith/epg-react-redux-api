@@ -16,9 +16,7 @@ describe.skip('Body', () => {
       });
 
       it('should ....', () => {
-        console.log(component.html());
       });
-
     });
   });
 });

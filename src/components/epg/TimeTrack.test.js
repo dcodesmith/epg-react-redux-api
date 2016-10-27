@@ -16,9 +16,7 @@ describe.skip('TimeTrack', () => {
       });
 
       it('should ....', () => {
-        console.log(component.html());
       });
-
     });
   });
 });

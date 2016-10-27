@@ -16,9 +16,7 @@ describe.skip('Grid', () => {
       });
 
       it('should ....', () => {
-        console.log(component.html());
       });
-
     });
   });
 });
