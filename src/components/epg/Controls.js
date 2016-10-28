@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+import ControlButton from './ControlButton';
+
 const Controls = ({ onNavigate, offset, times }) => {
 
   const TRACK_LENGTH = 12;
@@ -7,12 +9,13 @@ const Controls = ({ onNavigate, offset, times }) => {
 
   return (
     <div className="programme-guide__controls">
-      <button title="Previous 1 hr" className="previous" disabled={!offset} onClick={onNavigate.bind(null, -1)}>
+      <ControlButton title="Previous 1 hr" klass="previous" isDisabled={!offset} direction={-1} onNavigate={onNavigate}>
         <span>&laquo;</span>
-      </button>
-      <button title="Next 1 hr" className="next" disabled={offset >= LAST_OFFSET} onClick={onNavigate.bind(null, 1)}>
+      </ControlButton>
+
+      <ControlButton title="Next 1 hr" klass="next" isDisabled={offset >= LAST_OFFSET} direction={1} onNavigate={onNavigate}>
         <span>&raquo;</span>
-      </button>
+      </ControlButton>
     </div>
   );
 };
