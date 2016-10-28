@@ -15,7 +15,8 @@ const Header = ({ times, transformStyle }) => {
 };
 
 Header.propTypes = {
-  times: PropTypes.array.isRequired
+  times: PropTypes.array.isRequired,
+  transformStyle: PropTypes.object
 };
 
 export default Header;

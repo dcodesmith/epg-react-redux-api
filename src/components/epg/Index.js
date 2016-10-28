@@ -153,9 +153,7 @@ function mapProgrammeToChannel({ programmes, channels }) {
 // TODO: Move into selector folder
 function getProgrammeDates(programmes) {
   let programmeDates = [];
-  let dates = programmes.map(programme => {
-    return new Date(programme.date);
-  });
+  let dates = programmes.map(programme => new Date(programme.date));
   let endDate = new Date(Math.max.apply(null, dates));
   let startDate = new Date(Math.min.apply(null, dates));
   let numberOfDays = moment(endDate).diff(moment(startDate), 'days') + 1;
