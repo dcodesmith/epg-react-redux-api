@@ -54,7 +54,6 @@ export function deleteProgrammes() {
   return dispatch => {
     dispatch(beginAjaxCall());
     return programmeApi.delete().then(programmes => {
-      console.log('programmes', programmes);
       dispatch(deteleProgrammeSuccess(programmes));
     }).catch(error => {
       dispatch(ajaxCallError());
