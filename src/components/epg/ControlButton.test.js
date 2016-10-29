@@ -22,7 +22,7 @@ function render(props) {
   return mount(<ControlButton {...props} />);
 }
 
-describe.only('ControlButton', () => {
+describe('ControlButton', () => {
   describe('Given a ControlButton component', () => {
     let component;
     let button;
