@@ -26,7 +26,7 @@
     "url": "https://github.com/dcodesmith/epg-react-redux-ui.git"
   },
   "dependencies": {
-    "babel-polyfill": "6.16.0",
+    "babel-polyfill": "6.23.0",
     "bootstrap": "3.3.7",
     "isomorphic-fetch": "2.2.1",
     "moment": "2.16.0",
