@@ -2,13 +2,13 @@ import React, { PropTypes } from 'react';
 import moment from 'moment';
 
 const ProgrammeItem = ({ programme }) => {
-
   const setItemStyle = (programme) => {
     const ONE_MILLISECOND = 60 * 1000;
     const TRACK_WIDTH = 75;
+    const TIME_FORMAT = 'HH:mm';
 
-    let startTime = moment(programme.startTime, 'HH:mm');
-    let endTime = moment(programme.endTime, 'HH:mm');
+    let startTime = moment(programme.startTime, TIME_FORMAT);
+    let endTime = moment(programme.endTime, TIME_FORMAT);
     let duration = endTime.diff(startTime) / ONE_MILLISECOND;
 
     return { width: `${(duration * TRACK_WIDTH) / 30}px` };

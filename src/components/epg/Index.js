@@ -37,7 +37,6 @@ class Index extends Component {
     this.onFileChange = this.onFileChange.bind(this);
     this.onUploadCSV = this.onUploadCSV.bind(this);
     this.onClear = this.onClear.bind(this);
-
   }
 
   onSelectDate(selectedDateIndex) {
