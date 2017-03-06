@@ -58,7 +58,7 @@
     "eslint": "3.9.0",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-react": "6.4.1",
-    "eslint-watch": "2.1.14",
+    "eslint-watch": "3.0.0",
     "eventsource-polyfill": "0.9.6",
     "expect": "1.20.2",
     "express": "4.14.0",
