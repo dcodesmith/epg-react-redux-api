@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 import ChannelList from './ChannelList';
 
 describe('ChannelList', () => {
-
   describe('Given there are 4 channels', () => {
     let channels = [{id: 1, name: 'name', code: '0lo08w'}];
 
@@ -24,13 +23,16 @@ describe('ChannelList', () => {
         expect(component.find('ul').find('li').length).toBe(channels.length);
       });
 
-      it(`should have child elements text content matching the channel property`, () => {
+      it(`should have one ${channels.length} li/child elements`, () => {
+        expect(component.find('ul').find('li').length).toBe(channels.length);
+      });
+
+      it('should have child elements text content matching the channel property', () => {
         component.find('ul').find('li').forEach((node, index) => {
           expect(node.find('.channel__name').text()).toEqual(channels[index].name);
           expect(node.find('.channel__code').text()).toEqual(channels[index].code);
         });
       });
-
     });
   });
 });

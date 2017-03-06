@@ -3,19 +3,20 @@ import classNames from 'classnames';
 
 import TimeTrack from './TimeTrack';
 
-const Header = ({ times }) => {
+const Header = ({ times, transformStyle }) => {
 
   return (
     <div className="programme-guide__header">
       <div className="programme-guide__header__legend">&nbsp;</div>
 
-      <TimeTrack times={times}/>
+      <TimeTrack times={times} transformStyle={transformStyle}/>
     </div>
   );
 };
 
 Header.propTypes = {
-  times: PropTypes.array.isRequired
+  times: PropTypes.array.isRequired,
+  transformStyle: PropTypes.object
 };
 
 export default Header;

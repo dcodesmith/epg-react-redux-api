@@ -16,9 +16,7 @@ describe.skip('DateSelector', () => {
       });
 
       it('should ....', () => {
-        console.log(component.html());
       });
-
     });
   });
 });

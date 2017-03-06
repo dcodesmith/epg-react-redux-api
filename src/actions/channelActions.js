@@ -4,7 +4,6 @@ import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
 
 export function loadChannelsSuccess(channels) {
-  // console.log('loadChannelsSuccess', channels);
   return { type: LOAD_CHANNELS_SUCCESS, channels };
 }
 

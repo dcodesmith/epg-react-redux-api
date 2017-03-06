@@ -1,9 +1,9 @@
 import React from 'react';
 import expect from 'expect';
 import { shallow } from 'enzyme';
-import TImeTrack from './TImeTrack';
+import TImeTrack from './TimeTrack';
 
-describe.skip('TImeTrack', () => {
+describe.skip('TimeTrack', () => {
 
   describe('Given ...', () => {
 
@@ -16,9 +16,7 @@ describe.skip('TImeTrack', () => {
       });
 
       it('should ....', () => {
-        console.log(component.html());
       });
-
     });
   });
 });

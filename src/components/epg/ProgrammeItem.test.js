@@ -16,9 +16,7 @@ describe.skip('ProgrammeItem', () => {
       });
 
       it('should ....', () => {
-        console.log(component.html());
       });
-
     });
   });
 });

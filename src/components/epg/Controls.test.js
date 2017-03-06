@@ -17,9 +17,7 @@ function render(offset = 0, times = new Array(24)) {
 }
 
 describe('Controls', () => {
-
   describe('Given a 24hr time track starting from the beginning/offset = 0', () => {
-
     describe('And the offset value is 0', () => {
       // let offset = 0;
 

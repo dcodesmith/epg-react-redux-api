@@ -16,9 +16,7 @@ describe.skip('Toolbar', () => {
       });
 
       it('should ....', () => {
-        console.log(component.html());
       });
-
     });
   });
 });

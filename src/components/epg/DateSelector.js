@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import moment from 'moment';
 
+import DateNodeButton from './DateNodeButton';
+
 const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
 
   const ITEM_WIDTH = 150;
@@ -20,10 +22,7 @@ const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
 
   const dateNodes = dates.map((date, index) =>
     <li key={index} className={isActive(index)}>
-      <button className="date" onClick={onSelect.bind(null, index)}>
-        <span>{moment(date.value).format("dddd")}</span>
-        <span>{moment(date.value).format("Do")}</span>
-      </button>
+      <DateNodeButton index={index} date={date} onSelect={onSelect} />
     </li>
   );
 
