@@ -3,13 +3,13 @@ import React, { PropTypes } from 'react';
 const ControlButton = (props) => {
   const { title, klass, isDisabled, onNavigate, direction, children } = props;
 
-  const _onClick = () => {
+  const onClick = () => {
     onNavigate(direction);
   };
 
   return (
-    <button title={title} className={klass} disabled={isDisabled} onClick={_onClick}>
-      {children}
+    <button title={ title } className={ klass } disabled={ isDisabled } onClick={ onClick }>
+      { children }
     </button>
   );
 };
@@ -18,9 +18,9 @@ ControlButton.propTypes = {
   title: PropTypes.string.isRequired,
   klass: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool.isRequired,
-  onNavigate: PropTypes.func,
-  direction: PropTypes.number,
-  children: PropTypes.element
+  onNavigate: PropTypes.func.isRequired,
+  direction: PropTypes.number.isRequired,
+  children: PropTypes.element.isRequired
 };
 
 export default ControlButton;

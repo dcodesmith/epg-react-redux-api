@@ -14,11 +14,10 @@ export default function programmeReducer(state = initialState.programmes, action
     }
 
     case CREATE_PROGRAMMES_SUCCESS: {
-      return [ ...state, ...action.programmes ];
+      return [...state, ...action.programmes];
     }
 
     case DELETE_PROGRAMMES_SUCCESS: {
-      let s = [...state];
       return [];
     }
 

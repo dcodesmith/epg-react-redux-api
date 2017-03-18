@@ -1,4 +1,4 @@
-import  { combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 import channels from './channelReducer';
 import programmes from './programmeReducer';
 import ajaxCallsInProgress from './ajaxStatusReducer';

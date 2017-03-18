@@ -13,7 +13,7 @@ export default {
   entry: './src/index',
   target: 'web', // node to bundle for node
   output: {
-    path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
+    path: path.join(__dirname, '/dist'), // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -31,7 +31,7 @@ export default {
     loaders: [
       { test: /(\.css)$/, loaders: ['style', 'css'] },
       { test: /\.less$/, exclude: /node_modules/, loader: ExtractTextPlugin.extract('style-loader', 'css!postcss-loader!less') },
-      { test: /\.js$/, include: path.join(__dirname, 'src'),loaders: ['babel'] },
+      { test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel'] },
       // { test: /(\.css)$/, loader: ExtractTextPlugin.extract('css?sourceMap') },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
       { test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000' },

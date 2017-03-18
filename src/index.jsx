@@ -1,13 +1,12 @@
-/* eslint import/default: 0 */
 import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import routes from './routes';
+
+import configureStore from './store/configureStore';
 import { loadChannels } from './actions/channelActions';
 import { loadProgrammes } from './actions/programmeActions';
+import App from './components/epg/Index';
 
 import './styles/base.less';
 
@@ -17,7 +16,7 @@ store.dispatch(loadProgrammes());
 
 render(
   <Provider store={store}>
-    <Router history={browserHistory} routes={routes} />
+    <App />
   </Provider>,
   document.getElementById('app')
 );

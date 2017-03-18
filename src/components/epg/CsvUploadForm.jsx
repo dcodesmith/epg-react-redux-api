@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 
 // Notes: Used onClick event on button instead of onSubmit event on form for testing reasons.
-// Form onSumit triggers regardless of submit buttons state (enable or disable), so can't test for eventHandler call
+// Form onSumit triggers regardless of submit buttons state (enable or disable),
+// ...so can't test for eventHandler call
 
 const CsvUploadForm = ({ onUpload, isUploading, label, onFileChange }) => {
+
   return (
     <div className="channel-panel col-xs-12 col-sm-6 col-lg-8">
       <form className="form-horizontal">
@@ -17,7 +19,7 @@ const CsvUploadForm = ({ onUpload, isUploading, label, onFileChange }) => {
                 onChange={onFileChange}
                 type="file"
                 id="file_selector"
-                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+                accept=".csv" />
 
               <label htmlFor="file_selector" className="control-label">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 17">
@@ -32,7 +34,11 @@ const CsvUploadForm = ({ onUpload, isUploading, label, onFileChange }) => {
 
         <div className="form-group">
           <div className="col-sm-offset-1 col-sm-11">
-            <button type="Submit" disabled={isUploading} onClick={onUpload} className="submit btn btn-primary btn-large">
+            <button
+              type="Submit"
+              disabled={ isUploading }
+              onClick={ onUpload }
+              className="submit btn btn-primary btn-large">
               Submit
             </button>
           </div>

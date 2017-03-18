@@ -2,8 +2,9 @@
 // Allowing console calls below since this is a build file.
 /* eslint no-console: 0 */
 import webpack from 'webpack';
-import webpackConfig from '../webpack.config.prod';
 import colors from 'colors';
+
+import webpackConfig from '../webpack.config.prod';
 
 process.env.NODE_ENV = 'production';
 

@@ -1,8 +1,10 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import moment from 'moment';
 import { bindActionCreators } from 'redux';
+import { range } from 'lodash';
+
+import { getProgrammeDates, getSelectedDatesProgrammes } from '../../utils';
+
 import * as programmeActions from '../../actions/programmeActions';
 
 import CsvUploadForm from './CsvUploadForm';
@@ -29,14 +31,14 @@ class Index extends Component {
 
     // on load, offset should be set by getting the hour in the day
 
-    let offset = initialOffest;
-    let abscissa = `${-offset * HOUR_WIDTH}px`;
+    const offset = initialOffest;
+    const abscissa = `${-offset * HOUR_WIDTH}px`;
 
     this.state = {
       csvFile: undefined,
       label: FILE_CHOOSER_LABEL,
       selectedDateIndex: 0,
-      offset: offset,
+      offset,
       style: {
         transform: `translate3d(${abscissa}, 0, 0)`,
         WebkitTransform: `translate3d(${abscissa}, 0, 0)`
@@ -53,7 +55,7 @@ class Index extends Component {
   onSelectDate(selectedDateIndex) {
     // TODO: reset position navigate
 
-    let style = {
+    const style = {
       transform: `translate3d(0, 0, 0)`,
       WebkitTransform: `translate3d(0, 0, 0)`
     };
@@ -63,10 +65,9 @@ class Index extends Component {
 
   onNavigate(direction) {
     const HOUR_WIDTH = 150;
-
-    let offset = this.state.offset + direction;
-    let abscissa = `${-offset * HOUR_WIDTH}px`;
-    let style = {
+    const offset = this.state.offset + direction;
+    const abscissa = `${-offset * HOUR_WIDTH}px`;
+    const style = {
       transform: `translate3d(${abscissa}, 0, 0)`,
       WebkitTransform: `translate3d(${abscissa}, 0, 0)`
     };
@@ -75,7 +76,7 @@ class Index extends Component {
   }
 
   onUploadCSV(event) {
-    let formData = new FormData();
+    const formData = new FormData();
 
     event.preventDefault();
 
@@ -86,46 +87,44 @@ class Index extends Component {
   }
 
   onFileChange(event) {
-    let csvFile = event.target.files[0];
-    let label = csvFile ? csvFile.name : FILE_CHOOSER_LABEL;
+    const csvFile = event.target.files[0];
+    const label = csvFile ? csvFile.name : FILE_CHOOSER_LABEL;
 
     this.setState({ label, csvFile });
   }
 
-  onClear(){
+  onClear() {
     this.props.actions.deleteProgrammes();
   }
 
   render() {
     const { channels, dates, programmes, times } = this.props;
+    const selectedDate = dates[this.state.selectedDateIndex];
+    const selectedProgrammes = getSelectedDatesProgrammes({ selectedDate, programmes, channels });
     const isUploading = false;
-
-    let selectedDate = dates[this.state.selectedDateIndex];
-    let selectedProgrammes = getSelectedDatesProgrammes({ selectedDate, programmes, channels });
 
     return (
       <div className="container">
-
         <CsvUploadForm
           onUpload={this.onUploadCSV}
           isUploading={isUploading}
           label={this.state.label}
-          onFileChange={this.onFileChange}/>
+          onFileChange={this.onFileChange} />
 
         <ProgrammeGuide>
           <DateSelector
             dates={dates}
             selectedDateIndex={this.state.selectedDateIndex}
-            onSelect={this.onSelectDate}/>
+            onSelect={this.onSelectDate} />
 
-          <Grid programmes={selectedProgrammes}
+          <Grid
+            programmes={selectedProgrammes}
             offset={this.state.offset}
             onNavigate={this.onNavigate}
             times={times}
             transformStyle={this.state.style}
-            onClear={this.onClear}/>
+            onClear={this.onClear} />
         </ProgrammeGuide>
-
       </div>
     );
   }
@@ -139,76 +138,18 @@ Index.propTypes = {
   times: PropTypes.array.isRequired
 };
 
-// TODO: Move into selector folder
-function mapProgrammeToChannel({ programmes, channels }) {
-
-  return programmes.map((programme) => {
-    programme.channel = _.find(channels, { id: programme.channel });
-
-    return programme;
-  });
-
-}
-
-// TODO: Move into selector folder
-function getProgrammeDates(programmes) {
-  let programmeDates = [];
-  let dates = programmes.map(programme => new Date(programme.date));
-  let endDate = new Date(Math.max.apply(null, dates));
-  let startDate = new Date(Math.min.apply(null, dates));
-  let numberOfDays = moment(endDate).diff(moment(startDate), 'days') + 1;
-  let i, value;
-
-  const DATE_FORMAT = 'YYYY-MM-DD';
-
-  for (i = 0; i < numberOfDays; i++) {
-    value = moment(startDate).add(i, 'days').format(DATE_FORMAT);
-    programmeDates[i] = {
-      day: i + 1,
-      value,
-      ISOString: new Date(value).toISOString()
-    };
-  }
-
-  return programmeDates;
-}
-
-// TODO: Move into selector folder
-function getSelectedDatesProgrammes({ selectedDate, programmes, channels }) {
-  let selectedDateProgrammes = {};
-  let todaysProgrammes = [];
-
-  if (!selectedDate || !programmes) {
-    return {};
-  }
-
-  todaysProgrammes = _.filter(programmes, { date: selectedDate.ISOString });
-
-  todaysProgrammes.forEach((programme, index, programmes) => {
-    selectedDateProgrammes[programme.channel.code] = _.filter(programmes, {
-      channel: programme.channel
-    });
-  });
-
-  return selectedDateProgrammes;
-}
-
-function mapStateToProps(state, ownProps) {
+const mapStateToProps = (state) => {
   const { programmes, channels } = state;
-
-  let dates = getProgrammeDates(programmes);
-  let mappedProgrammes = mapProgrammeToChannel({ programmes, channels });
-  let times = _.range(0, 24, .5);
+  const dates = getProgrammeDates(programmes);
+  const times = range(0, 24, 0.5);
   // from reducer/index.js
 
-  return { channels, programmes: mappedProgrammes, dates, times };
-}
+  return { channels, programmes, dates, times };
+};
 
-function mapDispatchToProps(dispatch) {
-  return {
+const mapDispatchToProps = dispatch => ({
     // createCourse: course => dispatch(courseActions.createCourse(course)) for just one action
-    actions: bindActionCreators(programmeActions, dispatch)
-  };
-}
+  actions: bindActionCreators(programmeActions, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

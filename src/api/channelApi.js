@@ -10,9 +10,8 @@ class ChannelApi {
   static create(data) {}
 
   static readAll() {
-    return fetch('http://localhost:8010/api/channels').then(response => {
-      return response.json();
-    });
+    return fetch('http://localhost:8010/v1/channels')
+      .then(response => response.json());
   }
 
   static update(data) {}

@@ -27,37 +27,37 @@ export function deteleProgrammeSuccess(programmes) {
 // }
 
 export function createProgrammes(data) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(beginAjaxCall());
-    return programmeApi.create(data).then(programmes => {
+    return programmeApi.create(data).then((programmes) => {
       dispatch(createProgrammeSuccess(programmes));
-    }).catch(error => {
+    }).catch((error) => {
       dispatch(ajaxCallError());
-      throw(error);
+      throw (error);
     });
   };
 }
 
 export function loadProgrammes() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(beginAjaxCall());
-    return programmeApi.readAll().then(programmes => {
+    return programmeApi.readAll({ populate: 'channel' }).then((programmes) => {
       dispatch(loadProgrammesSuccess(programmes));
-    }).catch(error => {
+    }).catch((error) => {
       dispatch(ajaxCallError());
-      throw(error);
+      throw (error);
     });
   };
 }
 
 export function deleteProgrammes() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(beginAjaxCall());
-    return programmeApi.delete().then(programmes => {
+    return programmeApi.delete().then((programmes) => {
       dispatch(deteleProgrammeSuccess(programmes));
-    }).catch(error => {
+    }).catch((error) => {
       dispatch(ajaxCallError());
-      throw(error);
+      throw (error);
     });
   };
 }

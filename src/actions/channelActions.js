@@ -16,13 +16,13 @@ export function loadChannelsSuccess(channels) {
 // }
 
 export function loadChannels() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(beginAjaxCall());
-    return channelApi.readAll().then(channels => {
+    return channelApi.readAll().then((channels) => {
       dispatch(loadChannelsSuccess(channels));
-    }).catch(error => {
+    }).catch((error) => {
       dispatch(ajaxCallError());
-      throw(error);
+      throw (error);
     });
   };
 }

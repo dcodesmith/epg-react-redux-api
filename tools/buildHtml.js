@@ -13,10 +13,12 @@ fs.readFile('src/index.html', 'utf8', (err, markup) => {
   console.log(markup);
   $('head').prepend('<link rel="stylesheet" type="text/css" href="style.css">');
 
-  fs.writeFile('dist/index.html', $.html(), 'utf8', function (err) {
+  /* eslint no-shadow: 0 */
+  fs.writeFile('dist/index.html', $.html(), 'utf8', (err) => {
     if (err) {
       return console.log(err);
     }
+
     console.log('index.html written to /dist'.green);
   });
 });

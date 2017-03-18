@@ -2,33 +2,34 @@ import React, { PropTypes } from 'react';
 import moment from 'moment';
 
 const TimeTrack = ({ times, transformStyle }) => {
-
   const formatTrackTime = (timestamp) => {
-    let time = pad(timestamp.toString());
+    const pad = (number) => {
+      if (number < 10) {
+        return `0${number}`;
+      }
+
+      return number;
+    };
+
+    const time = pad(timestamp.toString());
 
     if (time.indexOf('.') > 0) {
       return time.replace('.5', ':30');
     }
 
-    return time + ':00';
-
-    function pad(number) {
-      if (number < 10) {
-        return '0' + number;
-      }
-      return number;
-    }
+    return `${time}:00`;
   };
 
   const timeNodes = times.map((time, index) =>
+    /* eslint react/no-array-index-key:0 */
     <li key={index} className="programme-guide__showtimes__time">
-      {formatTrackTime(time)}
+      { formatTrackTime(time) }
     </li>
   );
 
   return (
-    <ul className="programme-guide__showtimes" style={transformStyle}>
-      {timeNodes}
+    <ul className="programme-guide__showtimes" style={ transformStyle }>
+      { timeNodes }
     </ul>
   );
 };

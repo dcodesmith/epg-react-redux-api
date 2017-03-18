@@ -4,19 +4,17 @@ import qs from 'querystring';
 /* let capi = new ChannelApi(api_url); */
 /* capi.readAll();                     */
 /* *********************************** */
-const API_URL = 'http://localhost:8010/api/programmes';
+const API_URL = 'http://localhost:8010/v1/programmes';
 
 class ProgrammeApi {
 
   static create(data) {
-    let url = `${API_URL}/import`;
+    const url = `${API_URL}/import`;
 
     return fetch(url, {
       method: 'POST',
       body: data
-    }).then(response => {
-      return response.json();
-    });
+    }).then(response => response.json());
   }
 
   static readAll(query) {
@@ -28,9 +26,7 @@ class ProgrammeApi {
       url += `?${queryString}`;
     }
 
-    return fetch(url).then(response => {
-      return response.json();
-    });
+    return fetch(url).then(response => response.json());
   }
 
   static update(data) {}
@@ -38,8 +34,10 @@ class ProgrammeApi {
   static delete(id) {
     return fetch(API_URL, {
       method: 'DELETE'
-    }).then(response => {
-      return response.json();
+    }).then((response) => {
+      if (response.ok && response.status === '204') {
+        return [];
+      }
     });
   }
 
