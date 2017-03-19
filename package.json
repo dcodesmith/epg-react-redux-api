@@ -8,7 +8,7 @@
     "open:src": "babel-node tools/server.js",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
-    "test": "mocha --reporter spec tools/.testSetup.js \"src/**/*.test.js\"",
+    "test": "mocha --reporter spec tools/.testSetup.js \"src/**/*.test.jsx\"",
     "test:watch": "npm test -- -w",
     "test:coverage": "scripts/coverage.sh",
     "a": "./node_modules/.bin/nyc --reporter=json --require babel-core/register ./node_modules/.bin/mocha tools/.testSetup.js \"src/**/*.test.js\"",

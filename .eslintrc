@@ -15,6 +15,9 @@
       "jsx": true
     }
   },
+  "globals": {
+    "expect": true
+  },
   "env": {
     "es6": true,
     "browser": true,
@@ -26,6 +29,7 @@
     "comma-dangle": ["error", "never"],
     "import/no-extraneous-dependencies": 0,
     "quotes": 0,
+    "no-unused-expressions": 0,
     "no-console": 1,
     "no-debugger": 1,
     "no-var": 1,
