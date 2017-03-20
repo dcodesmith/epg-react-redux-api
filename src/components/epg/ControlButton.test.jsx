@@ -24,7 +24,7 @@ const render = (testProps) => {
   const props = Object.assign({}, DEFAULT_PROPS, testProps);
 
   return shallow(<ControlButton {...props} />);
-}
+};
 
 const testProps = {};
 

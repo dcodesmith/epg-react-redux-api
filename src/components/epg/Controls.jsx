@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 import ControlButton from './ControlButton';
 
-const Controls = ({ onNavigate, offset, times }) => {
+const Controls = ({ onNavigate, offset = 0, times }) => {
   const TRACK_LENGTH = 12;
   const LAST_OFFSET = Math.floor(times.length - TRACK_LENGTH) / 2;
 
@@ -14,7 +14,7 @@ const Controls = ({ onNavigate, offset, times }) => {
         isDisabled={ !offset }
         direction={ -1 }
         onNavigate={ onNavigate }>
-        &laquo;
+        <span>&laquo;</span>
       </ControlButton>
 
       <ControlButton
@@ -23,7 +23,7 @@ const Controls = ({ onNavigate, offset, times }) => {
         isDisabled={ offset >= LAST_OFFSET }
         direction={ 1 }
         onNavigate={ onNavigate }>
-        &raquo;
+        <span>&raquo;</span>
       </ControlButton>
     </div>
   );
@@ -31,7 +31,7 @@ const Controls = ({ onNavigate, offset, times }) => {
 
 Controls.propTypes = {
   onNavigate: PropTypes.func.isRequired,
-  offset: PropTypes.number.isRequired,
+  offset: PropTypes.number,
   times: PropTypes.array.isRequired
 };
 

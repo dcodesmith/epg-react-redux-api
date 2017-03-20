@@ -1,164 +1,98 @@
-// NOTES: click events could still be triggered when element is disabled when `shallow` is used to render component
-// always reset spy() after event trigger
-
 import React from 'react';
 import sinon from 'sinon';
-import expect from 'expect';
-import { mount } from 'enzyme';
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
+
 import Controls from './Controls';
+import ControlButton from './ControlButton';
 
-const onNavigate = sinon.spy();
-let component;
+const DEFAULT_PROPS = {
+  onNavigate: sinon.spy(),
+  times: new Array(24)
+};
 
-function render(offset = 0, times = new Array(24)) {
-  let props = { onNavigate, offset, times };
+const render = (testProps) => {
+  const props = Object.assign({}, DEFAULT_PROPS, testProps);
 
-  return mount(<Controls {...props} />);
-}
+  return shallow(<Controls {...props} />);
+};
+
+const testProps = {};
 
 describe('Controls', () => {
-  describe('Given a 24hr time track starting from the beginning/offset = 0', () => {
+  describe('When the component is rendered', () => {
+    let component, controlButtonComponents, nextButton, previousButton;
+
+    beforeEach(() => {
+      component = render(testProps);
+      controlButtonComponents = component.find(ControlButton);
+      previousButton = controlButtonComponents.at(0);
+      nextButton = controlButtonComponents.at(1);
+    });
+
+    it('should render 2 `ControlButton` components', () => {
+      expect(controlButtonComponents).to.be.length(2);
+
+      controlButtonComponents.forEach((controlButtonComponent, index) => {
+        expect(controlButtonComponent.props().onNavigate).to.equal(DEFAULT_PROPS.onNavigate);
+      });
+    });
+
+    it('should have a previous ControlButton with the appropriate props', () => {
+      const { title, klass, direction } = previousButton.props();
+
+      expect(title).to.equal('Previous 1 hr');
+      expect(klass).to.equal('previous');
+      expect(direction).to.equal(-1);
+    });
+
+    it('should have a next ControlButton with the appropriate props', () => {
+      const { title, klass, direction } = nextButton.props();
+
+      expect(title).to.equal('Next 1 hr');
+      expect(klass).to.equal('next');
+      expect(direction).to.equal(1);
+    });
+
     describe('And the offset value is 0', () => {
-      // let offset = 0;
+      before(() => {
+        testProps.offset = 0;
+      });
 
-      describe('When the component is rendered', () => {
-        before(() => {
-          component = render();
-        });
+      it('should set the `isDisabled` previous button to false', () => {
+        expect(nextButton.props().isDisabled).to.be.false;
+      });
 
-        it('should have a disabled/unclickable previous button', () => {
-          expect(component.find('.previous').prop('disabled')).toBe(true);
-        });
-
-        it('should have an enabled/clickable next button', () => {
-          expect(component.find('.next').prop('disabled')).toBe(false);
-        });
-
-        describe('And the next button is clicked', () => {
-          before(() => {
-            component.find('.next').simulate('click');
-          });
-
-          after(() => {
-            onNavigate.reset();
-          });
-
-          it('should call `onNavigate()` once', () => {
-            expect(onNavigate.calledOnce).toEqual(true);
-            expect(onNavigate.callCount).toEqual(1);
-          });
-        });
-
-        describe('And the previous button is clicked', () => {
-          before(() => {
-            component.find('.previous').simulate('click');
-          });
-
-          after(() => {
-            onNavigate.reset();
-          });
-
-          it('should not call `onNavigate()`', () => {
-            expect(onNavigate.callCount).toEqual(0);
-            expect(onNavigate.notCalled).toEqual(true);
-          });
-        });
+      it('should set the `isDisabled` next button to true', () => {
+        expect(previousButton.props().isDisabled).to.be.true;
       });
     });
 
     describe('And the offset value is greater than 0 and less than the last offset', () => {
-      let offset = 1;
+      before(() => {
+        testProps.offset = 1;
+      });
 
-      describe('When the component is rendered', () => {
-        before(() => {
-          component = render(offset);
-        });
+      it('should set the `isDisabled` previous button to false', () => {
+        expect(nextButton.props().isDisabled).to.be.false;
+      });
 
-        it('should have a enabled/clickable previous button', () => {
-          expect(component.find('.previous').prop('disabled')).toBe(false);
-        });
-
-        it('should have an enabled/clickable next button', () => {
-          expect(component.find('.next').prop('disabled')).toBe(false);
-        });
-
-        describe('And the next button is clicked', () => {
-          before(() => {
-            component.find('.next').simulate('click');
-          });
-
-          after(() => {
-            onNavigate.reset();
-          });
-
-          it('should call `onNavigate()` once', () => {
-            expect(onNavigate.calledOnce).toEqual(true);
-            expect(onNavigate.callCount).toEqual(1);
-          });
-        });
-
-        describe('And the previous button is clicked', () => {
-          before(() => {
-            component.find('.previous').simulate('click');
-          });
-
-          after(() => {
-            onNavigate.reset();
-          });
-
-          it('should call `onNavigate()`', () => {
-            expect(onNavigate.calledOnce).toEqual(true);
-            expect(onNavigate.callCount).toEqual(1);
-          });
-        });
+      it('should set the `isDisabled` next button to false', () => {
+        expect(previousButton.props().isDisabled).to.be.false;
       });
     });
 
-    describe('And the offset value is equal to or greater than the last offset', () => {
-      let offset = 6;
+    describe('And the offset value is equal to or greater than the last offse', () => {
+      before(() => {
+        testProps.offset = 6;
+      });
 
-      describe('When the component is rendered', () => {
-        before(() => {
-          component = render(offset);
-        });
+      it('should set the `isDisabled` previous button to true', () => {
+        expect(nextButton.props().isDisabled).to.be.true;
+      });
 
-        it('should have an enabled/clickable previous button', () => {
-          expect(component.find('.previous').prop('disabled')).toBe(false);
-        });
-
-        it('should have a disabled/unclickable next button', () => {
-          expect(component.find('.next').prop('disabled')).toBe(true);
-        });
-
-        describe('And the next button is clicked', () => {
-          before(() => {
-            component.find('.next').simulate('click');
-          });
-
-          after(() => {
-            onNavigate.reset();
-          });
-
-          it('should call `onNavigate()` once', () => {
-            expect(onNavigate.calledOnce).toEqual(false);
-            expect(onNavigate.callCount).toEqual(0);
-          });
-        });
-
-        describe('And the previous button is clicked', () => {
-          before(() => {
-            component.find('.previous').simulate('click');
-          });
-
-          after(() => {
-            onNavigate.reset();
-          });
-
-          it('should call `onNavigate()`', () => {
-            expect(onNavigate.calledOnce).toEqual(true);
-            expect(onNavigate.callCount).toEqual(1);
-          });
-        });
+      it('should set the `isDisabled` next button to false', () => {
+        expect(previousButton.props().isDisabled).to.be.false;
       });
     });
   });
