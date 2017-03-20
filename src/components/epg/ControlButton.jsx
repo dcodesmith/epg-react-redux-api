@@ -4,7 +4,6 @@ const ControlButton = (props) => {
   const { title, klass, isDisabled, onNavigate, direction, children } = props;
 
   const onClick = () => {
-    console.log('direction', direction);
     onNavigate(direction);
   };
 
