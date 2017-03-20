@@ -4,8 +4,8 @@ import { shallow } from 'enzyme';
 import ChannelList from './ChannelList';
 
 describe('ChannelList', () => {
-  describe('Given there are 4 channels', () => {
-    let channels = [{id: 1, name: 'name', code: '0lo08w'}];
+  describe('Given a channel', () => {
+    let channels = [{ id: 1, name: 'name', code: '0lo08w' }];
 
     describe('When the the component is rendered', () => {
       let component;
@@ -15,15 +15,11 @@ describe('ChannelList', () => {
         component = shallow(<ChannelList {...props} />);
       });
 
-      it('should have one ul/parent element', () => {
+      it('should have 1 ul/parent element', () => {
         expect(component.find('ul').length).toBe(1);
       });
 
-      it(`should have one ${channels.length} li/child elements`, () => {
-        expect(component.find('ul').find('li').length).toBe(channels.length);
-      });
-
-      it(`should have one ${channels.length} li/child elements`, () => {
+      it(`should have ${channels.length} li/child elements`, () => {
         expect(component.find('ul').find('li').length).toBe(channels.length);
       });
 
