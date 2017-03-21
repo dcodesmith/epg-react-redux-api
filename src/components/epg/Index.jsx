@@ -99,31 +99,36 @@ class Index extends Component {
 
   render() {
     const { channels, dates, programmes, times } = this.props;
-    const selectedDate = dates[this.state.selectedDateIndex];
+    const { selectedDateIndex, label, offset, style } = this.state;
+
+    const selectedDate = dates[selectedDateIndex];
     const selectedProgrammes = getSelectedDatesProgrammes({ selectedDate, programmes, channels });
     const isUploading = false;
 
     return (
       <div className="container">
+        {/* TODO: Move CsvUploadForm into own HOC/Container. The reference the container here */}
         <CsvUploadForm
-          onUpload={this.onUploadCSV}
-          isUploading={isUploading}
-          label={this.state.label}
-          onFileChange={this.onFileChange} />
+          onUpload={ this.onUploadCSV }
+          isUploading={ isUploading }
+          label={ label }
+          onFileChange={ this.onFileChange } />
 
         <ProgrammeGuide>
+          {/* TODO: Move DateSelector into own HOC. Then reference the it in ProgrammeGuide */}
           <DateSelector
-            dates={dates}
-            selectedDateIndex={this.state.selectedDateIndex}
-            onSelect={this.onSelectDate} />
+            dates={ dates }
+            selectedDateIndex={ selectedDateIndex }
+            onSelect={ this.onSelectDate } />
 
+          {/* TODO: Move Grid into own HOC. Then reference the container it in ProgrammeGuide */}
           <Grid
-            programmes={selectedProgrammes}
-            offset={this.state.offset}
-            onNavigate={this.onNavigate}
-            times={times}
-            transformStyle={this.state.style}
-            onClear={this.onClear} />
+            programmes={ selectedProgrammes }
+            offset={ offset }
+            onNavigate={ this.onNavigate }
+            times={ times }
+            transformStyle={ style }
+            onClear={ this.onClear } />
         </ProgrammeGuide>
       </div>
     );
