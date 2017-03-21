@@ -1,49 +1,60 @@
 import React from 'react';
 import sinon from 'sinon';
-import expect from 'expect';
-import { shallow, mount } from 'enzyme';
+import { expect } from 'chai';
+
+import { shallow } from 'enzyme';
 import CsvUploadForm from './CsvUploadForm';
 
 const onFileChange = sinon.spy();
 const onUpload = sinon.spy();
-let component;
 
-function render(isUploading = false, label = 'Text') {
-  let props = { onUpload, isUploading, label, onFileChange };
+const DEFAULT_PROPS = {
+  onFileChange,
+  onUpload,
+  isUploading: false,
+  label: 'Text'
+};
 
-  return mount(<CsvUploadForm {...props} />);
-}
+const render = (testProps) => {
+  const props = Object.assign({}, DEFAULT_PROPS, testProps);
+
+  return shallow(<CsvUploadForm {...props} />);
+};
+
+const testProps = {};
 
 describe('CsvUploadForm', () => {
-
   describe('Given an Upload CSV Form Component', () => {
-
     describe('When the component is rendered', () => {
-      let form;
+      let component, form;
 
-      before(() => {
-        component = render();
+      beforeEach(() => {
+        component = render(testProps);
         form = component.find('form');
       });
 
       it('should have a form', () => {
-        expect(form.length).toEqual(1);
+        expect(form.length).to.equal(1);
       });
 
-      it('should have an input field of type file', () => {
-        expect(form.find('input').prop('type')).toEqual('file');
+      it('should have an input field with the appropriate props', () => {
+        const { onChange, accept, type } = form.find('input').props();
+        
+        expect(onChange).to.equal(DEFAULT_PROPS.onFileChange);
+        expect(type).to.equal('file');
+        expect(accept).to.equal('.csv');
       });
 
       it('should have a label with value `Text`', () => {
-        expect(form.find('label').find('span').text()).toEqual('Text');
+        expect(form.find('label').find('span').text()).to.equal('Text');
       });
 
-      it('should have a button of type Submit', () => {
-        expect(form.find('button').prop('type')).toEqual('Submit');
-      });
+      it('should have a button with the appropriate props', () => {
+        const { disabled, onClick, type } = form.find('button').props();
 
-      it('should have an active Submit button', () => {
-        expect(form.find('button').prop('disabled')).toBe(false);
+        expect(disabled).to.be.false;
+        expect(type).to.equal('Submit');
+        expect(onClick).to.equal(DEFAULT_PROPS.onUpload);
       });
 
       describe('AND a file selected', () => {
@@ -56,51 +67,38 @@ describe('CsvUploadForm', () => {
         });
 
         it('should call `onFileChange()` once', () => {
-          expect(onFileChange.callCount).toEqual(1);
-          expect(onFileChange.calledOnce).toEqual(true);
+          expect(onFileChange).to.be.calledOnce;
         });
 
         describe('WHEN the form is submitted', () => {
           before(() => {
+            onUpload.reset();
             form.find('button').simulate('click');
           });
 
-          after(() => {
-            onUpload.reset();
-          });
-
           it('should call `onUpload()` once', () => {
-            expect(onUpload.callCount).toEqual(1);
-            expect(onUpload.calledOnce).toEqual(true);
+            expect(onUpload).to.be.calledOnce;
           });
         });
       });
 
       describe('AND a CSV file is being uploaded', () => {
-        let form;
-        let uploading = true;
-
         before(() => {
-          component = render(uploading);
-          form = component.find('form');
+          testProps.isUploading = true;
         });
 
         it('should have a disabled Submit button', () => {
-          expect(form.find('button').prop('disabled')).toBe(true);
+          expect(form.find('button').prop('disabled')).to.be.true;
         });
 
         describe('WHEN the form is submitted', () => {
           before(() => {
             form.find('button').simulate('click');
-          });
-
-          after(() => {
             onUpload.reset();
           });
 
           it('should NOT call `onUpload()`', () => {
-            expect(onUpload.callCount).toEqual(0);
-            expect(onUpload.calledOnce).toEqual(false);
+            expect(onUpload).to.not.be.called;
           });
         });
       });

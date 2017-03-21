@@ -11,7 +11,6 @@ chai.use(sinonChai);
 const sandbox = sinon.sandbox.create();
 const onClick = sandbox.stub();
 
-// const onClick = sinon.spy();
 const DEFAULT_PROPS = {
   title: 'Title',
   klass: 'a-class',
