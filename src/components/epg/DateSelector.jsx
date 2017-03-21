@@ -6,13 +6,13 @@ import DateNodeButton from './DateNodeButton';
 
 const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
   const ITEM_WIDTH = 150;
-  const isActive = index => classNames({
-    'date-selector__list__item': true,
+  const isActive = index => classNames('date-selector__list__item', {
     'date-selector__list__item--active': selectedDateIndex === index
   });
+  // TODO: Use utility function to be use in tests too computeExpectedTransitionStyle()
   const transitionStyle = {
-    transform: `translate3d( ${ITEM_WIDTH * selectedDateIndex}px, 0, 0)`,
-    WebkitTransform: `translate3d(${ITEM_WIDTH * selectedDateIndex}px, 0, 0)'`
+    transform: `translate3d(${ITEM_WIDTH * selectedDateIndex}px, 0, 0)`,
+    WebkitTransform: `translate3d(${ITEM_WIDTH * selectedDateIndex}px, 0, 0)`
   };
 
   const dateNodes = dates.map((date, index) =>
