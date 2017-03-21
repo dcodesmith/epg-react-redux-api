@@ -2,7 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import chai, { expect } from 'chai';
 import sinonChai from 'sinon-chai';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import ControlButton from './ControlButton';
 
