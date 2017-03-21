@@ -5,7 +5,7 @@ import DateSelector from './DateSelector';
 const ProgrammeGuide = ({ children }) => (
   <section className="col-md-12">
     <div className="grid">
-      {children}
+      { children }
     </div>
   </section>
 );
