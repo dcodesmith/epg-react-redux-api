@@ -7,17 +7,17 @@ const getProgrammeDates = (programmes) => {
   const endDate = new Date(Math.max.apply(null, dates));
   const startDate = new Date(Math.min.apply(null, dates));
   const numberOfDays = moment(endDate).diff(moment(startDate), 'days') + 1;
-  let dateValue;
+  let value;
   let index;
 
   const DATE_FORMAT = 'YYYY-MM-DD';
 
   for (index = 0; index < numberOfDays; index += 1) {
-    dateValue = moment(startDate).add(index, 'days').format(DATE_FORMAT);
+    value = moment(startDate).add(index, 'days').format(DATE_FORMAT);
     programmeDates[index] = {
       day: index + 1,
-      dateValue,
-      ISOString: new Date(dateValue).toISOString()
+      value,
+      ISOString: new Date(value).toISOString()
     };
   }
 
