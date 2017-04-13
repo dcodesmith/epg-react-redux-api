@@ -10,7 +10,7 @@ class ProgrammeApi {
 
   static create(data) {
     const url = `${API_URL}/import`;
-
+    console.log('data', data);
     return fetch(url, {
       method: 'POST',
       body: data

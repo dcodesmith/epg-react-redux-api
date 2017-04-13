@@ -27,7 +27,8 @@ export function deteleProgrammeSuccess(programmes) {
 // }
 
 export function createProgrammes(data) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    console.log('getState', getState());
     dispatch(beginAjaxCall());
     return programmeApi.create(data).then((programmes) => {
       dispatch(createProgrammeSuccess(programmes));
@@ -54,6 +55,7 @@ export function deleteProgrammes() {
   return (dispatch) => {
     dispatch(beginAjaxCall());
     return programmeApi.delete().then((programmes) => {
+      console.log('from delete', programmes);
       dispatch(deteleProgrammeSuccess(programmes));
     }).catch((error) => {
       dispatch(ajaxCallError());

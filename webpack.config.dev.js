@@ -3,9 +3,9 @@ import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-const GLOBALS = {
-  'process.env.NODE_ENV': JSON.stringify('production')
-};
+// const GLOBALS = {
+//   'process.env.NODE_ENV': JSON.stringify('production')
+// };
 
 export default {
   debug: true,
@@ -42,7 +42,7 @@ export default {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin(GLOBALS),
+    // new webpack.DefinePlugin(GLOBALS),
     new ExtractTextPlugin('style.css')
   ],
   module: {

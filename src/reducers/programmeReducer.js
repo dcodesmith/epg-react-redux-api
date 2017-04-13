@@ -14,7 +14,10 @@ export default function programmeReducer(state = initialState.programmes, action
     }
 
     case CREATE_PROGRAMMES_SUCCESS: {
-      return [...state, ...action.programmes];
+      console.log('state', state);
+      console.log('action.programmes', action.programmes);
+      
+      return action.programmes;
     }
 
     case DELETE_PROGRAMMES_SUCCESS: {

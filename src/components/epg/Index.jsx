@@ -79,11 +79,15 @@ class Index extends Component {
     const formData = new FormData();
 
     event.preventDefault();
+    
+    // console.log(this.state.csvFile);
 
     if (this.state.csvFile) {
       formData.append('programme', this.state.csvFile);
       this.props.actions.createProgrammes(formData);
     }
+
+    formData.delete('programme');
   }
 
   onFileChange(event) {
