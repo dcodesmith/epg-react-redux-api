@@ -28,7 +28,6 @@ export function deteleProgrammeSuccess(programmes) {
 
 export function createProgrammes(data) {
   return (dispatch, getState) => {
-    console.log('getState', getState());
     dispatch(beginAjaxCall());
     return programmeApi.create(data).then((programmes) => {
       dispatch(createProgrammeSuccess(programmes));

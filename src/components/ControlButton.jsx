@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const ControlButton = (props) => {
   const { title, klass, isDisabled, onNavigate, direction, children } = props;

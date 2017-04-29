@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Notes: Used onClick event on button instead of onSubmit event on form for testing reasons.
 // Form onSumit triggers regardless of submit buttons state (enable or disable),

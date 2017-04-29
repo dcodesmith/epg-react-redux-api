@@ -6,7 +6,7 @@ import ajaxCallsInProgress from './ajaxStatusReducer';
 
 // loops through all files in the same folder that contain "Reducer", then pass
 
-// console.log('modal', modal);
+const o = { a: 1 };
 
 export default combineReducers({
   modal,
