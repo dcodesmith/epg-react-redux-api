@@ -32,7 +32,7 @@ class GridContainer extends Component {
     const abscissa = `${-offset * HOUR_WIDTH}px`;
 
     this.state = {
-      selectedDateIndex: 0,
+      // selectedDateIndex: 0,
       offset,
       style: {
         transform: `translate3d(${abscissa}, 0, 0)`,
@@ -41,7 +41,6 @@ class GridContainer extends Component {
     };
 
     this.onNavigate = this.onNavigate.bind(this);
-    this.onClear = this.onClear.bind(this);
   }
 
   onNavigate(direction) {
@@ -56,15 +55,11 @@ class GridContainer extends Component {
     this.setState({ offset, style });
   }
 
-  onClear() {
-    this.props.deleteProgrammes();
-  }
-
   render() {
-    const { channels, programmes, dates, times } = this.props;
-    const { offset, style, selectedDateIndex } = this.state;
-    const selectedDate = dates[selectedDateIndex];
+    const { channels, programmes, dates, times, selectedDateIndex, deleteProgrammes } = this.props;
+    const { offset, style } = this.state;
 
+    const selectedDate = dates[selectedDateIndex];
     const selectedProgrammes = getSelectedDatesProgrammes({ selectedDate, programmes, channels });
 
     return (
@@ -74,7 +69,7 @@ class GridContainer extends Component {
         onNavigate={ this.onNavigate }
         times={ times }
         transformStyle={ style }
-        onClear={ this.onClear } />
+        onClear={ () => deleteProgrammes() } />
     );
   }
 }
@@ -87,12 +82,12 @@ GridContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { programmes, channels } = state;
+  const { programmes, channels, selectedDateIndex } = state;
 
   const dates = getProgrammeDates(programmes);
   const times = range(0, 24, 0.5);
 
-  return { channels, programmes, dates, times };
+  return { channels, programmes, dates, times, selectedDateIndex };
 };
 
 export default connect(

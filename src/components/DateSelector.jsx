@@ -19,7 +19,7 @@ const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
   const dateNodes = dates.map((date, index) =>
     /* eslint react/no-array-index-key: 0 */
     <li key={ index } className={ isActive(index) }>
-      <DateNodeButton index={ index } date={ date } onSelect={ onSelect } />
+      <DateNodeButton index={ index } date={ date } onSelect={ onSelect(index) } />
     </li>
   );
 

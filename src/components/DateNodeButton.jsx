@@ -2,13 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-const DateNodeButton = ({ index, onSelect, date }) => {
-  const onClick = () => {
-    onSelect(index);
-  };
-
+const DateNodeButton = ({ onSelect, date }) => {
   return (
-    <button className="date" onClick={ onClick }>
+    <button className="date" onClick={ onSelect }>
       <span>{ moment(date.value).format("dddd") }</span>
       <span>{ moment(date.value).format("Do") }</span>
     </button>

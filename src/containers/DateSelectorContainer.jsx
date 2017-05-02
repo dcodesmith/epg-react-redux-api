@@ -28,7 +28,6 @@ class DateSelectorContainer extends Component {
     const abscissa = `${-offset * HOUR_WIDTH}px`;
 
     this.state = {
-      selectedDateIndex: 0,
       style: {
         transform: `translate3d(${abscissa}, 0, 0)`,
         WebkitTransform: `translate3d(${abscissa}, 0, 0)`
@@ -49,8 +48,8 @@ class DateSelectorContainer extends Component {
   }
 
   render() {
-    const { dates } = this.props;
-    const { selectedDateIndex } = this.state;
+    const { dates, selectedDateIndex } = this.props;
+
     const selectedDate = dates[selectedDateIndex];
 
     return (
@@ -66,11 +65,10 @@ DateSelectorContainer.propTypes = {
   dates: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    dates: getProgrammeDates(state.programmes)
-  }
-};
+const mapStateToProps = (state) => ({
+  selectedDateIndex: state.selectedDateIndex,
+  dates: getProgrammeDates(state.programmes)
+});
 
 export default connect(
   mapStateToProps
