@@ -6,12 +6,12 @@ import GridContainer from './GridContainer';
 
 const App = () => (
   <div className="container">
-    <CsvUploadFormContainer/>
+    <CsvUploadFormContainer />
 
     <section className="col-md-12">
       <div className="grid">
-        <DateSelectorContainer/>
-        <GridContainer/>
+        <DateSelectorContainer />
+        <GridContainer />
       </div>
     </section>
   </div>

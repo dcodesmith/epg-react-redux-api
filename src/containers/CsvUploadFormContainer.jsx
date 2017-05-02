@@ -14,7 +14,7 @@ class CsvUploadFormContainer extends Component {
 
     this.state = {
       csvFile: undefined,
-      label: FILE_CHOOSER_LABEL,
+      label: FILE_CHOOSER_LABEL
     };
 
     this.onFileChange = this.onFileChange.bind(this);
@@ -52,9 +52,11 @@ class CsvUploadFormContainer extends Component {
   }
 }
 
-CsvUploadFormContainer.propTypes = {};
+CsvUploadFormContainer.propTypes = {
+  createProgrammes: PropTypes.func.isRequired
+};
 
 export default connect(
   null,
   { createProgrammes }
-)(CsvUploadFormContainer)
+)(CsvUploadFormContainer);

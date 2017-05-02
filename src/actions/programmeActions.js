@@ -18,14 +18,6 @@ export function deteleProgrammeSuccess(programmes) {
   return { type: DELETE_PROGRAMMES_SUCCESS, programmes };
 }
 
-// export function updateChannelSuccess(channel) {
-//   return { type: UPDATE_CHANNEL_SUCCESS, channel };
-// }
-//
-// export function createChannelSuccess(channel) {
-//   return { type: CREATE_CHANNEL_SUCCESS, channel };
-// }
-
 export function createProgrammes(data) {
   return (dispatch, getState) => {
     dispatch(beginAjaxCall());

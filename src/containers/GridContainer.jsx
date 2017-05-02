@@ -28,15 +28,15 @@ class GridContainer extends Component {
 
     // on load, offset should be set by getting the hour in the day
 
-    const offset = initialOffest;
-    const abscissa = `${-offset * HOUR_WIDTH}px`;
+    // const offset = initialOffest;
+    // const abscissa = `${-offset * HOUR_WIDTH}px`;
 
     this.state = {
       // selectedDateIndex: 0,
-      offset,
+      offset: 0,
       style: {
-        transform: `translate3d(${abscissa}, 0, 0)`,
-        WebkitTransform: `translate3d(${abscissa}, 0, 0)`
+        transform: `translate3d0, 0, 0)`,
+        WebkitTransform: `translate3d(0, 0, 0)`
       }
     };
 
@@ -77,7 +77,9 @@ class GridContainer extends Component {
 GridContainer.propTypes = {
   channels: PropTypes.array.isRequired,
   programmes: PropTypes.array.isRequired,
+  dates: PropTypes.array.isRequired,
   deleteProgrammes: PropTypes.func.isRequired,
+  selectedDateIndex: PropTypes.number.isRequired,
   times: PropTypes.array.isRequired
 };
 

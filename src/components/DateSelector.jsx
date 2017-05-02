@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import moment from 'moment';
 
+import { md5ObjectHash } from '../utils';
+
 import DateNodeButton from './DateNodeButton';
 
 const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
@@ -17,9 +19,8 @@ const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
   };
 
   const dateNodes = dates.map((date, index) =>
-    /* eslint react/no-array-index-key: 0 */
-    <li key={ index } className={ isActive(index) }>
-      <DateNodeButton index={ index } date={ date } onSelect={ onSelect(index) } />
+    <li key={ md5ObjectHash(date) } className={ isActive(index) }>
+      <DateNodeButton index={ index } date={ date } onSelect={ () => onSelect(index) } />
     </li>
   );
 

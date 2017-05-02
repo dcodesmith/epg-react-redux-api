@@ -1,7 +1,8 @@
+import md5 from 'md5';
 import moment from 'moment';
 import { filter } from 'lodash';
 
-const getProgrammeDates = (programmes) => {
+export const getProgrammeDates = (programmes) => {
   const programmeDates = [];
   const dates = programmes.map(programme => new Date(programme.date));
   const endDate = new Date(Math.max.apply(null, dates));
@@ -25,7 +26,7 @@ const getProgrammeDates = (programmes) => {
 };
 
 // TODO: Move into selector folder
-const getSelectedDatesProgrammes = ({ selectedDate, programmes, channels }) => {
+export const getSelectedDatesProgrammes = ({ selectedDate, programmes, channels }) => {
   const selectedDateProgrammes = {};
   let todaysProgrammes = [];
 
@@ -46,4 +47,4 @@ const getSelectedDatesProgrammes = ({ selectedDate, programmes, channels }) => {
   return selectedDateProgrammes;
 };
 
-export { getProgrammeDates, getSelectedDatesProgrammes };
+export const md5ObjectHash = obj => md5(JSON.stringify(obj));
