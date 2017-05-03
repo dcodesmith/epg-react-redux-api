@@ -14,12 +14,12 @@ const Body = ({ programmes, transformStyle }) => {
 
   const getProgrammesNodes = channel => (
     programmes[channel].map((programme, index) =>
-      <ProgrammeItem programme={ programme } key={ channel.id } />
+      <ProgrammeItem programme={ programme } key={ programme.id } />
     )
   );
 
-  const channelsNodes = channels.map((channel, index) =>
-    <div key={ channel.id } className="programme-guide__row">
+  const channelsNodes = channels.map((channel) =>
+    <div key={ channel } className="programme-guide__row">
       { /* <div className="indicator">Afees Adedamola Kolawole</div>*/ }
 
       <div className="programme-guide__row__header">

@@ -1,31 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ControlButton = (props) => {
-  const { title, klass, isDisabled, onNavigate, direction, children } = props;
-
-  const onClick = () => {
-    onNavigate(direction);
-  };
-
-  return (
-    <button title={ title } className={ klass } disabled={ isDisabled } onClick={ onClick }>
-      { children }
-    </button>
-  );
-};
+const ControlButton = ({ title, klass, isDisabled = true, onNavigate, children }) => (
+  <button title={ title } className={ klass } disabled={ isDisabled } onClick={ onNavigate }>
+    { children }
+  </button>
+);
 
 ControlButton.propTypes = {
   title: PropTypes.string.isRequired,
   klass: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool,
   onNavigate: PropTypes.func.isRequired,
-  direction: PropTypes.number.isRequired,
   children: PropTypes.element.isRequired
-};
-
-ControlButton.defaultProps = {
-  isDisabled: true
 };
 
 export default ControlButton;
