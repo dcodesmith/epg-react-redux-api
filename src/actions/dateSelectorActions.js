@@ -1,7 +1,7 @@
-import { PREVIOUS_DATE, NEXT_DATE } from './actionTypes';
+import { SELECT_DATE } from './actionTypes';
 
 const goToNextDate = index => ({
-  type: NEXT_DATE,
+  type: SELECT_DATE,
   index
 });
 

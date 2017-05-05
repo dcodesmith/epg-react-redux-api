@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { range } from 'lodash';
 
 import { deleteProgrammes } from '../actions/programmeActions';
+import { navigate } from '../actions/navigationActions';
+
+console.log(navigate);
 
 import { getProgrammeDates, getSelectedDatesProgrammes } from '../utils';
 
@@ -33,7 +36,7 @@ class GridContainer extends Component {
 
     this.state = {
       // selectedDateIndex: 0,
-      offset: 0,
+      // offset: 0,
       style: {
         transform: `translate3d0, 0, 0)`,
         WebkitTransform: `translate3d(0, 0, 0)`
@@ -52,12 +55,22 @@ class GridContainer extends Component {
       WebkitTransform: `translate3d(${abscissa}, 0, 0)`
     };
 
-    this.setState({ offset, style });
+    this.setState({ style });
   }
 
   render() {
-    const { channels, programmes, dates, times, selectedDateIndex, deleteProgrammes } = this.props;
-    const { offset, style } = this.state;
+    const { channels, programmes, dates, times, selectedDateIndex, deleteProgrammes, navigate, offset } = this.props;
+
+    console.log('offset', offset);
+
+    const HOUR_WIDTH = 150;
+    const abscissa = `${-offset * HOUR_WIDTH}px`;
+    const style = {
+      transform: `translate3d(${abscissa}, 0, 0)`,
+      WebkitTransform: `translate3d(${abscissa}, 0, 0)`
+    };
+
+    // const { style } = this.state;
 
     const selectedDate = dates[selectedDateIndex];
     const selectedProgrammes = getSelectedDatesProgrammes({ selectedDate, programmes, channels });
@@ -66,7 +79,7 @@ class GridContainer extends Component {
       <Grid
         programmes={ selectedProgrammes }
         offset={ offset }
-        onNavigate={ this.onNavigate }
+        onNavigate={ navigate }
         times={ times }
         transformStyle={ style }
         onClear={ () => deleteProgrammes() } />
@@ -79,20 +92,21 @@ GridContainer.propTypes = {
   programmes: PropTypes.array.isRequired,
   dates: PropTypes.array.isRequired,
   deleteProgrammes: PropTypes.func.isRequired,
+  navigate: PropTypes.func.isRequired,
   selectedDateIndex: PropTypes.number.isRequired,
   times: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => {
-  const { programmes, channels, selectedDateIndex } = state;
+  const { programmes, channels, selectedDateIndex, offset } = state;
 
   const dates = getProgrammeDates(programmes);
   const times = range(0, 24, 0.5);
 
-  return { channels, programmes, dates, times, selectedDateIndex };
+  return { channels, programmes, dates, times, selectedDateIndex, offset };
 };
 
 export default connect(
   mapStateToProps,
-  { deleteProgrammes }
+  { deleteProgrammes, navigate }
 )(GridContainer);

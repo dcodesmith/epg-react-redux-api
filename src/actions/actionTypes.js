@@ -12,5 +12,8 @@ export const HIDE_MODAL = 'HIDE_MODAL';
 export const BEGIN_AJAX_CALL = 'BEGIN_AJAX_CALL';
 export const AJAX_CALL_ERROR = 'AJAX_CALL_ERROR';
 
-export const NEXT_DATE = 'NEXT_DATE';
-export const PREVIOUS_DATE = 'PREVIOUS_DATE';
+export const SELECT_DATE = 'SELECT_DATE';
+
+export const NEXT_PAGE = 'NEXT_PAGE';
+export const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
+export const NAVIGATE_PAGE = 'NAVIGATE_PAGE';
