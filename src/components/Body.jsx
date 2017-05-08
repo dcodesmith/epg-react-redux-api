@@ -6,6 +6,9 @@ import classNames from 'classnames';
 import ProgrammeItem from './ProgrammeItem';
 
 const Body = ({ programmes, transformStyle }) => {
+
+  console.log('Body rendered');
+
   const channels = Object.keys(programmes);
   const klass = classNames({
     'programme-guide__body': true,

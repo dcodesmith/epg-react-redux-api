@@ -14,78 +14,27 @@ import Grid from '../components/Grid';
 
 const FILE_CHOOSER_LABEL = 'No File Chosen';
 
-class GridContainer extends Component {
-  constructor(props, context) {
-    super(props, context);
-    let initialOffest;
-    const HOUR_WIDTH = 150;
-    const currentHour = (new Date()).getHours();
+const GridContainer = ({channels, programmes, dates, times, selectedDateIndex, deleteProgrammes, navigate, offset }) => {
+  const HOUR_WIDTH = 150;
+  const abscissa = `${-offset * HOUR_WIDTH}px`;
+  const selectedDate = dates[selectedDateIndex];
+  const selectedProgrammes = getSelectedDatesProgrammes({ selectedDate, programmes, channels });
 
-    if (currentHour >= 21) {
-      initialOffest = 18;
-    } else if (currentHour <= 6) {
-      initialOffest = 0;
-    } else {
-      initialOffest = currentHour - 3;
-    }
+  const style = {
+    transform: `translate3d(${abscissa}, 0, 0)`,
+    WebkitTransform: `translate3d(${abscissa}, 0, 0)`
+  };
 
-    // on load, offset should be set by getting the hour in the day
-
-    // const offset = initialOffest;
-    // const abscissa = `${-offset * HOUR_WIDTH}px`;
-
-    this.state = {
-      // selectedDateIndex: 0,
-      // offset: 0,
-      style: {
-        transform: `translate3d0, 0, 0)`,
-        WebkitTransform: `translate3d(0, 0, 0)`
-      }
-    };
-
-    this.onNavigate = this.onNavigate.bind(this);
-  }
-
-  onNavigate(direction) {
-    const HOUR_WIDTH = 150;
-    const offset = this.state.offset + direction;
-    const abscissa = `${-offset * HOUR_WIDTH}px`;
-    const style = {
-      transform: `translate3d(${abscissa}, 0, 0)`,
-      WebkitTransform: `translate3d(${abscissa}, 0, 0)`
-    };
-
-    this.setState({ style });
-  }
-
-  render() {
-    const { channels, programmes, dates, times, selectedDateIndex, deleteProgrammes, navigate, offset } = this.props;
-
-    console.log('offset', offset);
-
-    const HOUR_WIDTH = 150;
-    const abscissa = `${-offset * HOUR_WIDTH}px`;
-    const style = {
-      transform: `translate3d(${abscissa}, 0, 0)`,
-      WebkitTransform: `translate3d(${abscissa}, 0, 0)`
-    };
-
-    // const { style } = this.state;
-
-    const selectedDate = dates[selectedDateIndex];
-    const selectedProgrammes = getSelectedDatesProgrammes({ selectedDate, programmes, channels });
-
-    return (
-      <Grid
-        programmes={ selectedProgrammes }
-        offset={ offset }
-        onNavigate={ navigate }
-        times={ times }
-        transformStyle={ style }
-        onClear={ () => deleteProgrammes() } />
-    );
-  }
-}
+  return (
+    <Grid
+      programmes={ selectedProgrammes }
+      offset={ offset }
+      onNavigate={ navigate }
+      times={ times }
+      transformStyle={ style }
+      onClear={ () => deleteProgrammes() } />
+  );
+};
 
 GridContainer.propTypes = {
   channels: PropTypes.array.isRequired,
