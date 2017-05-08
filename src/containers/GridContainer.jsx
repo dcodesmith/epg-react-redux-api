@@ -6,8 +6,6 @@ import { range } from 'lodash';
 import { deleteProgrammes } from '../actions/programmeActions';
 import { navigate } from '../actions/navigationActions';
 
-console.log(navigate);
-
 import { getProgrammeDates, getSelectedDatesProgrammes } from '../utils';
 
 import Grid from '../components/Grid';
