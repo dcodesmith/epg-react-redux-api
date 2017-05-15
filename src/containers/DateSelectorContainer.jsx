@@ -8,19 +8,6 @@ import { move } from '../actions/dateSelectorActions';
 
 import DateSelector from '../components/DateSelector';
 
-const DateSelectorContainer = ({ dates, selectedDateIndex, move }) => (
-  <DateSelector
-    dates={ dates }
-    selectedDateIndex={ selectedDateIndex }
-    onSelect={ move } />
-);
-
-DateSelectorContainer.propTypes = {
-  dates: PropTypes.array.isRequired,
-  selectedDateIndex: PropTypes.number.isRequired,
-  move: PropTypes.func.isRequired
-};
-
 const mapStateToProps = state => ({
   selectedDateIndex: state.selectedDateIndex,
   dates: getProgrammeDates(state.programmes)
@@ -29,4 +16,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { move }
-)(DateSelectorContainer);
+)(DateSelector);

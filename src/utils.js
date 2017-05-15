@@ -3,6 +3,7 @@ import moment from 'moment';
 import { filter } from 'lodash';
 
 export const getProgrammeDates = (programmes) => {
+  console.log('asdadasdad');
   const programmeDates = [];
   const dates = programmes.map(programme => new Date(programme.date));
   const endDate = new Date(Math.max.apply(null, dates));
