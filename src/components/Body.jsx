@@ -7,7 +7,7 @@ import ProgrammeItem from './ProgrammeItem';
 
 const Body = ({ programmes, transformStyle }) => {
 
-  console.log('Body rendered');
+  // console.log('Body rendered', programmes);
 
   const channels = Object.keys(programmes);
   const klass = classNames({

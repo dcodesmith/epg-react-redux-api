@@ -6,7 +6,7 @@ import ControlButton from './ControlButton';
 const TRACK_LENGTH = 12;
 
 const Controls = ({ onNavigate, offset = 0, times }) => { 
-  console.log('Controls rendered');
+  // console.log('Controls rendered');
   return (
     <div className="programme-guide__controls">
       <ControlButton

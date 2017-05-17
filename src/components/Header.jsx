@@ -6,7 +6,7 @@ import TimeTrack from './TimeTrack';
 
 const Header = ({ times, transformStyle }) => {
 
-  console.log('Header rendered');
+  // console.log('Header rendered');
 
   return (
     <div className="programme-guide__header">

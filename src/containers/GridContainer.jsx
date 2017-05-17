@@ -5,57 +5,43 @@ import { range } from 'lodash';
 
 import { navigate } from '../actions/navigationActions';
 
-import { getProgrammeDates, getSelectedDatesProgrammes } from '../utils';
+import { getSelectedDatesProgrammes } from '../selectors';
 
 import Grid from '../components/Grid';
 
-const FILE_CHOOSER_LABEL = 'No File Chosen';
-
-const GridContainer = ({channels, programmes, dates, times, selectedDateIndex, navigate, offset }) => {
-  const selectedDate = dates[selectedDateIndex];
-  const selectedProgrammes = getSelectedDatesProgrammes({ selectedDate, programmes, channels });
-
-  const transformStyle = (offset) => {
-    const HOUR_WIDTH = 150;
-    const abscissa = `${-offset * HOUR_WIDTH}px`;
-
-    return {
-      transform: `translate3d(${ abscissa }, 0, 0)`,
-      WebkitTransform: `translate3d(${ abscissa }, 0, 0)`
-    };
-  };
-
-  const style = transformStyle(offset);
-
-  return (
-    <Grid
-      programmes={ selectedProgrammes }
-      offset={ offset }
-      onNavigate={ navigate }
-      times={ times }
-      transformStyle={ style } />
-  );
-};
-
-GridContainer.propTypes = {
-  channels: PropTypes.array.isRequired,
-  programmes: PropTypes.array.isRequired,
-  dates: PropTypes.array.isRequired,
-  navigate: PropTypes.func.isRequired,
-  selectedDateIndex: PropTypes.number.isRequired,
-  times: PropTypes.array.isRequired
-};
+const HOUR_WIDTH = 150;
 
 const mapStateToProps = (state) => {
-  const { programmes, channels, selectedDateIndex, offset } = state;
+  const { offset } = state;
+  const abscissa = `${-offset * HOUR_WIDTH}px`;
+  
+  return {
+    offset,
+    times: range(0, 24, 0.5),
+    programmes: getSelectedDatesProgrammes(state),
+    transformStyle: {
+      transform: `translate3d(${abscissa}, 0, 0)`,
+      WebkitTransform: `translate3d(${abscissa}, 0, 0)`
+    }
+  };
 
-  const dates = getProgrammeDates(programmes);
-  const times = range(0, 24, 0.5);
+  // const dates = getProgrammeDates(state);
+  // const times = range(0, 24, 0.5);
+  // const selectedDate = dates[selectedDateIndex];
+  // const abscissa = `${-offset * HOUR_WIDTH}px`;
+  // const transformStyle = {
+  //   transform: `translate3d(${abscissa}, 0, 0)`,
+  //   WebkitTransform: `translate3d(${abscissa}, 0, 0)`
+  // };
 
-  return { channels, programmes, dates, times, selectedDateIndex, offset };
+  // const allProgrammes = getSelectedDatesProgrammes(state);
+
+  // programmes = getSelectedDatesProgrammes({ selectedDate, programmes, channels });
+
+  // return { programmes: allProgrammes, offset, times, transformStyle };
 };
 
 export default connect(
   mapStateToProps,
-  { navigate }
-)(GridContainer);
+  { onNavigate: navigate }
+)(Grid);

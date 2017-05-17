@@ -7,7 +7,7 @@ import { md5ObjectHash } from '../utils';
 
 import DateNodeButton from './DateNodeButton';
 
-const DateSelector = ({ dates, selectedDateIndex, move }) => {
+const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
   const ITEM_WIDTH = 150;
   const isActive = index => classNames('date-selector__list__item', {
     'date-selector__list__item--active': selectedDateIndex === index
@@ -20,7 +20,7 @@ const DateSelector = ({ dates, selectedDateIndex, move }) => {
 
   const dateNodes = dates.map((date, index) =>
     <li key={ md5ObjectHash(date) } className={ isActive(index) }>
-      <DateNodeButton index={ index } date={ date } onSelect={ () => move(index) } />
+      <DateNodeButton index={ index } date={ date } onSelect={ () => onSelect(index) } />
     </li>
   );
 
@@ -37,7 +37,7 @@ const DateSelector = ({ dates, selectedDateIndex, move }) => {
 DateSelector.propTypes = {
   dates: PropTypes.array.isRequired,
   selectedDateIndex: PropTypes.number.isRequired,
-  move: PropTypes.func.isRequired
+  onSelect: PropTypes.func.isRequired
 };
 
 export default DateSelector;
