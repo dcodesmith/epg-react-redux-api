@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { pure } from 'recompose';
+
 import ControlButton from './ControlButton';
 
 const TRACK_LENGTH = 12;
 
-const Controls = ({ onNavigate, offset = 0, times }) => { 
+const Controls = ({ onNavigate, offset = 0, times }) => {
   // console.log('Controls rendered');
   return (
     <div className="programme-guide__controls">

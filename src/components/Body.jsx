@@ -10,8 +10,7 @@ const Body = ({ programmes, transformStyle }) => {
   // console.log('Body rendered', programmes);
 
   const channels = Object.keys(programmes);
-  const klass = classNames({
-    'programme-guide__body': true,
+  const klass = classNames('programme-guide__body', {
     'epg-fade': channels.length > 0
   });
 

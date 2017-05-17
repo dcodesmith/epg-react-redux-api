@@ -8,5 +8,5 @@ import Toolbar from '../components/Toolbar';
 
 export default connect(
   null,
-  { deleteProgrammes }
+  { onDelete: deleteProgrammes }
 )(Toolbar);
