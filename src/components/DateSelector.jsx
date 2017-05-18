@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import moment from 'moment';
 
 import { md5ObjectHash } from '../utils';
+import { ITEM_WIDTH } from '../constants';
 
 import DateNodeButton from './DateNodeButton';
 
 const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
-  const ITEM_WIDTH = 150;
   const isActive = index => classNames('date-selector__list__item', {
     'date-selector__list__item--active': selectedDateIndex === index
   });

@@ -6,19 +6,14 @@ import Controls from './Controls';
 
 import ToolbarContainer from '../containers/ToolbarContainer';
 
-const Grid = ({ programmes, offset, onNavigate, times, transformStyle }) => {
-
-  // console.log('programmes', programmes);
-
-  return (
-    <div className="programme-guide">
-      <Header times={ times } transformStyle={ transformStyle } />
-      <Body programmes={ programmes } transformStyle={ transformStyle } />
-      <Controls onNavigate={ onNavigate } offset={ offset } times={ times } />
-      <ToolbarContainer />
-    </div>
-  );
-};
+const Grid = ({ programmes, offset, onNavigate, times, transformStyle }) => (
+  <div className="programme-guide">
+    <Header times={ times } transformStyle={ transformStyle } />
+    <Body programmes={ programmes } transformStyle={ transformStyle } />
+    <Controls onNavigate={ onNavigate } offset={ offset } times={ times } />
+    <ToolbarContainer />
+  </div>
+);
 
 Grid.propTypes = {
   programmes: PropTypes.object.isRequired,

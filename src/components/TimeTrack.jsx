@@ -1,29 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+
+import { formatTrackTime, md5ObjectHash } from '../utils';
 
 const TimeTrack = ({ times, transformStyle }) => {
-  const formatTrackTime = (timestamp) => {
-    const pad = (number) => {
-      if (number < 10) {
-        return `0${number}`;
-      }
-
-      return number;
-    };
-
-    const time = pad(timestamp.toString());
-
-    if (time.indexOf('.') > 0) {
-      return time.replace('.5', ':30');
-    }
-
-    return `${time}:00`;
-  };
-
-  const timeNodes = times.map((time, index) =>
-    /* eslint react/no-array-index-key:0 */
-    <li key={index} className="programme-guide__showtimes__time">
+  const timeNodes = times.map(time =>
+    <li key={md5ObjectHash(time)} className="programme-guide__showtimes__time">
       { formatTrackTime(time) }
     </li>
   );
@@ -37,7 +19,7 @@ const TimeTrack = ({ times, transformStyle }) => {
 
 TimeTrack.propTypes = {
   times: PropTypes.array.isRequired,
-  transformStyle: PropTypes.object
+  transformStyle: PropTypes.object.isRequired
 };
 
 export default TimeTrack;

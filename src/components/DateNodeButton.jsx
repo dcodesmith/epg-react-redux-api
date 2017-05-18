@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
+import { ORDINAL_MONTH_DAY, DAY_NAME } from '../constants';
+
 const DateNodeButton = ({ onSelect, date }) => (
   <button className="date" onClick={ onSelect }>
-    <span>{ moment(date.value).format("dddd") }</span>
-    <span>{ moment(date.value).format("Do") }</span>
+    <span>{ moment(date.value).format(ORDINAL_MONTH_DAY) }</span>
+    <span>{ moment(date.value).format(DAY_NAME) }</span>
   </button>
 );
 

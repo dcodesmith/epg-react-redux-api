@@ -10,7 +10,7 @@ const ControlButton = ({ title, klass, isDisabled = true, onNavigate, children }
 ControlButton.propTypes = {
   title: PropTypes.string.isRequired,
   klass: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool,
+  isDisabled: PropTypes.bool.isRequired,
   onNavigate: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired
 };

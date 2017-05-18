@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import classNames from 'classnames';
 
 import ProgrammeItem from './ProgrammeItem';
 
 const Body = ({ programmes, transformStyle }) => {
-
-  // console.log('Body rendered', programmes);
-
   const channels = Object.keys(programmes);
-  const klass = classNames({
-    'programme-guide__body': true,
+  const bodyClasses = classNames('programme-guide__body', {
     'epg-fade': channels.length > 0
   });
 
@@ -38,7 +33,7 @@ const Body = ({ programmes, transformStyle }) => {
   );
 
   return (
-    <div className={ klass }>
+    <div className={ bodyClasses }>
       { channelsNodes }
     </div>
   );

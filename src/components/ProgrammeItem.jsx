@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import moment from 'moment';
 
+import { ONE_MILLISECOND, TRACK_WIDTH, TIME_FORMAT } from '../constants';
+
 const ProgrammeItem = ({ programme }) => {
+  const currentDate = new Date();
+  const currentTime = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+
   const setItemStyle = () => {
-    const ONE_MILLISECOND = 60 * 1000;
-    const TRACK_WIDTH = 75;
-    const TIME_FORMAT = 'HH:mm';
     const startTime = moment(programme.startTime, TIME_FORMAT);
     const endTime = moment(programme.endTime, TIME_FORMAT);
     const duration = endTime.diff(startTime) / ONE_MILLISECOND;
@@ -14,8 +17,12 @@ const ProgrammeItem = ({ programme }) => {
     return { width: `${(duration * TRACK_WIDTH) / 30}px` };
   };
 
+  const itemStyle = classNames('schedule__item', {
+    highlight: (programme.startTime <= currentTime && programme.endTime >= currentTime)
+  });
+
   return (
-    <li className="schedule__item" style={ setItemStyle() } title={ programme.show }>
+    <li className={itemStyle} style={ setItemStyle() } title={ programme.show }>
       <div>
         <span className="schedule__item__time">
           { programme.startTime } - { programme.endTime }
