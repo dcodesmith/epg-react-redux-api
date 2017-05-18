@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import { ONE_MILLISECOND, TRACK_WIDTH, TIME_FORMAT } from '../constants';
 
-const ProgrammeItem = ({ programme }) => {
+const ProgrammeItem = ({ programme, onModalShow }) => {
   const currentDate = new Date();
   const currentTime = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
 
@@ -21,8 +21,12 @@ const ProgrammeItem = ({ programme }) => {
     highlight: (programme.startTime <= currentTime && programme.endTime >= currentTime)
   });
 
+  const onClick = () => {
+    console.log('programme', programme);
+  };
+
   return (
-    <li className={ itemStyle } style={ setItemStyle() } title={ programme.show }>
+    <li className={ itemStyle } style={ setItemStyle() } title={ programme.show } onClick={ () => onModalShow(programme) }>
       <div>
         <span className="schedule__item__time">
           { programme.startTime } - { programme.endTime }

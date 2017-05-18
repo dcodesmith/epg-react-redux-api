@@ -6,10 +6,10 @@ import Controls from './Controls';
 
 import ToolbarContainer from '../containers/ToolbarContainer';
 
-const Grid = ({ programmes, offset, onNavigate, times, transformStyle }) => (
+const Grid = ({ programmes, offset, onNavigate, times, transformStyle, onShowModal }) => (
   <div className="programme-guide">
     <Header times={ times } transformStyle={ transformStyle } />
-    <Body programmes={ programmes } transformStyle={ transformStyle } />
+    <Body programmes={ programmes } transformStyle={ transformStyle } onModalShow={ onShowModal } />
     <Controls onNavigate={ onNavigate } offset={ offset } times={ times } />
     <ToolbarContainer />
   </div>

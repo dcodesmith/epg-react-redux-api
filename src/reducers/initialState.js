@@ -1,5 +1,8 @@
 export default {
-  isOpen: false,
+  modal: {
+    isOpen: false,
+    data: {}
+  },
   channels: [],
   programmes: [],
   ajaxCallsInProgress: 0,

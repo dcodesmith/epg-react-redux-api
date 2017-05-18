@@ -5,7 +5,7 @@ import { sortBy } from 'lodash';
 
 import ProgrammeItem from './ProgrammeItem';
 
-const Body = ({ programmes, transformStyle }) => {
+const Body = ({ programmes, transformStyle, onModalShow }) => {
   const channels = Object.keys(programmes);
   const bodyClasses = classNames('programme-guide__body', {
     'epg-fade': channels.length > 0
@@ -15,7 +15,7 @@ const Body = ({ programmes, transformStyle }) => {
     const sortedProgramme = sortBy(programmes[channel], 'startTime');
 
     return sortedProgramme.map((programme, index) => (
-      <ProgrammeItem programme={ programme } key={ programme.id } />
+      <ProgrammeItem programme={ programme } key={ programme.id } onModalShow={ onModalShow } />
     ));
   };
 

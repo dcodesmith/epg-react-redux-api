@@ -4,17 +4,18 @@ import { connect } from 'react-redux';
 import { range } from 'lodash';
 
 import { navigate } from '../actions/navigationActions';
+import { showModal, hideModal } from '../actions/modalActions';
 
 import { getSelectedDatesProgrammes } from '../selectors';
 
-import Grid from '../components/Grid';
+import { ITEM_WIDTH } from '../constants';
 
-const HOUR_WIDTH = 150;
+import Grid from '../components/Grid';
 
 const mapStateToProps = (state) => {
   const { offset } = state;
-  const abscissa = `${-offset * HOUR_WIDTH}px`;
-  
+  const abscissa = `${-offset * ITEM_WIDTH}px`;
+
   return {
     offset,
     times: range(0, 24, 0.5),
@@ -24,24 +25,12 @@ const mapStateToProps = (state) => {
       WebkitTransform: `translate3d(${abscissa}, 0, 0)`
     }
   };
-
-  // const dates = getProgrammeDates(state);
-  // const times = range(0, 24, 0.5);
-  // const selectedDate = dates[selectedDateIndex];
-  // const abscissa = `${-offset * HOUR_WIDTH}px`;
-  // const transformStyle = {
-  //   transform: `translate3d(${abscissa}, 0, 0)`,
-  //   WebkitTransform: `translate3d(${abscissa}, 0, 0)`
-  // };
-
-  // const allProgrammes = getSelectedDatesProgrammes(state);
-
-  // programmes = getSelectedDatesProgrammes({ selectedDate, programmes, channels });
-
-  // return { programmes: allProgrammes, offset, times, transformStyle };
 };
 
 export default connect(
   mapStateToProps,
-  { onNavigate: navigate }
+  {
+    onNavigate: navigate,
+    onShowModal: showModal
+  }
 )(Grid);

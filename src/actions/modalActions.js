@@ -1,12 +1,8 @@
 import { SHOW_MODAL, HIDE_MODAL } from './actionTypes';
 
-export function showModal(isOpen) {
-  return { type: SHOW_MODAL, isOpen: true };
-}
+export const showModal = data => ({ type: SHOW_MODAL, data });
 
-export function hideModal(isOpen) {
-  return { type: HIDE_MODAL, isOpen: false };
-}
+export const hideModal = () => ({ type: HIDE_MODAL });
 
 // export function updateChannelSuccess(channel) {
 //   return { type: UPDATE_CHANNEL_SUCCESS, channel };
@@ -18,6 +14,6 @@ export function hideModal(isOpen) {
 
 // export function loadChannels() {
 //   return (dispatch) => {
-    
+
 //   };
 // }

@@ -3,6 +3,7 @@ import React from 'react';
 import CsvUploadFormContainer from './CsvUploadFormContainer';
 import DateSelectorContainer from './DateSelectorContainer';
 import GridContainer from './GridContainer';
+import ModalContainer from './ModalContainer';
 
 const App = () => (
   <div className="container">
@@ -14,6 +15,7 @@ const App = () => (
         <GridContainer />
       </div>
     </section>
+    <ModalContainer />
   </div>
 );
 
