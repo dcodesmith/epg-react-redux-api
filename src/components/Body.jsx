@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { sortBy } from 'lodash';
 
 import ProgrammeItem from './ProgrammeItem';
 
@@ -10,14 +11,16 @@ const Body = ({ programmes, transformStyle }) => {
     'epg-fade': channels.length > 0
   });
 
-  const getProgrammesNodes = channel => (
-    programmes[channel].map((programme, index) =>
-      <ProgrammeItem programme={ programme } key={ programme.id } />
-    )
-  );
+  const getProgrammesNodes = (channel) => {
+    const sortedProgramme = sortBy(programmes[channel], 'startTime');
 
-  const channelsNodes = channels.map((channel) =>
-    <div key={ channel } className="programme-guide__row">
+    return sortedProgramme.map((programme, index) => (
+      <ProgrammeItem programme={ programme } key={ programme.id } />
+    ));
+  };
+
+  const channelsNodes = channels.map(channel =>
+    <div key={ channel } className={ `${channel} programme-guide__row` }>
       { /* <div className="indicator">Afees Adedamola Kolawole</div>*/ }
 
       <div className="programme-guide__row__header">

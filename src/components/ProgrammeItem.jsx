@@ -22,7 +22,7 @@ const ProgrammeItem = ({ programme }) => {
   });
 
   return (
-    <li className={itemStyle} style={ setItemStyle() } title={ programme.show }>
+    <li className={ itemStyle } style={ setItemStyle() } title={ programme.show }>
       <div>
         <span className="schedule__item__time">
           { programme.startTime } - { programme.endTime }
