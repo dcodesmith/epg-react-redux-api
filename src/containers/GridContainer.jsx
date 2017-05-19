@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { range } from 'lodash';
 
 import { navigate } from '../actions/navigationActions';
-import { showModal, hideModal } from '../actions/modalActions';
+import { showModal } from '../actions/modalActions';
 
 import { getSelectedDatesProgrammes } from '../selectors';
 
