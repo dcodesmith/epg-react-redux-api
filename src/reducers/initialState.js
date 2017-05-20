@@ -7,9 +7,5 @@ export default {
   programmes: [],
   ajaxCallsInProgress: 0,
   selectedDateIndex: 0,
-  offset: 0,
-  form: {
-    csvFile: undefined,
-    label: 'No File Chosen'
-  }
+  offset: 0
 };
