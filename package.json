@@ -8,7 +8,7 @@
     "open:src": "babel-node tools/server.js",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
-    "test": "mocha --reporter spec tools/.testSetup.js \"src/**/*.test.jsx\"",
+    "test": "mocha --reporter spec tools/.testSetup.js \"src/**/*.test.{jsx,js}\"",
     "test:watch": "npm test -- -w",
     "test:coverage": "scripts/coverage.sh",
     "a": "./node_modules/.bin/nyc --reporter=json --require babel-core/register ./node_modules/.bin/mocha tools/.testSetup.js \"src/**/*.test.js\"",
@@ -28,6 +28,7 @@
   "dependencies": {
     "babel-polyfill": "6.23.0",
     "bootstrap": "3.3.7",
+    "chai": "^3.5.0",
     "cheerio": "^0.22.0",
     "colors": "1.1.2",
     "isomorphic-fetch": "2.2.1",
