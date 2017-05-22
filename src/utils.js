@@ -2,15 +2,9 @@ import md5 from 'md5';
 
 export const md5ObjectHash = obj => md5(JSON.stringify(obj));
 
+export const pad = number => ((number < 10) ? `0${number}` : number);
+
 export const formatTrackTime = (timestamp) => {
-  const pad = (number) => {
-    if (number < 10) {
-      return `0${number}`;
-    }
-
-    return number;
-  };
-
   const time = pad(timestamp.toString());
 
   if (time.indexOf('.') > 0) {
