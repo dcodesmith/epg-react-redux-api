@@ -4,10 +4,11 @@ import classNames from 'classnames';
 import moment from 'moment';
 
 import { ONE_MILLISECOND, TRACK_WIDTH, TIME_FORMAT } from '../constants';
+import { pad } from '../utils';
 
 const ProgrammeItem = ({ programme, onModalShow }) => {
   const currentDate = new Date();
-  const currentTime = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+  const currentTime = `${pad(currentDate.getHours())}:${currentDate.getMinutes()}`;
 
   const setItemStyle = () => {
     const startTime = moment(programme.startTime, TIME_FORMAT);
@@ -21,12 +22,9 @@ const ProgrammeItem = ({ programme, onModalShow }) => {
     highlight: (programme.startTime <= currentTime && programme.endTime >= currentTime)
   });
 
-  const onClick = () => {
-    console.log('programme', programme);
-  };
-
   return (
     <li className={ itemStyle } style={ setItemStyle() } title={ programme.show } onClick={ () => onModalShow(programme) }>
+      { /* <div className="indicator">Afees Adedamola Kolawole</div> */ }
       <div>
         <span className="schedule__item__time">
           { programme.startTime } - { programme.endTime }
