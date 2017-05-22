@@ -29,7 +29,8 @@ const style = {
     height: '600px',
     borderRadius: '0',
     padding: '0',
-    borderTop: '2px solid #4AC4F1'
+    borderTop: '2px solid #4AC4F1',
+    overflow: 'visible'
   }
 };
 
@@ -40,6 +41,7 @@ const Overlay = ({ isOpen, data, onHideModal }) => {
 
   return (
     <Modal { ...props }>
+      <button className="modal__close__cta" onClick={ onHideModal }> X </button>
       <ProgrammeDetails data={ data } />
     </Modal>
   );
