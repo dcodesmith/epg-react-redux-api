@@ -2,7 +2,6 @@ import { LOAD_CHANNELS_SUCCESS } from './actionTypes';
 import channelApi from '../api/channelApi';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
-
 export function loadChannelsSuccess(channels) {
   return { type: LOAD_CHANNELS_SUCCESS, channels };
 }
