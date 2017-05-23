@@ -8,9 +8,9 @@ import { createProgrammeSuccess } from '../actions/programmeActions';
 describe('Store', () => {
   it('should handle creating programmes', () => {
     const store = createStore(rootReducer, initialState);
-    const course = {};
+    const programmes = [];
 
-    const action = createProgrammeSuccess(course);
+    const action = createProgrammeSuccess(programmes);
     store.dispatch(action);
 
     const actual = store.getState().programmes;

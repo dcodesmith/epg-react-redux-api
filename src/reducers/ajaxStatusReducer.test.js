@@ -4,9 +4,9 @@ import reducer from './ajaxStatusReducer';
 import { BEGIN_AJAX_CALL, AJAX_CALL_ERROR, LOAD_CHANNELS_SUCCESS } from '../actions/actionTypes';
 import initialState from './initialState';
 
-let state;
+describe('AJAX Status Reducer', () => {
+  let state;
 
-describe.only('AJAX Status Reducer', () => {
   describe('Given no action type', () => {
     before(() => {
       state = reducer(undefined, {});
@@ -20,12 +20,48 @@ describe.only('AJAX Status Reducer', () => {
   describe('Given an action type: BEGIN_AJAX_CALL', () => {
     const type = BEGIN_AJAX_CALL;
 
-    before(() => {
-      state = reducer(initialState.ajaxCallsInProgress, { type });
-    });
+    describe('and there are no ajax calls in progress', () => {
+      const ajaxCallsInProgress = 0;
 
-    it('should have to 1 ajax calls in progress', () => {
-      expect(state).to.equal(1);
+      before(() => {
+        state = reducer(initialState.ajaxCallsInProgress, { type });
+      });
+
+      it('should have to 1 ajax calls in progress', () => {
+        expect(state).to.equal(1);
+      });
+    });
+  });
+
+  describe('Given an action type: LOAD_CHANNELS_SUCCESS', () => {
+    const type = 'LOAD_CHANNELS_SUCCESS';
+
+    describe('and there is 1 ajax call in progress', () => {
+      const ajaxCallsInProgress = 1;
+
+      before(() => {
+        state = reducer(ajaxCallsInProgress, { type });
+      });
+
+      it('should have to 0 ajax calls in progress', () => {
+        expect(state).to.equal(0);
+      });
+    });
+  });
+
+  describe('Given an action type: AJAX_CALL_ERROR', () => {
+    const type = AJAX_CALL_ERROR;
+
+    describe('and there is 1 ajax call in progress', () => {
+      const ajaxCallsInProgress = 1;
+
+      before(() => {
+        state = reducer(ajaxCallsInProgress, { type });
+      });
+
+      it('should have to 0 ajax calls in progress', () => {
+        expect(state).to.equal(0);
+      });
     });
   });
 });
