@@ -24,7 +24,6 @@ const ProgrammeItem = ({ programme, onModalShow }) => {
 
   return (
     <li className={ itemStyle } style={ setItemStyle() } title={ programme.show } onClick={ () => onModalShow(programme) }>
-      { /* <div className="indicator">Afees Adedamola Kolawole</div> */ }
       <div>
         <span className="schedule__item__time">
           { programme.startTime } - { programme.endTime }
@@ -38,7 +37,8 @@ const ProgrammeItem = ({ programme, onModalShow }) => {
 };
 
 ProgrammeItem.propTypes = {
-  programme: PropTypes.object.isRequired
+  programme: PropTypes.object.isRequired,
+  onModalShow: PropTypes.func.isRequired
 };
 
 export default ProgrammeItem;
