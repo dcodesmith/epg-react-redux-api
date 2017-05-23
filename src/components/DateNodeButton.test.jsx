@@ -47,7 +47,7 @@ describe('DateNodeButton', () => {
           component.simulate('click');
         });
 
-        it('should invoke the `onSelect` function with index `-1`', () => {
+        it('should invoke the `onSelect` function with index 0', () => {
           expect(onSelect).to.be.calledOnce
             .and.to.be.calledWithExactly(DEFAULT_PROPS.index);
         });
