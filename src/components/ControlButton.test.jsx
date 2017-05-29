@@ -13,9 +13,9 @@ const onClick = sandbox.stub();
 
 const DEFAULT_PROPS = {
   title: 'Title',
-  klass: 'a-class',
+  className: 'a-class',
   onNavigate: onClick,
-  direction: -1,
+  isDisabled: true,
   children: <div>Hi</div>
 };
 
@@ -46,12 +46,14 @@ describe('ControlButton', () => {
       });
 
       it('should have a list of classes `a-class b-class`', () => {
-        expect(button.hasClass(DEFAULT_PROPS.klass)).to.be.true;
+        expect(button.hasClass(DEFAULT_PROPS.className)).to.be.true;
       });
 
       it('should have a child element', () => {
-        // FIXME
-        // expect(component.children().html()).to.equal(DEFAULT_PROPS.children);
+        // @FIXME - assert textContent
+        // console.log('component', button.children().children().type());
+        // console.log('DEFAULT_PROPS.children', DEFAULT_PROPS.children);
+        expect(button.children().type()).to.equal(DEFAULT_PROPS.children.type);
       });
 
       describe('And the button is not disabled', () => {
@@ -68,10 +70,8 @@ describe('ControlButton', () => {
             button.simulate('click');
           });
 
-          it('should invoke the onClick method with the argument `-1`', () => {
-            expect(onClick).to.have.been
-              .calledOnce
-              .calledWithExactly(DEFAULT_PROPS.direction);
+          it('should invoke the onClick method', () => {
+            expect(onClick).to.have.been.calledOnce;
           });
         });
       });
@@ -91,7 +91,7 @@ describe('ControlButton', () => {
             onClick.reset();
           });
 
-          it('should NOT invoke the onClick method with the argument', () => {
+          it('should NOT invoke the onClick method', () => {
             expect(onClick).to.not.have.been.called;
           });
         });
