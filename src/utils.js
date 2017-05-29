@@ -1,4 +1,7 @@
 import md5 from 'md5';
+import moment from 'moment';
+
+import { ONE_MILLISECOND, TRACK_WIDTH, TIME_FORMAT } from './constants';
 
 export const md5ObjectHash = obj => md5(JSON.stringify(obj));
 
@@ -12,4 +15,12 @@ export const formatTrackTime = (timestamp) => {
   }
 
   return `${time}:00`;
+};
+
+export const setItemStyle = (programme) => {
+  const startTime = moment(programme.startTime, TIME_FORMAT);
+  const endTime = moment(programme.endTime, TIME_FORMAT);
+  const duration = endTime.diff(startTime) / ONE_MILLISECOND;
+
+  return { width: `${(duration * TRACK_WIDTH) / 30}px` };
 };
