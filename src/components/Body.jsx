@@ -23,8 +23,6 @@ const Body = ({ programmes, transformStyle, onModalShow }) => {
   const channelsNodes = channels.map(channel =>
     <div key={ channel } className={ `${channel} programme-guide__row` }>
 
-      <div className="indicator" style={ transformStyle }>Afees Adedamola Kolawole</div>
-
       <div className="programme-guide__row__header">
         <ChannelLogo channel={ channel } />
       </div>

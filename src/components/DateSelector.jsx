@@ -3,20 +3,17 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import moment from 'moment';
 
-import { md5ObjectHash } from '../utils';
+import { md5ObjectHash, computeTransitionStyle } from '../utils';
 import { ITEM_WIDTH } from '../constants';
 
 import DateNodeButton from './DateNodeButton';
 
 const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
+  const transitionStyle = computeTransitionStyle(selectedDateIndex);
+
   const isActive = index => classNames('date-selector__list__item', {
     'date-selector__list__item--active': selectedDateIndex === index
   });
-  // TODO: Use utility function to be use in tests too computeExpectedTransitionStyle()
-  const transitionStyle = {
-    transform: `translate3d(${ITEM_WIDTH * selectedDateIndex}px, 0, 0)`,
-    WebkitTransform: `translate3d(${ITEM_WIDTH * selectedDateIndex}px, 0, 0)`
-  };
 
   const dateNodes = dates.map((date, index) =>
     <li key={ md5ObjectHash(date) } className={ isActive(index) }>

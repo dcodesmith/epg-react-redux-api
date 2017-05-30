@@ -1,7 +1,7 @@
 import md5 from 'md5';
 import moment from 'moment';
 
-import { ONE_MILLISECOND, TRACK_WIDTH, TIME_FORMAT } from './constants';
+import { ONE_MILLISECOND, TRACK_WIDTH, TIME_FORMAT, ITEM_WIDTH } from './constants';
 
 export const md5ObjectHash = obj => md5(JSON.stringify(obj));
 
@@ -24,3 +24,8 @@ export const setItemStyle = (programme) => {
 
   return { width: `${(duration * TRACK_WIDTH) / 30}px` };
 };
+
+export const computeTransitionStyle = (selectedDateIndex = 0) => ({
+  transform: `translate3d(${ITEM_WIDTH * selectedDateIndex}px, 0, 0)`,
+  WebkitTransform: `translate3d(${ITEM_WIDTH * selectedDateIndex}px, 0, 0)`
+});

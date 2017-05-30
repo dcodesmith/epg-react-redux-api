@@ -6,10 +6,20 @@ import { shallow } from 'enzyme';
 import DateSelector from './DateSelector';
 import DateNodeButton from './DateNodeButton';
 
+import { computeTransitionStyle } from '../utils';
+
 const MOCK_DATES = [
   { day: 1, value: '2016-03-03', ISOString: '2016-03-03T00:00:00.000Z' },
   { day: 2, value: '2016-03-04', ISOString: '2016-03-04T00:00:00.000Z' }
 ];
+
+import {
+  ITEM_WIDTH,
+  PREVIOUS_BUTTON_CLASS,
+  PREVIOUS_BUTTON_TITLE,
+  NEXT_BUTTON_CLASS,
+  NEXT_BUTTON_TITLE
+} from '../constants';
 
 const spyOnSelect = sinon.spy();
 
@@ -26,11 +36,6 @@ const render = (testProps) => {
 };
 
 const testProps = {};
-const ITEM_WIDTH = 150;
-const computeExpectedTransitionStyle = (selectedDateIndex = 0) => ({
-  transform: `translate3d(${ITEM_WIDTH * selectedDateIndex}px, 0, 0)`,
-  WebkitTransform: `translate3d(${ITEM_WIDTH * selectedDateIndex}px, 0, 0)`
-});
 
 describe('DateSelector', () => {
   describe('Given a DateSelector', () => {
@@ -57,7 +62,7 @@ describe('DateSelector', () => {
 
       it('should have the transition style of 0px', () => {
         const { style } = component.find('span').props();
-        const EXPECTED_TRASITION_STYLE = computeExpectedTransitionStyle();
+        const EXPECTED_TRASITION_STYLE = computeTransitionStyle();
 
         expect(style).to.eql(EXPECTED_TRASITION_STYLE);
       });
@@ -83,7 +88,7 @@ describe('DateSelector', () => {
 
         it('should have the transition style of 150px', () => {
           const { style } = component.find('span').props();
-          const EXPECTED_TRASITION_STYLE = computeExpectedTransitionStyle(selectedDateIndex);
+          const EXPECTED_TRASITION_STYLE = computeTransitionStyle(selectedDateIndex);
 
           expect(style).to.eql(EXPECTED_TRASITION_STYLE);
         });
