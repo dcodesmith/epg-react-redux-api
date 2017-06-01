@@ -20,7 +20,8 @@ Grid.propTypes = {
   offset: PropTypes.number.isRequired,
   onNavigate: PropTypes.func.isRequired,
   times: PropTypes.array.isRequired,
-  transformStyle: PropTypes.object.isRequired
+  transformStyle: PropTypes.object.isRequired,
+  onShowModal: PropTypes.func.isRequired
 };
 
 export default Grid;

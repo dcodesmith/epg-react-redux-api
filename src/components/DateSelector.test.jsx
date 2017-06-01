@@ -7,12 +7,6 @@ import DateSelector from './DateSelector';
 import DateNodeButton from './DateNodeButton';
 
 import { computeTransitionStyle } from '../utils';
-
-const MOCK_DATES = [
-  { day: 1, value: '2016-03-03', ISOString: '2016-03-03T00:00:00.000Z' },
-  { day: 2, value: '2016-03-04', ISOString: '2016-03-04T00:00:00.000Z' }
-];
-
 import {
   ITEM_WIDTH,
   PREVIOUS_BUTTON_CLASS,
@@ -20,6 +14,11 @@ import {
   NEXT_BUTTON_CLASS,
   NEXT_BUTTON_TITLE
 } from '../constants';
+
+const MOCK_DATES = [
+  { day: 1, value: '2016-03-03', ISOString: '2016-03-03T00:00:00.000Z' },
+  { day: 2, value: '2016-03-04', ISOString: '2016-03-04T00:00:00.000Z' }
+];
 
 const spyOnSelect = sinon.spy();
 
@@ -29,7 +28,7 @@ const DEFAULT_PROPS = {
   onSelect: spyOnSelect
 };
 
-const render = (testProps) => {
+const render = (testProps = {}) => {
   const props = Object.assign({}, DEFAULT_PROPS, testProps);
 
   return shallow(<DateSelector {...props} />);
@@ -38,8 +37,8 @@ const render = (testProps) => {
 const testProps = {};
 
 describe('DateSelector', () => {
-  describe('Given a DateSelector', () => {
-    describe('When the component is rendered', () => {
+  describe('Given a DateSelector component', () => {
+    describe('When rendered', () => {
       let component;
 
       beforeEach(() => {
