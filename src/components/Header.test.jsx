@@ -1,21 +1,37 @@
 import React from 'react';
-import expect from 'expect';
+import sinon from 'sinon';
 import { shallow } from 'enzyme';
+import { expect } from 'chai';
+
 import Header from './Header';
+import TimeTrack from './TimeTrack';
 
-describe.skip('Header', () => {
+const DEFAULT_PROPS = {
+  times: [],
+  transformStyle: {}
+};
 
-  describe('Given ...', () => {
+const render = (testProps = {}) => {
+  const props = Object.assign({}, DEFAULT_PROPS, testProps);
 
-    describe('When the component is rendered', () => {
+  return shallow(<Header {...props} />);
+};
+
+describe('Header', () => {
+  describe('Given a Header component', () => {
+    describe('When rendered', () => {
       let component;
 
       beforeEach(() => {
-        let props = {};
-        component = shallow(<Header {...props} />);
+        component = render();
       });
 
-      it('should ....', () => {
+      it('should render a TimeTrack component', () => {
+        const timeTrackComponent = component.find(TimeTrack);
+        const { times, transformStyle } = timeTrackComponent.props();
+
+        expect(times).to.eql(DEFAULT_PROPS.times);
+        expect(transformStyle).to.eql(DEFAULT_PROPS.transformStyle);
       });
     });
   });
