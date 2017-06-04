@@ -1,5 +1,4 @@
 import React from 'react';
-import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
@@ -9,6 +8,7 @@ import TimeTrack from './TimeTrack';
 const DEFAULT_PROPS = {
   times: [],
   transformStyle: {}
+
 };
 
 const render = (testProps = {}) => {
@@ -26,7 +26,7 @@ describe('Header', () => {
         component = render();
       });
 
-      it('should render a TimeTrack component', () => {
+      it('should render a TimeTrack component with the correct props', () => {
         const timeTrackComponent = component.find(TimeTrack);
         const { times, transformStyle } = timeTrackComponent.props();
 
