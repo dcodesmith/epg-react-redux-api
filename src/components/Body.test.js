@@ -4,14 +4,12 @@ import { shallow } from 'enzyme';
 import Body from './Body';
 
 describe.skip('Body', () => {
-
   describe('Given ...', () => {
-
     describe('When the component is rendered', () => {
       let component;
 
       beforeEach(() => {
-        let props = {};
+        const props = {};
         component = shallow(<Body {...props} />);
       });
 
