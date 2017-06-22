@@ -33,8 +33,8 @@ describe('AJAX Status Reducer', () => {
     });
   });
 
-  describe('Given an action type: LOAD_CHANNELS_SUCCESS', () => {
-    const type = 'LOAD_CHANNELS_SUCCESS';
+  describe('Given succesful action type', () => {
+    const type = 'A_RANDOM_SUCCESS';
 
     describe('and there is 1 ajax call in progress', () => {
       const ajaxCallsInProgress = 1;

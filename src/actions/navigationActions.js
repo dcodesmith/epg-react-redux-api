@@ -1,9 +1,8 @@
-import { NAVIGATE_PAGE, SELECT_DATE } from './actionTypes';
-// import { goToNextDate } from './dateSelectorActions';
+import { NAVIGATE_PAGE } from './actionTypes';
 
 export const navigatePage = direction => ({ type: NAVIGATE_PAGE, direction });
 
-export const navigate = direction => (dispatch, getState) => {
+export const navigate = direction => (dispatch) => {
   // @TODO: navigate to next date when the last time/show is reached.
   // const { offset, selectedDateIndex } = getState();
   // let newSelectedDateIndex;

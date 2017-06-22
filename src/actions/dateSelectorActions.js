@@ -1,4 +1,4 @@
-import { SELECT_DATE, NAVIGATE_PAGE } from './actionTypes';
+import { SELECT_DATE } from './actionTypes';
 import { navigatePage } from './navigationActions';
 
 export const goToNextDate = index => ({ type: SELECT_DATE, index });
