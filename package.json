@@ -12,6 +12,9 @@
     "reporter": [
       "lcov",
       "text"
+    ],
+    "include": [
+      "src"
     ]
   },
   "scripts": {
@@ -24,7 +27,7 @@
     "test:coverage": "cross-env NODE_ENV=test nyc --all mocha --recursive src",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test:watch": "npm test -- -w",
-    "test:coverage": "scripts/coverage.sh",
+    "test:coverage:sh": "scripts/coverage.sh",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "node_modules/.bin/rimraf ./dist",
     "build:html": "babel-node tools/buildHtml.js",
