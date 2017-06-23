@@ -5,9 +5,8 @@ import { shallow } from 'enzyme';
 
 import Toolbar from './Toolbar';
 
-const onDelete = sinon.spy();
-
-const DEFAULT_PROPS = { onDelete };
+const onDeleteSpy = sinon.spy();
+const DEFAULT_PROPS = { onDelete: onDeleteSpy };
 
 const render = (testProps = {}) => {
   const props = Object.assign({}, DEFAULT_PROPS, testProps);
@@ -15,20 +14,32 @@ const render = (testProps = {}) => {
   return shallow(<Toolbar {...props} />);
 };
 
-
-describe.skip('Toolbar', () => {
+describe('Toolbar', () => {
   describe('Given a Toolbar component', () => {
     describe('When rendered', () => {
-      let component;
+      let component, button;
 
       beforeEach(() => {
         component = render();
+        button = component.find('button');
       });
 
-      it('should ....', () => {
-        component.simulate('click');
+      it('should render the component', () => {
+        expect(component.find('.programme-guide__toolbar').length).to.equal(1);
+      });
 
-        expect(onDelete).to.be.calledOnce;
+      it('should render a button', () => {
+        expect(button.length).to.equal(1);
+      });
+
+      describe('And the button is clicked', () => {
+        before(() => {
+          button.simulate('click');
+        });
+
+        it('should invoke the `onDelete` function', () => {
+          expect(onDeleteSpy).to.be.calledOnce;
+        });
       });
     });
   });
