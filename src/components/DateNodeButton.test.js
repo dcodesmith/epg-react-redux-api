@@ -6,11 +6,11 @@ import { shallow } from 'enzyme';
 
 import DateNodeButton from './DateNodeButton';
 
-const onSelect = sinon.spy();
+const onSelectSpy = sinon.spy();
 const date = { day: 1, value: '2016-03-03', ISOString: '2016-03-03T00:00:00.000Z' };
 const DEFAULT_PROPS = {
   index: 0,
-  onSelect,
+  onSelect: onSelectSpy,
   date
 };
 
@@ -34,9 +34,6 @@ describe('DateNodeButton', () => {
 
       it('should be a button with the appropriate props', () => {
         expect(component.type()).to.equal('button');
-        expect(component.props().onClick)
-          .to.be.a('function')
-          .and.to.be.defined;
       });
 
       it('should display dates in the correct format', () => {
@@ -46,12 +43,14 @@ describe('DateNodeButton', () => {
 
       describe('And the button is clicked', () => {
         before(() => {
+          onSelectSpy.reset();
           component.simulate('click');
         });
 
         it('should invoke the `onSelect` function with index 0', () => {
-          expect(onSelect).to.be.calledOnce;
-            // .and.to.be.calledWithExactly(DEFAULT_PROPS.index);
+          expect(DEFAULT_PROPS.onSelect)
+            .to.be.calledOnce
+            .and.to.be.calledWithExactly(DEFAULT_PROPS.index);
         });
       });
     });

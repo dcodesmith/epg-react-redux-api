@@ -55,7 +55,7 @@ describe('DateSelector', () => {
 
           expect(index).to.equal(position);
           expect(date).to.equal(MOCK_DATES[position]);
-          // @FIXME - expect(onSelect).to.equal(spyOnSelect);
+          expect(onSelect).to.equal(spyOnSelect);
         });
       });
 

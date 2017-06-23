@@ -17,7 +17,7 @@ const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
 
   const dateNodes = dates.map((date, index) =>
     <li key={ md5ObjectHash(date) } className={ isActive(index) }>
-      <DateNodeButton index={ index } date={ date } onSelect={ () => onSelect(index) } />
+      <DateNodeButton index={ index } date={ date } onSelect={ onSelect } />
     </li>
   );
 
