@@ -1,9 +1,5 @@
 import qs from 'querystring';
 
-/* *********************************** */
-/* let capi = new ChannelApi(api_url); */
-/* capi.readAll();                     */
-/* *********************************** */
 const API_URL = 'http://localhost:8010/v1/programmes';
 
 class ProgrammeApi {

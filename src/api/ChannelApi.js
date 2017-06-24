@@ -1,10 +1,3 @@
-// import fetch from 'isomorphic-fetch';
-
-/* *********************************** */
-/* let capi = new ChannelApi(api_url); */
-/* capi.readAll();                     */
-/* *********************************** */
-
 class ChannelApi {
 
   static create(data) {}

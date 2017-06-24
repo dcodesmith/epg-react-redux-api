@@ -1,5 +1,5 @@
 import { LOAD_CHANNELS_SUCCESS } from './actionTypes';
-import channelApi from '../api/channelApi';
+import ChannelApi from '../api/ChannelApi';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
 export function loadChannelsSuccess(channels) {
@@ -17,7 +17,7 @@ export function loadChannelsSuccess(channels) {
 export function loadChannels() {
   return (dispatch) => {
     dispatch(beginAjaxCall());
-    return channelApi.readAll().then((channels) => {
+    return ChannelApi.readAll().then((channels) => {
       dispatch(loadChannelsSuccess(channels));
     }).catch((error) => {
       dispatch(ajaxCallError());
