@@ -10,18 +10,23 @@ import {
   PREVIOUS_BUTTON_CLASS,
   PREVIOUS_BUTTON_TITLE,
   NEXT_BUTTON_CLASS,
-  NEXT_BUTTON_TITLE
+  NEXT_BUTTON_TITLE,
+  BACKWARD,
+  FORWARD
 } from '../constants';
 
+const onNavigateSpy = sinon.spy();
+
 const DEFAULT_PROPS = {
-  onNavigate: sinon.spy(),
-  times: new Array(24)
+  onNavigate: onNavigateSpy,
+  times: new Array(24),
+  offset: 0
 };
 
 const render = (testProps) => {
   const props = Object.assign({}, DEFAULT_PROPS, testProps);
 
-  return shallow(<Controls {...props} />);
+  return shallow(<Controls { ...props } />);
 };
 
 const testProps = {};
@@ -41,22 +46,24 @@ describe('Controls', () => {
       expect(controlButtonComponents).to.be.length(2);
 
       controlButtonComponents.forEach((controlButtonComponent, index) => {
-        // @FIXME - expect(controlButtonComponent.props().onNavigate).to.equal(DEFAULT_PROPS.onNavigate);
+        expect(controlButtonComponent.props().onNavigate).to.equal(onNavigateSpy);
       });
     });
 
     it('should have a previous ControlButton with the appropriate props', () => {
-      const { title, className } = previousButton.props();
+      const { title, className, direction } = previousButton.props();
 
       expect(title).to.equal(PREVIOUS_BUTTON_TITLE);
       expect(className).to.equal(PREVIOUS_BUTTON_CLASS);
+      expect(direction).to.equal(BACKWARD);
     });
 
     it('should have a next ControlButton with the appropriate props', () => {
-      const { title, className } = nextButton.props();
+      const { title, className, direction } = nextButton.props();
 
       expect(title).to.equal(NEXT_BUTTON_TITLE);
       expect(className).to.equal(NEXT_BUTTON_CLASS);
+      expect(direction).to.equal(FORWARD);
     });
 
     describe('And the offset value is 0', () => {
@@ -87,7 +94,7 @@ describe('Controls', () => {
       });
     });
 
-    describe('And the offset value is equal to or greater than the last offse', () => {
+    describe('And the offset value is equal to or greater than the last offset', () => {
       before(() => {
         testProps.offset = 6;
       });

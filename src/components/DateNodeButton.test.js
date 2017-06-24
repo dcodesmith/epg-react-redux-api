@@ -4,6 +4,8 @@ import moment from 'moment';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
+import { ORDINAL_MONTH_DAY, DAY_NAME } from '../constants';
+
 import DateNodeButton from './DateNodeButton';
 
 const onSelectSpy = sinon.spy();
@@ -14,8 +16,8 @@ const DEFAULT_PROPS = {
   date
 };
 
-const EXPECTED_DAY = moment(date.value).format("dddd");
-const EXPECTED_DATE = moment(date.value).format("Do");
+const EXPECTED_DAY = moment(date.value).format(DAY_NAME);
+const EXPECTED_DATE = moment(date.value).format(ORDINAL_MONTH_DAY);
 
 const render = (testProps = {}) => {
   const props = Object.assign({}, DEFAULT_PROPS, testProps);

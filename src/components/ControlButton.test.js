@@ -4,19 +4,27 @@ import chai, { expect } from 'chai';
 import sinonChai from 'sinon-chai';
 import { shallow } from 'enzyme';
 
+import { FORWARD } from '../constants';
+
 import ControlButton from './ControlButton';
 
 chai.use(sinonChai);
 
-const sandbox = sinon.sandbox.create();
-const onClick = sandbox.stub();
+const onNavigateSpy = sinon.spy();
+
+const childReactElement = React.createElement(
+  'div',
+  { className: 'a-child' },
+  null
+);
 
 const DEFAULT_PROPS = {
   title: 'Title',
   className: 'a-class',
-  onNavigate: onClick,
+  onNavigate: onNavigateSpy,
   isDisabled: true,
-  children: <div>Hi</div>
+  direction: FORWARD,
+  children: childReactElement
 };
 
 const render = (testProps) => {
@@ -41,8 +49,12 @@ describe('ControlButton', () => {
         expect(button).to.be.length(1);
       });
 
-      it('should have a title `Title`', () => {
-        expect(button.prop('title')).to.equal(DEFAULT_PROPS.title);
+      it('should have the expected props', () => {
+        const { title, className, disabled, onClick, children } = button.props();
+
+        expect(title).to.equal(DEFAULT_PROPS.title);
+        expect(className).to.equal(DEFAULT_PROPS.className);
+        expect(disabled).to.equal(DEFAULT_PROPS.isDisabled);
       });
 
       it('should have a list of classes `a-class b-class`', () => {
@@ -50,10 +62,7 @@ describe('ControlButton', () => {
       });
 
       it('should have a child element', () => {
-        // @FIXME - assert textContent
-        // console.log('component', button.children().children().type());
-        // console.log('DEFAULT_PROPS.children', DEFAULT_PROPS.children);
-        expect(button.children().type()).to.equal(DEFAULT_PROPS.children.type);
+        expect(button.contains(childReactElement)).to.be.true;
       });
 
       describe('And the button is not disabled', () => {
@@ -70,8 +79,10 @@ describe('ControlButton', () => {
             button.simulate('click');
           });
 
-          it('should invoke the onClick method', () => {
-            expect(onClick).to.have.been.calledOnce;
+          it('should invoke the onNavigate method', () => {
+            expect(onNavigateSpy)
+              .to.have.been.calledOnce
+              .and.to.be.calledWithExactly(FORWARD);
           });
         });
       });
@@ -88,11 +99,11 @@ describe('ControlButton', () => {
         describe('And clicked', () => {
           before(() => {
             button.simulate('click');
-            onClick.reset();
+            onNavigateSpy.reset();
           });
 
           it('should NOT invoke the onClick method', () => {
-            expect(onClick).to.not.have.been.called;
+            expect(onNavigateSpy).to.not.have.been.called;
           });
         });
       });

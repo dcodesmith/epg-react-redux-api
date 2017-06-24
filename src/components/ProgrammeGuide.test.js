@@ -1,23 +1,42 @@
 import React from 'react';
-import expect from 'expect';
+import { expect } from 'chai';
 import { shallow } from 'enzyme';
+
 import ProgrammeGuide from './ProgrammeGuide';
 
-describe.skip('ProgrammeGuide', () => {
+const childReactElement = React.createElement(
+  'div',
+  { className: 'a-child' },
+  null
+);
 
-  describe('Given ...', () => {
+const DEFAULT_PROPS = {
+  children: childReactElement
+};
 
-    describe('When the component is rendered', () => {
+const render = (testProps = {}) => {
+  const props = Object.assign({}, DEFAULT_PROPS, testProps);
+
+  return shallow(<ProgrammeGuide {...props} />);
+};
+
+describe('ProgrammeGuide', () => {
+  describe('Given a ProgrammeGuide component', () => {
+    describe('When rendered', () => {
       let component;
 
       beforeEach(() => {
-        let props = {};
-        component = shallow(<ProgrammeGuide {...props} />);
+        component = render();
       });
 
-      it('should ....', () => {
+      it('should render the component', () => {
+        expect(component.find('.col-md-12').length).to.equal(1);
+        expect(component.find('.grid').length).to.equal(1);
       });
 
+      it('should render children', () => {
+        expect(component.contains(childReactElement)).to.be.true;
+      });
     });
   });
 });

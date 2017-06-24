@@ -7,11 +7,11 @@ import TimeTrack from './TimeTrack';
 import { formatTrackTime, md5ObjectHash } from '../utils';
 
 const DEFAULT_PROPS = {
-    times: range(0, 24, 0.5),
-    transformStyle: {
-      transform: `translate3d(0, 0, 0)`,
-      WebkitTransform: `translate3d(0, 0, 0)`
-    }
+  times: range(0, 24, 0.5),
+  transformStyle: {
+    transform: `translate3d(0, 0, 0)`,
+    WebkitTransform: `translate3d(0, 0, 0)`
+  }
 };
 
 const render = (testProps = {}) => {
