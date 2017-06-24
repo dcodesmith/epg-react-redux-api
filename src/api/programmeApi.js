@@ -7,12 +7,8 @@ import qs from 'querystring';
 const API_URL = 'http://localhost:8010/v1/programmes';
 
 class ProgrammeApi {
-  constructor(url) {
-    this.url = url;
-  }
-
   static create(data) {
-    const url = `${this.url}/import`;
+    const url = `${API_URL}/import`;
     return fetch(url, {
       method: 'POST',
       body: data
@@ -20,7 +16,7 @@ class ProgrammeApi {
   }
 
   static readAll(query) {
-    let url = this.url;
+    let url = API_URL;
     let queryString;
 
     if (query) {
@@ -31,10 +27,8 @@ class ProgrammeApi {
     return fetch(url).then(response => response.json());
   }
 
-  static update(data) {}
-
   static delete(id) {
-    const url = this.url;
+    const url = API_URL;
 
     return fetch(url, {
       method: 'DELETE'

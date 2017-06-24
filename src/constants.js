@@ -11,3 +11,5 @@ export const NEXT_BUTTON_CLASS = 'next';
 export const NEXT_BUTTON_TITLE = 'Next 1 hr';
 export const PREVIOUS_BUTTON_CLASS = 'previous';
 export const PREVIOUS_BUTTON_TITLE = 'Previous 1 hr';
+export const FORWARD = 1;
+export const BACKWARD = -1;

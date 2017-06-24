@@ -13,7 +13,6 @@ const CsvUploadForm = ({ onUpload, isUploading = false, label, onFileChange }) =
         <label className="col-sm-3 control-label" htmlFor="file_selector">Choose CSV File</label>
         <div className="col-sm-9">
           <div className="file-chooser">
-
             <input
               onChange={ onFileChange }
               type="file"
@@ -26,7 +25,6 @@ const CsvUploadForm = ({ onUpload, isUploading = false, label, onFileChange }) =
               </svg>
               <span>{ label }</span>
             </label>
-
           </div>
         </div>
       </div>

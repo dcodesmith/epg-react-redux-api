@@ -8,7 +8,9 @@ import {
   PREVIOUS_BUTTON_CLASS,
   PREVIOUS_BUTTON_TITLE,
   NEXT_BUTTON_CLASS,
-  NEXT_BUTTON_TITLE
+  NEXT_BUTTON_TITLE,
+  FORWARD,
+  BACKWARD
 } from '../constants';
 
 const Controls = ({ onNavigate, offset = 0, times }) => (
@@ -17,15 +19,17 @@ const Controls = ({ onNavigate, offset = 0, times }) => (
       title={ PREVIOUS_BUTTON_TITLE }
       className={ PREVIOUS_BUTTON_CLASS }
       isDisabled={ !offset }
-      onNavigate={ () => onNavigate(-1) }>
+      direction={ BACKWARD }
+      onNavigate={ onNavigate }>
       <span>&laquo;</span>
     </ControlButton>
 
     <ControlButton
       title={ NEXT_BUTTON_TITLE }
       className={ NEXT_BUTTON_CLASS }
-      isDisabled={ offset >= ( Math.floor(times.length - TRACK_LENGTH) / 2 ) }
-      onNavigate={ () => onNavigate(1) }>
+      isDisabled={ offset >= (Math.floor(times.length - TRACK_LENGTH) / 2) }
+      direction={ FORWARD }
+      onNavigate={ onNavigate }>
       <span>&raquo;</span>
     </ControlButton>
   </div>
@@ -33,7 +37,7 @@ const Controls = ({ onNavigate, offset = 0, times }) => (
 
 Controls.propTypes = {
   onNavigate: PropTypes.func.isRequired,
-  offset: PropTypes.number,
+  offset: PropTypes.number.isRequired,
   times: PropTypes.array.isRequired
 };
 
