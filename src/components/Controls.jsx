@@ -13,7 +13,7 @@ import {
   BACKWARD
 } from '../constants';
 
-const Controls = ({ onNavigate, offset = 0, times }) => (
+const Controls = ({ onNavigate, offset, times }) => (
   <div className="programme-guide__controls">
     <ControlButton
       title={ PREVIOUS_BUTTON_TITLE }
