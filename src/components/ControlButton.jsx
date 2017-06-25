@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ControlButton = ({ title, className, direction, isDisabled = true, onNavigate, children }) => {
+const ControlButton = ({ title, className, direction, isDisabled, onNavigate, children }) => {
   const _onNaviagte = () => {
     onNavigate(direction);
   };

@@ -30,7 +30,7 @@ const DEFAULT_PROPS = {
 const render = (testProps) => {
   const props = Object.assign({}, DEFAULT_PROPS, testProps);
 
-  return shallow(<ControlButton {...props} />);
+  return shallow(<ControlButton { ...props } />);
 };
 
 const testProps = {};
@@ -50,15 +50,11 @@ describe('ControlButton', () => {
       });
 
       it('should have the expected props', () => {
-        const { title, className, disabled, onClick, children } = button.props();
+        const { title, className, disabled } = button.props();
 
         expect(title).to.equal(DEFAULT_PROPS.title);
         expect(className).to.equal(DEFAULT_PROPS.className);
         expect(disabled).to.equal(DEFAULT_PROPS.isDisabled);
-      });
-
-      it('should have a list of classes `a-class b-class`', () => {
-        expect(button.hasClass(DEFAULT_PROPS.className)).to.be.true;
       });
 
       it('should have a child element', () => {
