@@ -1,0 +1,16 @@
+language: node_js
+
+node_js:
+  - "7"
+
+branches:
+  only:
+    - containerization
+
+script:
+  - npm run test:coverage
+  - npm run coverage
+
+cache:
+  directories:
+    - "node_modules"

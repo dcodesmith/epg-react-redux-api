@@ -1,6 +1,11 @@
 export default {
-  isOpen: false,
+  modal: {
+    isOpen: false,
+    data: {}
+  },
   channels: [],
   programmes: [],
-  ajaxCallsInProgress: 0
+  ajaxCallsInProgress: 0,
+  selectedDateIndex: 0,
+  offset: 0
 };

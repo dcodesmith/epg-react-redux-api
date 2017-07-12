@@ -5,8 +5,6 @@ import {
 } from '../actions/actionTypes';
 import initialState from './initialState';
 
-// Consider using immutable.js here
-
 export default function programmeReducer(state = initialState.programmes, action) {
   switch (action.type) {
     case LOAD_PROGRAMMES_SUCCESS: {
@@ -14,9 +12,6 @@ export default function programmeReducer(state = initialState.programmes, action
     }
 
     case CREATE_PROGRAMMES_SUCCESS: {
-      console.log('state', state);
-      console.log('action.programmes', action.programmes);
-      
       return action.programmes;
     }
 

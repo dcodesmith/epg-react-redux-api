@@ -38,6 +38,9 @@ export default {
       publicPath: false
     }
   },
+  // externals: {
+  //   react: 'React'
+  // },
   postcss: {},
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -51,11 +54,14 @@ export default {
       { test: /(\.css)$/, loaders: ['style', 'css'] },
       { test: /\.less$/, exclude: /node_modules/, loader: ExtractTextPlugin.extract('style-loader', 'css!postcss-loader!less') },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
+      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
       // { test: /\.(html|json)$/, exclude: /node_modules/, loader: 'raw'},
       { test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000' },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
       { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
-      { test: /\.svg$/, exclude: /node_modules/, loader: 'file?name=[path][name].[ext]' }
+// { test: /\.svg$/, loader: 'babel?presets[]=es2015,presets[]=react!svg-react', include: path.join(__dirname, 'src/images') },
+      { test: /\.(jpg|png)$/, loader: 'file', include: path.join(__dirname, 'src/images') },
+      // { test: /\.svg$/, exclude: /node_modules/, loader: 'file?name=[path][name].[ext]' }
     ]
   },
   resolve: {

@@ -1,0 +1,31 @@
+.ReactModal__Body--open {
+  overflow: hidden;
+  animation: fadein 2s;
+}
+
+.overlay {
+    position: 'fixed';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.modal__close__cta {
+  border: 1px solid #BCBCBC;
+  background: transparent;
+  width: 30px;
+  height: 30px;
+  right: -30px;
+  top: -35px;
+  overflow: visible;
+  position: absolute;
+  border-radius: 50%;
+  outline: 0;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

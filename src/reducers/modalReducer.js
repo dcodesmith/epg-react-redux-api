@@ -3,13 +3,16 @@ import initialState from './initialState';
 
 // Consider using immutable.js here
 
-export default function modalReducer(state = initialState.isOpen, action) {
+export default function modalReducer(state = initialState.modal, action) {
   switch (action.type) {
     case SHOW_MODAL:
-      return !initialState.isOpen;
+      return {
+        isOpen: !state.isOpen,
+        data: action.data
+      };
 
     case HIDE_MODAL:
-      return initialState.isOpen;
+      return initialState.modal;
 
     default:
       return state;

@@ -1,49 +1,31 @@
+import md5 from 'md5';
 import moment from 'moment';
-import { filter } from 'lodash';
 
-const getProgrammeDates = (programmes) => {
-  const programmeDates = [];
-  const dates = programmes.map(programme => new Date(programme.date));
-  const endDate = new Date(Math.max.apply(null, dates));
-  const startDate = new Date(Math.min.apply(null, dates));
-  const numberOfDays = moment(endDate).diff(moment(startDate), 'days') + 1;
-  let value;
-  let index;
+import { ONE_MILLISECOND, TRACK_WIDTH, TIME_FORMAT, ITEM_WIDTH } from './constants';
 
-  const DATE_FORMAT = 'YYYY-MM-DD';
+export const md5ObjectHash = obj => md5(JSON.stringify(obj));
 
-  for (index = 0; index < numberOfDays; index += 1) {
-    value = moment(startDate).add(index, 'days').format(DATE_FORMAT);
-    programmeDates[index] = {
-      day: index + 1,
-      value,
-      ISOString: new Date(value).toISOString()
-    };
+export const pad = number => ((number < 10) ? `0${number}` : number);
+
+export const formatTrackTime = (timestamp) => {
+  const time = pad(timestamp.toString());
+
+  if (time.indexOf('.') > 0) {
+    return time.replace('.5', ':30');
   }
 
-  return programmeDates;
+  return `${time}:00`;
 };
 
-// TODO: Move into selector folder
-const getSelectedDatesProgrammes = ({ selectedDate, programmes, channels }) => {
-  const selectedDateProgrammes = {};
-  let todaysProgrammes = [];
+export const setItemStyle = (programme) => {
+  const startTime = moment(programme.startTime, TIME_FORMAT);
+  const endTime = moment(programme.endTime, TIME_FORMAT);
+  const duration = endTime.diff(startTime) / ONE_MILLISECOND;
 
-  if (!selectedDate || !programmes) {
-    return {};
-  }
-
-  todaysProgrammes = filter(programmes, { date: selectedDate.ISOString });
-
-  /* eslint no-shadow: 0 */
-
-  todaysProgrammes.forEach((programme, index, programmes) => {
-    selectedDateProgrammes[programme.channel.code] = filter(programmes, {
-      channel: programme.channel
-    });
-  });
-
-  return selectedDateProgrammes;
+  return { width: `${(duration * TRACK_WIDTH) / 30}px` };
 };
 
-export { getProgrammeDates, getSelectedDatesProgrammes };
+export const computeTransitionStyle = (selectedDateIndex = 0) => ({
+  transform: `translate3d(${ITEM_WIDTH * selectedDateIndex}px, 0, 0)`,
+  WebkitTransform: `translate3d(${ITEM_WIDTH * selectedDateIndex}px, 0, 0)`
+});

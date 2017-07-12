@@ -11,7 +11,7 @@
       text-align: center;
       width: 150px;
       padding: 10px;
-      z-index: @zindex1;
+      z-index: @zindex0;
       position: relative;
     }
   }
@@ -33,11 +33,6 @@
       font-weight: 500;
       padding: 10px 5px;
       width: 75px;
-
-      &:nth-child(odd) {
-        // background: rgba(54, 25, 25, .5);
-        // background: lighten(@brand-primary, 4%);
-      }
     }
   }
 
@@ -57,11 +52,10 @@
       background: lighten(#dfdfdf, 10%);
       float: left;
       height: 100%;
-      padding: 10px 0;
       position: relative;
       text-align: center;
       width: 150px;
-      z-index: @zindex1;
+      z-index: @zindex0;
     }
 
     &__items {
