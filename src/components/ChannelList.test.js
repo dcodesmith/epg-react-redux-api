@@ -11,7 +11,7 @@ const DEFAULT_PROPS = {
 const render = (testProps = {}) => {
   const props = Object.assign({}, DEFAULT_PROPS, testProps);
 
-  return shallow(<ChannelList {...props} />);
+  return shallow(<ChannelList { ...props } />);
 };
 
 describe('ChannelList', () => {
