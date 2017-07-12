@@ -11,7 +11,7 @@ const DEFAULT_PROPS = { onDelete: onDeleteSpy };
 const render = (testProps = {}) => {
   const props = Object.assign({}, DEFAULT_PROPS, testProps);
 
-  return shallow(<Toolbar {...props} />);
+  return shallow(<Toolbar { ...props } />);
 };
 
 describe('Toolbar', () => {
