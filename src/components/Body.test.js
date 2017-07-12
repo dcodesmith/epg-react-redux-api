@@ -158,7 +158,7 @@ describe('Body', () => {
         expect(channelRowItems.length).to.be.equal(EXPECTED_CHANNELS.length);
       });
 
-      // @TODO
+      // @TODO -
       it('should render 4 Programmes components', () => {
         const ProgrammeItemComponents = component.find(ProgrammeItem);
 
