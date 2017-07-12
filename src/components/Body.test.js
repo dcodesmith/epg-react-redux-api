@@ -112,7 +112,7 @@ const render = (testProps = {}) => {
   return shallow(<Body { ...props } />);
 };
 
-describe.only('Body', () => {
+describe('Body', () => {
   describe('Given a Body component', () => {
     describe('When rendered', () => {
       let component;
@@ -158,14 +158,11 @@ describe.only('Body', () => {
         expect(channelRowItems.length).to.be.equal(EXPECTED_CHANNELS.length);
       });
 
+      // @TODO
       it('should render 4 Programmes components', () => {
         const ProgrammeItemComponents = component.find(ProgrammeItem);
 
         expect(ProgrammeItemComponents.length).to.equal(4);
-
-        Object.keys(mockProgrammes).forEach((channel) => {
-          const sortedProgramme = sortBy(mockProgrammes[channel], 'startTime');
-        });
 
         ProgrammeItemComponents.forEach((ProgrammeItemComponent, index) => {
           const { programme, onModalShow } = ProgrammeItemComponent.props();
