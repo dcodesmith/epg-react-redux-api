@@ -15,6 +15,9 @@
     ],
     "include": [
       "src"
+    ],
+    "exclude": [
+      "src/store"
     ]
   },
   "scripts": {
