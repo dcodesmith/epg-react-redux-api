@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch';
+
 class ChannelApi {
 
   static create(data) {}
