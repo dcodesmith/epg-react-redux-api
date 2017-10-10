@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // ...so can't test for eventHandler call
 
 const CsvUploadForm = ({ onUpload, isUploading = false, label, onFileChange }) => (
-  <div className="channel-panel col-xs-12 col-sm-6 col-lg-8">
+  <div className="channel-panel">
     <form className="form-horizontal">
 
       <div className="form-group">

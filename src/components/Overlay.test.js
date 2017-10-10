@@ -1,8 +1,11 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 import { shallow } from 'enzyme';
+import sinonChai from 'sinon-chai';
 import Modal from 'react-modal';
+
+chai.use(sinonChai);
 
 import Overlay from './Overlay';
 import ProgrammeDetails from './ProgrammeDetails';
@@ -41,12 +44,12 @@ describe('Overlay', () => {
       });
 
       describe('And the close CTA is clicked', () => {
-        before(() => {
+        beforeAll(() => {
           button.simulate('click');
         });
 
         it('should invoke the onHideModal method', () => {
-          expect(onHideModalSpy).to.be.calledOnce;
+          expect(onHideModalSpy).to.have.been.calledOnce;
         });
       });
     });

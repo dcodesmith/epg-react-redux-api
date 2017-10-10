@@ -8,7 +8,7 @@ let state;
 
 describe('navigation reducer', () => {
   describe('Given no action type', () => {
-    before(() => {
+    beforeAll(() => {
       state = reducer(undefined, {});
     });
 
@@ -23,7 +23,7 @@ describe('navigation reducer', () => {
     describe('and an new index is selected', () => {
       const index = 1;
 
-      before(() => {
+      beforeAll(() => {
         state = reducer(undefined, { type, index });
       });
 
@@ -35,7 +35,7 @@ describe('navigation reducer', () => {
     describe('and another index is selected', () => {
       const index = 1;
 
-      before(() => {
+      beforeAll(() => {
         state = reducer(undefined, { type, index });
       });
 

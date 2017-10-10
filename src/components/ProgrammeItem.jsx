@@ -15,11 +15,11 @@ const ProgrammeItem = ({ programme, onModalShow }) => {
   return (
     <li className={ itemStyle } style={ setItemStyle(programme) } title={ programme.show } onClick={ () => onModalShow(programme) }>
       <div>
-        <span className="schedule__item__time">
-          { programme.startTime } - { programme.endTime }
-        </span>
         <span className="schedule__item__title">
           { programme.show }
+        </span>
+        <span className="schedule__item__time">
+          { programme.startTime } - { programme.endTime }
         </span>
       </div>
     </li>

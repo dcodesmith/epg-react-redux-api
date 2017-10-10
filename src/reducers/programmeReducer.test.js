@@ -23,7 +23,7 @@ const ACTIONS = [{
 
 describe('Programme reducer', () => {
   describe('Given no action type', () => {
-    before(() => {
+    beforeAll(() => {
       state = reducer(undefined, {});
     });
 
@@ -34,12 +34,12 @@ describe('Programme reducer', () => {
 
   ACTIONS.forEach((action) => {
     describe(`Given an action type: ${action.type}`, () => {
-      const type = action.type;
+      const { type } = action;
 
       describe('and there are programmes', () => {
-        const programmes = action.programmes;
+        const { programmes } = action;
 
-        before(() => {
+        beforeAll(() => {
           state = reducer(undefined, { type, programmes });
         });
 

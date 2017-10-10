@@ -1,17 +1,15 @@
 import React from 'react';
-import expect from 'expect';
+import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import ProgrammeItem from './ProgrammeItem';
 
 describe.skip('ProgrammeItem', () => {
-
   describe('Given ...', () => {
-
     describe('When the component is rendered', () => {
       let component;
 
       beforeEach(() => {
-        let props = {};
+        const props = {};
         component = shallow(<ProgrammeItem {...props} />);
       });
 

@@ -1,14 +1,17 @@
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import sinonChai from 'sinon-chai';
 
 import { BEGIN_AJAX_CALL, AJAX_CALL_ERROR } from './actionTypes';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
+
+chai.use(sinonChai);
 
 describe('AJAX Status Actions', () => {
   describe('Given an ajax call', () => {
     let action;
 
     describe('When it begins', () => {
-      before(() => {
+      beforeAll(() => {
         action = beginAjaxCall();
       });
 
@@ -18,7 +21,7 @@ describe('AJAX Status Actions', () => {
     });
 
     describe('When it fails', () => {
-      before(() => {
+      beforeAll(() => {
         action = ajaxCallError();
       });
 

@@ -1,0 +1,15 @@
+.channel-logo {
+  height: 64px;
+
+  &__fill {
+    fill: transparent;
+  }
+
+  @include channelBg()
+}
+
+@include media-breakpoint-up(lg) {
+  .channel-logo {
+    width: 100%;
+  }
+}

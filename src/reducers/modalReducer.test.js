@@ -8,7 +8,7 @@ let state;
 
 describe('modal reducer', () => {
   describe('Given no action type', () => {
-    before(() => {
+    beforeAll(() => {
       state = reducer(undefined, {});
     });
 
@@ -23,7 +23,7 @@ describe('modal reducer', () => {
     describe('and action data', () => {
       const data = { firstName: 'Afees', initials: 'D', surname: 'Kolawole' };
 
-      before(() => {
+      beforeAll(() => {
         state = reducer(initialState.modal, { type, data });
       });
 
@@ -36,7 +36,7 @@ describe('modal reducer', () => {
   describe('Given an action type - `HIDE_MODAL`', () => {
     const type = HIDE_MODAL;
 
-    before(() => {
+    beforeAll(() => {
       state = reducer({}, { type });
     });
 

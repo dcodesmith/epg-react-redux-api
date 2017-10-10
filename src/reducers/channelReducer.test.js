@@ -8,7 +8,7 @@ let state;
 
 describe('Channel reducer', () => {
   describe('Given no action type', () => {
-    before(() => {
+    beforeAll(() => {
       state = reducer(undefined, {});
     });
 
@@ -23,7 +23,7 @@ describe('Channel reducer', () => {
     describe('and there are channels', () => {
       const channels = [{ name: 'BBC ONE' }];
 
-      before(() => {
+      beforeAll(() => {
         state = reducer(initialState.offset, { type, channels });
       });
 

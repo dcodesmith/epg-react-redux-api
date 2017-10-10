@@ -8,7 +8,7 @@ describe('AJAX Status Reducer', () => {
   let state;
 
   describe('Given no action type', () => {
-    before(() => {
+    beforeAll(() => {
       state = reducer(undefined, {});
     });
 
@@ -23,7 +23,7 @@ describe('AJAX Status Reducer', () => {
     describe('and there are no ajax calls in progress', () => {
       const ajaxCallsInProgress = 0;
 
-      before(() => {
+      beforeAll(() => {
         state = reducer(initialState.ajaxCallsInProgress, { type });
       });
 
@@ -39,7 +39,7 @@ describe('AJAX Status Reducer', () => {
     describe('and there is 1 ajax call in progress', () => {
       const ajaxCallsInProgress = 1;
 
-      before(() => {
+      beforeAll(() => {
         state = reducer(ajaxCallsInProgress, { type });
       });
 
@@ -55,7 +55,7 @@ describe('AJAX Status Reducer', () => {
     describe('and there is 1 ajax call in progress', () => {
       const ajaxCallsInProgress = 1;
 
-      before(() => {
+      beforeAll(() => {
         state = reducer(ajaxCallsInProgress, { type });
       });
 

@@ -1,8 +1,11 @@
 import React from 'react';
 import sinon from 'sinon';
 import moment from 'moment';
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 import { shallow } from 'enzyme';
+import sinonChai from 'sinon-chai';
+
+chai.use(sinonChai);
 
 import { ORDINAL_MONTH_DAY, DAY_NAME } from '../constants';
 
@@ -44,7 +47,7 @@ describe('DateNodeButton', () => {
       });
 
       describe('And the button is clicked', () => {
-        before(() => {
+        beforeAll(() => {
           onSelectSpy.reset();
           component.simulate('click');
         });

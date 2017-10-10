@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import moment from 'moment';
+// import moment from 'moment';
 
-import { md5ObjectHash, computeTransitionStyle } from '../utils';
-import { ITEM_WIDTH } from '../constants';
+import { md5ObjectHash } from '../utils';
+// import { ITEM_WIDTH } from '../constants'; computeTransitionStyle
 
 import DateNodeButton from './DateNodeButton';
 
 const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
-  const transitionStyle = computeTransitionStyle(selectedDateIndex);
+  // const transitionStyle = computeTransitionStyle(selectedDateIndex);
 
   const isActive = index => classNames('date-selector__list__item', {
     'date-selector__list__item--active': selectedDateIndex === index
@@ -26,7 +26,8 @@ const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
       <ul className="date-selector__list">
         { dateNodes }
       </ul>
-      <span style={ transitionStyle } className="date-selector__list__item--underlined" />
+      {/* TODO: Put it back later */}
+      {/* <span style={ transitionStyle } className="date-selector__list__item--underlined" /> */}
     </div>
   );
 };

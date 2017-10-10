@@ -1,5 +1,8 @@
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+
+chai.use(sinonChai);
 
 import configureStore from '../store/configureStore.dev';
 import {
@@ -30,7 +33,7 @@ describe('Promotion Actions', () => {
   //   let action, AsyncAction;
 
   //   describe('When it begins', () => {
-  //     before(() => {
+  //     beforeAll(() => {
   //       action = createProgrammes(data)(dispatch);
   //       // programmeApi.create(data).returns(Promise.resolve({}));
   //     });
@@ -50,7 +53,7 @@ describe('Promotion Actions', () => {
     const programmes = [{ name: 'Show A' }, { name: 'Show B' }];
 
     describe('When programmes are succesfully loaded', () => {
-      before(() => {
+      beforeAll(() => {
         action = loadProgrammesSuccess(programmes);
       });
 
@@ -60,7 +63,7 @@ describe('Promotion Actions', () => {
     });
 
     describe('When programmes are succesfully created', () => {
-      before(() => {
+      beforeAll(() => {
         action = createProgrammeSuccess(programmes);
       });
 
@@ -70,7 +73,7 @@ describe('Promotion Actions', () => {
     });
 
     describe('When programmes are succesfully deleted', () => {
-      before(() => {
+      beforeAll(() => {
         action = deteleProgrammeSuccess();
       });
 

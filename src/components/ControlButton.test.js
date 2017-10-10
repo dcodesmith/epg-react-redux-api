@@ -62,7 +62,7 @@ describe('ControlButton', () => {
       });
 
       describe('And the button is not disabled', () => {
-        before(() => {
+        beforeAll(() => {
           testProps.isDisabled = false;
         });
 
@@ -71,7 +71,7 @@ describe('ControlButton', () => {
         });
 
         describe('And clicked', () => {
-          before(() => {
+          beforeAll(() => {
             button.simulate('click');
           });
 
@@ -84,7 +84,7 @@ describe('ControlButton', () => {
       });
 
       describe('And the button is disbabled', () => {
-        before(() => {
+        beforeAll(() => {
           testProps.isDisabled = true;
         });
 
@@ -93,7 +93,7 @@ describe('ControlButton', () => {
         });
 
         describe('And clicked', () => {
-          before(() => {
+          beforeAll(() => {
             button.simulate('click');
             onNavigateSpy.reset();
           });

@@ -1,5 +1,5 @@
 .date-selector {
-  font-size: 1.1rem;
+  overflow: hidden;
 
   &__list {
     background: lighten(#dfdfdf, 10%);
@@ -9,11 +9,14 @@
     margin: 0;
     transition: transform 0.7s ease;
     white-space: nowrap;
+    display: flex;
+    overflow: scroll;
 
     &__item {
       display: inline-block;
       position: relative;
       text-align: center;
+      width: 100%;
 
       .date {
         background: none;
@@ -22,7 +25,7 @@
         padding: 5px 15px;
         padding: 10px 15px;
         text-transform: uppercase;
-        width: 150px;
+        width: 100%;
 
         span {
           display: block;
@@ -39,12 +42,12 @@
 
       &--active {
         .date {
-          font-weight: 500;
+          font-weight: bold;
         }
       }
 
       &--underlined {
-        border: 2px solid @brand-primary;
+        border: 2px solid $brand-primary;
         display: block;
         width: 150px;
         transition: transform 0.5s ease;
