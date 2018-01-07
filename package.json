@@ -32,7 +32,8 @@
       "**/*.{js,jsx}",
       "!**/src/*.js",
       "!**/coverage/**/*.js",
-      "!**/src/store/**"
+      "!**/src/store/**",
+      "!**/src/containers/**"
     ]
   },
   "devDependencies": {
