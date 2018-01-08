@@ -1,6 +1,6 @@
 import {
-  LOAD_PROGRAMMES_SUCCESS,
   CREATE_PROGRAMMES_SUCCESS,
+  LOAD_PROGRAMMES_SUCCESS,
   DELETE_PROGRAMMES_SUCCESS
 } from './actionTypes';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
@@ -27,35 +27,34 @@ export const createProgrammes = data => async (dispatch) => {
   try {
     const programmes = await ProgrammeApi.create(data);
 
-    dispatch(createProgrammeSuccess(programmes));    
+    dispatch(createProgrammeSuccess(programmes));
   } catch (error) {
     dispatch(ajaxCallError());
-    throw (error);
+    // throw (error);
   }
 };
 
 export const loadProgrammes = () => async (dispatch) => {
   dispatch(beginAjaxCall());
-  
+
   try {
     const programmes = await ProgrammeApi.readAll({ populate: 'channel' });
 
-    dispatch(loadProgrammesSuccess(programmes));    
+    dispatch(loadProgrammesSuccess(programmes));
   } catch (error) {
     dispatch(ajaxCallError());
-    throw (error);
+    // throw (error);
   }
 };
 
-
 export const deleteProgrammes = () => async (dispatch) => {
   dispatch(beginAjaxCall());
-  
+
   try {
     await ProgrammeApi.delete();
-    dispatch(deteleProgrammeSuccess());    
+    dispatch(deteleProgrammeSuccess());
   } catch (error) {
     dispatch(ajaxCallError());
-    throw (error);
+    // throw (error);
   }
 };

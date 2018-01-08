@@ -12,7 +12,7 @@ export const loadChannels = () => async (dispatch) => {
   try {
     const channels = await ChannelApi.readAll();
 
-    dispatch(loadChannelsSuccess(channels));    
+    dispatch(loadChannelsSuccess(channels));
   } catch (error) {
     dispatch(ajaxCallError());
     // throw (error);

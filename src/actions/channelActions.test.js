@@ -1,131 +1,60 @@
-import chai, { expect } from 'chai';
-import nock from 'nock';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+import chai, { expect } from 'chai';
 
-chai.use(sinonChai);
-
-import configureStore from '../store/configureStore.prod';
-import { LOAD_CHANNELS_SUCCESS } from './actionTypes';
-import { loadChannelsSuccess, loadChannels } from './channelActions';
+import { LOAD_CHANNELS_SUCCESS, BEGIN_AJAX_CALL, AJAX_CALL_ERROR } from './actionTypes';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
-// TODO: Revisit
-const sandbox = sinon.sandbox.create();
-const store = configureStore();
-const dispatch = sandbox.spy(store, 'dispatch');
+import ChannelApi from '../api/ChannelApi';
+import { loadChannels } from './channelActions';
 
-describe.skip('Channel Actions', () => {
-  describe('Given channels', () => {
-    let action;
-    const channels = [{ name: 'BBC One' }, { name: 'BBC Two' }];
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
-    describe('When channels are succesfully loaded', () => {
-      beforeAll(() => {
-        action = loadChannelsSuccess(channels);
-      });
+const payload = [{ name: 'Random Channel' }];
 
-      it('should return a `LOAD_CHANNELS_SUCCESS` action', () => {
-        expect(action).to.eql({ type: LOAD_CHANNELS_SUCCESS, channels });
-      });
+describe('Given channel actions', () => {
+  let store;
+  let actualActions;
+  let expectedActions;
+
+  const readAll = sinon.stub(ChannelApi, 'readAll');
+
+  beforeAll(() => {
+    store = mockStore({});
+  });
+
+  beforeEach(async() => {
+    store.dispatch(loadChannels());
+    actualActions = store.getActions();
+  });
+
+  afterEach(() => {
+    store.clearActions();
+    readAll.reset();
+  });
+
+  describe('when the call to the API is successful', () => {
+    beforeAll(async () => {
+      await readAll.resolves(payload);
     });
 
-    describe('When channels are succesfully requested', () => {
-      const expectedData = [{ name: 'BBC One' }];
+    it('should dispatch `BEGIN_AJAX_CALL` and `LOAD_CHANNELS_SUCCESS` actions', () => {
+      expectedActions = [{ type: BEGIN_AJAX_CALL }, { type: LOAD_CHANNELS_SUCCESS, channels: payload }];
 
-      beforeAll(() => {
-        nock('http://localhost:8010')
-          .get('/v1/channels')
-          .reply(200, expectedData);
+      expect(actualActions).to.eql(expectedActions);
+    });
+  });
 
-        loadChannels()(dispatch);
-      });
-
-      afterAll(() => {
-        nock.cleanAll();
-        dispatch.reset();
-      });
-
-      it('should invoke the dispatch method twice', () => {
-        expect(dispatch).to.have.been.calledTwice;
-      });
-
-      it('should invoke the dispatch method with with beginAjaxCall', () => {
-        expect(dispatch).to.have.been.calledWithExactly(beginAjaxCall());
-      });
-
-      it('should invoke the dispatch method with with loadChannelsSuccess', () => {
-        expect(dispatch)
-          .to.have.been.calledWithExactly(loadChannelsSuccess(expectedData));
-      });
+  describe('when the call to the API is unsuccessful', () => {
+    beforeAll(async () => {
+      await readAll.rejects();
     });
 
+    it('should dispatch `BEGIN_AJAX_CALL` and `AJAX_CALL_ERROR` actions', () => {
+      expectedActions = [{ type: BEGIN_AJAX_CALL }, { type: AJAX_CALL_ERROR }];
 
-    describe('When channels are unsuccesfully requested', () => {
-      beforeAll(() => {
-        nock('http://localhost:8010')
-          .get('/v1/channels')
-          .replyWithError();
-
-        loadChannels()(dispatch);
-      });
-
-      afterAll(() => {
-        nock.cleanAll();
-        dispatch.reset();
-      });
-
-      it('should invoke the dispatch method twice', () => {
-        expect(dispatch).to.have.been.calledTwice;
-      });
-
-      it('should invoke the dispatch method with with beginAjaxCall', () => {
-        expect(dispatch).to.have.been.calledWithExactly(beginAjaxCall());
-      });
-
-      it('should invoke the dispatch method with with ajaxCallError', () => {
-        expect(dispatch)
-          .to.have.been.calledWithExactly(ajaxCallError());
-      });
-    });
-
-    describe('When channels are succesfully requested', () => {
-      beforeAll(() => {
-        nock('http://localhost:8010')
-          .get('/v1/channels')
-          .reply(200, channels);
-
-        store.dispatch(loadChannels());
-      });
-
-      afterAll(() => {
-        nock.cleanAll();
-      });
-
-      it.skip('should update the channel state', (done) => {
-        store.dispatch(loadChannels()).then(() => {
-          expect(store.getState().channels).to.eql(channels);
-        });
-        done();
-      });
-    });
-
-    describe('When channels are unsuccesfully requested', () => {
-      beforeAll(() => {
-        nock('http://localhost:8010')
-          .get('/v1/channels')
-          .replyWithError();
-      });
-
-      afterAll(() => {
-        nock.cleanAll();
-      });
-
-      it.skip('should not update the channel state', (done) => {
-        store.dispatch(loadChannels()).then(() => {
-          expect(store.getState().channels).to.equal([]);
-        });
-        done();
-      });
+      expect(actualActions).to.eql(expectedActions);
     });
   });
 });

@@ -1,84 +1,116 @@
-import chai, { expect } from 'chai';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+import chai, { expect } from 'chai';
 
-chai.use(sinonChai);
-
-import configureStore from '../store/configureStore.dev';
 import {
-  LOAD_PROGRAMMES_SUCCESS,
   CREATE_PROGRAMMES_SUCCESS,
-  DELETE_PROGRAMMES_SUCCESS
+  LOAD_PROGRAMMES_SUCCESS,
+  DELETE_PROGRAMMES_SUCCESS,
+  BEGIN_AJAX_CALL,
+  AJAX_CALL_ERROR
 } from './actionTypes';
-import {
-  createProgrammes,
-  loadProgrammesSuccess,
-  createProgrammeSuccess,
-  deteleProgrammeSuccess
-} from './programmeActions';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
+import ProgrammeApi from '../api/ProgrammeApi';
+import { createProgrammes, loadProgrammes, deleteProgrammes } from './programmeActions';
 
-const sandbox = sinon.sandbox.create();
-const store = configureStore();
-const dispatch = sandbox.spy(store, 'dispatch'); // OR dispatch = sandbox.spy();
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
-// dbAPI.fetchUser = sinon.stub().returns(Promise.resolve({username: 'John'}));
+const createStub = sinon.stub(ProgrammeApi, 'create');
+const readAllStub = sinon.stub(ProgrammeApi, 'readAll');
+const deleteStub = sinon.stub(ProgrammeApi, 'delete');
 
-const programmeApi = {
-  create: sandbox.stub()
-};
+const payload = [{ programme: 'Random Programme' }];
 
-describe('Promotion Actions', () => {
-  // describe('Given an ajax call', () => {
-  //   let action, AsyncAction;
+describe.only('Given programme actions', () => {
+  let store;
+  let actualActions;
+  let expectedActions;
 
-  //   describe('When it begins', () => {
-  //     beforeAll(() => {
-  //       action = createProgrammes(data)(dispatch);
-  //       // programmeApi.create(data).returns(Promise.resolve({}));
-  //     });
+  beforeAll(() => {
+    store = mockStore({});
+  });
 
-  //     it('should return a type `BEGIN_AJAX_CALL`', () => {
-  //       action.then(() => {
-  //         expect(dispatch).to.be.calledWith(beginAjaxCall());
-  //         // done();
-  //         // expect(dispatch.called).to.be.true;
-  //       });
-  //     });
-  //   });
-  // });
+  beforeEach(async () => {
+    actualActions = store.getActions();
+  });
 
-  describe('Given programmes', () => {
-    let action;
-    const programmes = [{ name: 'Show A' }, { name: 'Show B' }];
+  afterEach(() => {
+    store.clearActions();
+  });
 
-    describe('When programmes are succesfully loaded', () => {
-      beforeAll(() => {
-        action = loadProgrammesSuccess(programmes);
-      });
+  describe('create programmes', () => {
+    beforeEach(async () => await store.dispatch(createProgrammes({})));
+    afterEach(() => createStub.reset());
 
-      it('should return a `LOAD_PROGRAMMES_SUCCESS` action', () => {
-        expect(action).to.eql({ type: LOAD_PROGRAMMES_SUCCESS, programmes });
+    describe('when the call to the API is successful', () => {
+      beforeAll(async () => await createStub.resolves(payload));
+
+      it('should dispatch `BEGIN_AJAX_CALL` and `CREATE_PROGRAMMES_SUCCESS` actions', async () => {
+        expectedActions = [{ type: BEGIN_AJAX_CALL }, { type: CREATE_PROGRAMMES_SUCCESS, programmes: payload }];
+
+        expect(actualActions).to.eql(expectedActions);
       });
     });
 
-    describe('When programmes are succesfully created', () => {
-      beforeAll(() => {
-        action = createProgrammeSuccess(programmes);
-      });
+    describe('when the call to the API is unsuccessful', () => {
+      beforeAll(async () => await createStub.rejects());
 
-      it('should return a `CREATE_PROGRAMMES_SUCCESS` action', () => {
-        expect(action).to.eql({ type: CREATE_PROGRAMMES_SUCCESS, programmes });
+      it('should dispatch `BEGIN_AJAX_CALL` and `AJAX_CALL_ERROR` actions', async () => {
+        expectedActions = [{ type: BEGIN_AJAX_CALL }, { type: AJAX_CALL_ERROR }];
+
+        expect(actualActions).to.eql(expectedActions);
+      });
+    });
+  });
+
+  describe('load programmes', () => {
+    beforeEach(async () => await store.dispatch(loadProgrammes()));
+    afterEach(() => readAllStub.reset());
+
+    describe('when the call to the API is successful', () => {
+      beforeAll(async () => await readAllStub.resolves(payload));
+
+      it('should dispatch `BEGIN_AJAX_CALL` and `LOAD_PROGRAMMES_SUCCESS` actions', async () => {
+        expectedActions = [{ type: BEGIN_AJAX_CALL }, { type: LOAD_PROGRAMMES_SUCCESS, programmes: payload }];
+
+        expect(actualActions).to.eql(expectedActions);
       });
     });
 
-    describe('When programmes are succesfully deleted', () => {
-      beforeAll(() => {
-        action = deteleProgrammeSuccess();
-      });
+    describe('when the call to the API is unsuccessful', () => {
+      beforeAll(async () => await readAllStub.rejects());
 
-      it('should return a `DELETE_PROGRAMMES_SUCCESS` action', () => {
-        expect(action).to.eql({ type: DELETE_PROGRAMMES_SUCCESS, programmes: [] });
+      it('should dispatch `BEGIN_AJAX_CALL` and `AJAX_CALL_ERROR` actions', async () => {
+        expectedActions = [{ type: BEGIN_AJAX_CALL }, { type: AJAX_CALL_ERROR }];
+
+        expect(actualActions).to.eql(expectedActions);
+      });
+    });
+  });
+
+  describe('delete programmes', () => {
+    beforeEach(async () => await store.dispatch(deleteProgrammes()));
+    afterEach(() => deleteStub.reset());
+
+    describe('when the call to the API is successful', () => {
+      beforeAll(async () => await deleteStub.resolves());
+
+      it('should dispatch `BEGIN_AJAX_CALL` and `DELETE_PROGRAMMES_SUCCESS` actions', async () => {
+        expectedActions = [{ type: BEGIN_AJAX_CALL }, { type: DELETE_PROGRAMMES_SUCCESS, programmes: [] }];
+
+        expect(actualActions).to.eql(expectedActions);
+      });
+    });
+
+    describe('when the call to the API is unsuccessful', () => {
+      beforeAll(async () => await deleteStub.rejects());
+
+      it('should dispatch `BEGIN_AJAX_CALL` and `AJAX_CALL_ERROR` actions', async () => {
+        expectedActions = [{ type: BEGIN_AJAX_CALL }, { type: AJAX_CALL_ERROR }];
+
+        expect(actualActions).to.eql(expectedActions);
       });
     });
   });
