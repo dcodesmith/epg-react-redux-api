@@ -9,11 +9,11 @@ chai.use(sinonChai);
 import CsvUploadForm from './CsvUploadForm';
 
 const onFileChange = sinon.spy();
-const onUpload = sinon.spy();
+const onUploadSpy = sinon.spy();
 
 const DEFAULT_PROPS = {
   onFileChange,
-  onUpload,
+  onUpload: onUploadSpy,
   isUploading: false,
   label: 'Text'
 };
@@ -75,12 +75,12 @@ describe('CsvUploadForm', () => {
 
         describe('WHEN the form is submitted', () => {
           beforeAll(() => {
-            onUpload.reset();
+            onUploadSpy.reset();
             form.find('button').simulate('click');
           });
 
           it('should call `onUpload()` once', () => {
-            expect(onUpload).to.be.calledOnce;
+            expect(onUploadSpy).to.be.calledOnce;
           });
         });
       });
@@ -97,11 +97,11 @@ describe('CsvUploadForm', () => {
         describe('WHEN the form is submitted', () => {
           beforeAll(() => {
             form.find('button').simulate('click');
-            onUpload.reset();
+            onUploadSpy.reset();
           });
 
           it('should NOT call `onUpload()`', () => {
-            expect(onUpload).to.not.be.called;
+            expect(onUploadSpy).to.not.be.called;
           });
         });
       });

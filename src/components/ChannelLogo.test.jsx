@@ -13,7 +13,7 @@ const render = (testProps = {}) => {
   return shallow(<ChannelLogo { ...props } />);
 };
 
-describe.only('ChannelLogo', () => {
+describe('ChannelLogo', () => {
   describe('Given a channel logo', () => {
     describe('When the the component is rendered', () => {
       let component, channelLogo;
