@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 import { filter, uniq } from 'lodash';
 
 const getProgrammes = state => state.programmes;
+const getChannels = state => state.channels;
 
 export const getProgrammeDates = createSelector([getProgrammes], programmes => {
   const programmeDates = [];
@@ -21,14 +22,12 @@ export const getProgrammeDates = createSelector([getProgrammes], programmes => {
     programmeDates[index] = {
       day: index + 1,
       value
-      // ISOString: new Date(value).toISOString()
     };
   }
 
   return programmeDates;
 });
 
-const getChannels = state => state.channels;
 const getSelectedDate = (state) => {
   const dates = getProgrammeDates(state);
 
@@ -44,7 +43,7 @@ export const getSelectedDatesProgrammes = createSelector(
     if (!selectedDate || !programmes) {
       return {};
     }
-    
+
     todaysProgrammes = filter(programmes, { day: selectedDate.day });
 
     /* eslint no-shadow: 0 */
