@@ -8,7 +8,7 @@ let state;
 
 describe('navigation reducer', () => {
   describe('Given no action type', () => {
-    before(() => {
+    beforeAll(() => {
       state = reducer(undefined, {});
     });
 
@@ -23,7 +23,7 @@ describe('navigation reducer', () => {
     describe('and a forward direction', () => {
       const direction = 1;
 
-      before(() => {
+      beforeAll(() => {
         state = reducer(initialState.offset, { type, direction });
       });
 
@@ -35,7 +35,7 @@ describe('navigation reducer', () => {
     describe('and a backward direction', () => {
       const direction = -1;
 
-      before(() => {
+      beforeAll(() => {
         state = reducer(state = 1, { type, direction });
       });
 

@@ -1,5 +1,8 @@
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+
+chai.use(sinonChai);
 
 import { NAVIGATE_PAGE } from './actionTypes';
 import { navigatePage, navigate } from './navigationActions';
@@ -14,7 +17,7 @@ describe('Navigation Actions', () => {
     const direction = 1;
 
     describe('When navigate action creator is invoked', () => {
-      before(() => {
+      beforeAll(() => {
         action = navigate(direction)(dispatch);
       });
 
@@ -24,7 +27,7 @@ describe('Navigation Actions', () => {
     });
 
     describe('When navigatePage is invoked', () => {
-      before(() => {
+      beforeAll(() => {
         action = navigatePage(direction);
       });
 

@@ -1,5 +1,8 @@
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+
+chai.use(sinonChai);
 
 import { SELECT_DATE, NAVIGATE_PAGE } from './actionTypes';
 import { move, goToNextDate } from './dateSelectorActions';
@@ -17,7 +20,7 @@ describe('Date Selector Actions', () => {
     const index = 1;
 
     describe('When move action creator is invoked', () => {
-      before(() => {
+      beforeAll(() => {
         getState.returns(mockState);
         action = move(index)(dispatch, getState);
       });
@@ -36,7 +39,7 @@ describe('Date Selector Actions', () => {
     });
 
     describe('When goToNextDate is invoked', () => {
-      before(() => {
+      beforeAll(() => {
         action = goToNextDate(index);
       });
 

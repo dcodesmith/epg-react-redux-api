@@ -1,16 +1,19 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
-
+import chai, { expect } from 'chai';
 import { shallow } from 'enzyme';
+import sinonChai from 'sinon-chai';
+
+chai.use(sinonChai);
+
 import CsvUploadForm from './CsvUploadForm';
 
 const onFileChange = sinon.spy();
-const onUpload = sinon.spy();
+const onUploadSpy = sinon.spy();
 
 const DEFAULT_PROPS = {
   onFileChange,
-  onUpload,
+  onUpload: onUploadSpy,
   isUploading: false,
   label: 'Text'
 };
@@ -39,7 +42,7 @@ describe('CsvUploadForm', () => {
 
       it('should have an input field with the appropriate props', () => {
         const { onChange, accept, type } = form.find('input').props();
-        
+
         expect(onChange).to.equal(DEFAULT_PROPS.onFileChange);
         expect(type).to.equal('file');
         expect(accept).to.equal('.csv');
@@ -58,11 +61,11 @@ describe('CsvUploadForm', () => {
       });
 
       describe('AND a file selected', () => {
-        before(() => {
+        beforeAll(() => {
           form.find('input').simulate('change');
         });
 
-        after(() => {
+        afterAll(() => {
           onFileChange.reset();
         });
 
@@ -71,19 +74,19 @@ describe('CsvUploadForm', () => {
         });
 
         describe('WHEN the form is submitted', () => {
-          before(() => {
-            onUpload.reset();
+          beforeAll(() => {
+            onUploadSpy.reset();
             form.find('button').simulate('click');
           });
 
           it('should call `onUpload()` once', () => {
-            expect(onUpload).to.be.calledOnce;
+            expect(onUploadSpy).to.be.calledOnce;
           });
         });
       });
 
       describe('AND a CSV file is being uploaded', () => {
-        before(() => {
+        beforeAll(() => {
           testProps.isUploading = true;
         });
 
@@ -92,13 +95,13 @@ describe('CsvUploadForm', () => {
         });
 
         describe('WHEN the form is submitted', () => {
-          before(() => {
+          beforeAll(() => {
             form.find('button').simulate('click');
-            onUpload.reset();
+            onUploadSpy.reset();
           });
 
           it('should NOT call `onUpload()`', () => {
-            expect(onUpload).to.not.be.called;
+            expect(onUploadSpy).to.not.be.called;
           });
         });
       });

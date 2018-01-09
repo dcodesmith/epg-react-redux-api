@@ -4,10 +4,6 @@ import { hideModal } from '../actions/modalActions';
 
 import Overlay from '../components/Overlay';
 
-const mapStateToProps = (state, ownProps) => {
-  const { isOpen, data } = state.modal;
-
-  return { isOpen, data };
-};
+const mapStateToProps = ({ modal: { isOpen, data } }) => ({ isOpen, data });
 
 export default connect(mapStateToProps, { onHideModal: hideModal })(Overlay);

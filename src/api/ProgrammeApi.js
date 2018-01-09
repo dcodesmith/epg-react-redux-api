@@ -34,7 +34,6 @@ class ProgrammeApi {
       }
     });
   }
-
 }
 
 export default ProgrammeApi;

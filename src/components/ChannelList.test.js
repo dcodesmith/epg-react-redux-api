@@ -19,7 +19,7 @@ describe('ChannelList', () => {
     describe('When the the component is rendered', () => {
       let component, channelList;
 
-      before(() => {
+      beforeAll(() => {
         component = render();
         channelList = component.find('.channel__list');
       });

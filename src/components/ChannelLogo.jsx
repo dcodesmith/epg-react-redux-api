@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ChannelLogo = ({ channel }) => (
   <div className={channel}>
-    <img className="channel-logo" src={require(`../images/${channel}.svg`)} />
+    <img className="channel-logo" alt="alt" src={`../images/${channel}.svg`} />
   </div>
 );
 

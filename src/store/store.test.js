@@ -1,4 +1,4 @@
-import expect from 'expect';
+import { expect } from 'chai';
 import { createStore } from 'redux';
 
 import rootReducer from '../reducers';
@@ -16,6 +16,6 @@ describe('Store', () => {
     const actual = store.getState().programmes;
     const expected = [];
 
-    expect(actual).toEqual(expected);
+    expect(actual).to.eql(expected);
   });
 });

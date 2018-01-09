@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
 class ChannelApi {
-
   static create(data) {}
 
   static readAll() {
@@ -12,7 +11,6 @@ class ChannelApi {
   static update(data) {}
 
   static delete(id) {}
-
 }
 
 export default ChannelApi;

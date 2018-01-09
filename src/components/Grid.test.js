@@ -30,7 +30,7 @@ describe('Grid', () => {
     describe('When rendered', () => {
       let component;
 
-      before(() => {
+      beforeAll(() => {
         component = render();
       });
 

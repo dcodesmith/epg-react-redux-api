@@ -67,7 +67,7 @@ describe('Controls', () => {
     });
 
     describe('And the offset value is 0', () => {
-      before(() => {
+      beforeAll(() => {
         testProps.offset = 0;
       });
 
@@ -81,7 +81,7 @@ describe('Controls', () => {
     });
 
     describe('And the offset value is greater than 0 and less than the last offset', () => {
-      before(() => {
+      beforeAll(() => {
         testProps.offset = 1;
       });
 
@@ -95,7 +95,7 @@ describe('Controls', () => {
     });
 
     describe('And the offset value is equal to or greater than the last offset', () => {
-      before(() => {
+      beforeAll(() => {
         testProps.offset = 6;
       });
 

@@ -6,10 +6,10 @@ import GridContainer from './GridContainer';
 import OverlayContainer from './OverlayContainer';
 
 const App = () => (
-  <div className="container">
+  <div className="container-fluid">
     <CsvUploadFormContainer />
 
-    <section className="col-md-12">
+    <section>
       <div className="grid">
         <DateSelectorContainer />
         <GridContainer />

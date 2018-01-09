@@ -1,4 +1,7 @@
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import sinonChai from 'sinon-chai';
+
+chai.use(sinonChai);
 
 import { SHOW_MODAL, HIDE_MODAL } from './actionTypes';
 import { showModal, hideModal } from './modalActions';
@@ -10,7 +13,7 @@ describe('Modal Actions', () => {
     const data = { name: 'A' };
 
     describe('When the show modal action creator is invoked', () => {
-      before(() => {
+      beforeAll(() => {
         action = showModal(data);
       });
 
@@ -21,7 +24,7 @@ describe('Modal Actions', () => {
   });
 
   describe('When the hide modal action creator is invoked', () => {
-    before(() => {
+    beforeAll(() => {
       action = hideModal();
     });
 

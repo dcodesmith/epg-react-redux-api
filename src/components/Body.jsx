@@ -22,17 +22,14 @@ const Body = ({ programmes, transformStyle, onModalShow }) => {
 
   const channelsNodes = channels.map(channel =>
     <div key={ channel } className={ `${channel} programme-guide__row` }>
-
       <div className="programme-guide__row__header">
         <ChannelLogo channel={ channel } />
       </div>
-
       <div className="programme-guide__row__items" style={ transformStyle }>
         <ul className="schedule">
           { getProgrammesNodes(channel) }
         </ul>
       </div>
-
     </div>
   );
 

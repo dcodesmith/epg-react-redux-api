@@ -1,7 +1,10 @@
 import React from 'react';
 import sinon from 'sinon';
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 import { shallow } from 'enzyme';
+import sinonChai from 'sinon-chai';
+
+chai.use(sinonChai);
 
 import Toolbar from './Toolbar';
 
@@ -33,7 +36,7 @@ describe('Toolbar', () => {
       });
 
       describe('And the button is clicked', () => {
-        before(() => {
+        beforeAll(() => {
           button.simulate('click');
         });
 

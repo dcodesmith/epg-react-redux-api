@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 // Form onSumit triggers regardless of submit buttons state (enable or disable),
 // ...so can't test for eventHandler call
 
-const CsvUploadForm = ({ onUpload, isUploading = false, label, onFileChange }) => (
-  <div className="channel-panel col-xs-12 col-sm-6 col-lg-8">
+const CsvUploadForm = ({ onUpload, isUploading, label, onFileChange }) => (
+  <div className="channel-panel">
     <form className="form-horizontal">
 
       <div className="form-group">
@@ -47,9 +47,13 @@ const CsvUploadForm = ({ onUpload, isUploading = false, label, onFileChange }) =
 
 CsvUploadForm.propTypes = {
   onUpload: PropTypes.func.isRequired,
-  isUploading: PropTypes.bool.isRequired,
+  isUploading: PropTypes.bool,
   label: PropTypes.string.isRequired,
   onFileChange: PropTypes.func.isRequired
+};
+
+CsvUploadForm.defaultProps = {
+  isUploading: false
 };
 
 export default CsvUploadForm;

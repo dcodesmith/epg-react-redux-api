@@ -6,14 +6,15 @@ export function loadChannelsSuccess(channels) {
   return { type: LOAD_CHANNELS_SUCCESS, channels };
 }
 
-export function loadChannels() {
-  return (dispatch) => {
-    dispatch(beginAjaxCall());
-    return ChannelApi.readAll().then((channels) => {
-      dispatch(loadChannelsSuccess(channels));
-    }).catch((error) => {
-      dispatch(ajaxCallError());
-      throw (error);
-    });
-  };
-}
+export const loadChannels = () => async (dispatch) => {
+  dispatch(beginAjaxCall());
+
+  try {
+    const channels = await ChannelApi.readAll();
+
+    dispatch(loadChannelsSuccess(channels));
+  } catch (error) {
+    dispatch(ajaxCallError());
+    // throw (error);
+  }
+};
