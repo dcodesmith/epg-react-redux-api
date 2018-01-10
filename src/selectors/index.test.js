@@ -1,5 +1,8 @@
 import { expect } from 'chai';
+import moment from 'moment';
 import { getProgrammeDates, getSelectedDatesProgrammes } from './index';
+
+const DATE_FORMAT = 'YYYY-MM-DD';
 
 const programmes = [
   { day: 1, show: 'Homes Under The Hammer', channel: { code: 'fv56lj0' } },
@@ -32,14 +35,12 @@ describe('selectors', () => {
     });
 
     it('should return each unique programmes day & value pair', () => {
-      expect(programmeDates).to.eql(
-        [ { day: 1, value: '2018-01-09' },
-          { day: 2, value: '2018-01-10' },
-          { day: 3, value: '2018-01-11' },
-          { day: 4, value: '2018-01-12' },
-          { day: 5, value: '2018-01-13' },
-          { day: 6, value: '2018-01-14' }
-      ]);
+      programmeDates.forEach((programmeDate, index) => {
+        expect(programmeDate).to.eql({
+          day: index +  1,
+          value: moment().add(index, 'days').format(DATE_FORMAT)
+        });
+      });
     });
   });
 

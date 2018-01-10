@@ -2,30 +2,20 @@ import moment from 'moment';
 import { createSelector } from 'reselect';
 import { filter, uniq } from 'lodash';
 
+const DATE_FORMAT = 'YYYY-MM-DD';
+
 const getProgrammes = state => state.programmes;
 const getChannels = state => state.channels;
 
-export const getProgrammeDates = createSelector([getProgrammes], programmes => {
-  const programmeDates = [];
+export const getProgrammeDates = createSelector(
+  [getProgrammes], programmes => {
   const days = programmes.map(({ day }) => day);
   const numberOfDays = uniq(days);
-  // const endDate = new Date(Math.max.apply(null, dates));
-  // const startDate = new Date(Math.min.apply(null, dates));
-  // const numberOfDays = moment(endDate).diff(moment(startDate), 'days') + 1;
-  let value;
-  let index;
 
-  const DATE_FORMAT = 'YYYY-MM-DD';
-
-  for (index = 0; index < numberOfDays.length; index += 1) {
-    value = moment().add(index, 'days').format(DATE_FORMAT);
-    programmeDates[index] = {
-      day: index + 1,
-      value
-    };
-  }
-
-  return programmeDates;
+  return numberOfDays.map((day, index) => ({
+    day,
+    value: moment().add(index, 'days').format(DATE_FORMAT)
+  }));
 });
 
 const getSelectedDate = (state) => {
