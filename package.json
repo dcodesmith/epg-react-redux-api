@@ -2,6 +2,7 @@
   "name": "epg-react-redux-ui",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://dcodesmith.github.io/epg-react-redux-ui",
   "dependencies": {
     "bootstrap": "v4.0.0-beta.3",
     "classnames": "^2.2.5",
@@ -25,6 +26,9 @@
     "test": "react-scripts test --env=jsdom --verbose",
     "test:coverage": "react-scripts test --env=jsdom --coverage",
     "coveralls": "ls -l ./coverage && cat ./coverage/lcov.info | coveralls",
+    "predeploy": "npm run build",
+    "deploy": "npm run cleanup && gh-pages -d build",
+    "cleanup": "rm -rf node_modules/gh-pages/.cache",
     "eject": "react-scripts eject"
   },
   "jest": {
@@ -40,6 +44,7 @@
     "coveralls": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "gh-pages": "^1.1.0",
     "nock": "^9.1.5",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.2",

@@ -13,7 +13,12 @@ cache:
 
 script:
   - yarn test:coverage
-  - yarn build
+
+after_success:
+  - git config --global user.email "dcodesmith@users.noreply.github.com"
+  - git remote rm origin
+  - git remote add origin https://dcodesmith:${GH_TOKEN}@github.com/dcodesmith/epg-react-redux-ui.git
+  - yarn deploy
 
 after_script:
   - yarn coveralls
