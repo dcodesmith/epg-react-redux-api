@@ -1,13 +1,9 @@
 import React from 'react';
-import sinon from 'sinon';
-import chai, { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinonChai from 'sinon-chai';
 
 import ProgrammeItem from './ProgrammeItem';
-chai.use(sinonChai);
 
-const onModalShowSpy = sinon.spy();
+const onModalShowSpy = jest.fn();
 const programme = {
   createdAt: '2018-01-01T13:30:55.446Z',
   day: 1,
@@ -24,7 +20,10 @@ const programme = {
   updatedAt: '2018-01-01T13:30:55.446Z'
 };
 
-const props = { programme, onModalShow: onModalShowSpy };
+const DEFAULT_PROPS = {
+  programme,
+  onModalShow: onModalShowSpy
+};
 
 describe('ProgrammeItem', () => {
   describe('Given ...', () => {
@@ -32,21 +31,21 @@ describe('ProgrammeItem', () => {
       let component;
 
       beforeAll(() => {
-        component = shallow(<ProgrammeItem {...props} />);
+        component = shallow(<ProgrammeItem { ...DEFAULT_PROPS } />);
       });
 
       it('should render the component', () => {
-        expect(component.find('.schedule__item')).to.have.lengthOf(1);
+        expect(component.find('.schedule__item')).toHaveLength(1);
       });
 
       it('should display the show title', () => {
-        expect(component.find('.schedule__item__title').text()).to.equal(programme.show);
+        expect(component.find('.schedule__item__title').text()).toEqual(programme.show);
       });
 
       it('should display the show time', () => {
         const { startTime, endTime } = programme;
 
-        expect(component.find('.schedule__item__time').text()).to.equal(`${startTime} - ${endTime}`);
+        expect(component.find('.schedule__item__time').text()).toEqual(`${startTime} - ${endTime}`);
       });
 
       describe('and the component is clicked', () => {
@@ -55,7 +54,7 @@ describe('ProgrammeItem', () => {
         });
 
         it('should invoke onModalShow', () => {
-          expect(onModalShowSpy).to.have.been.called;
+          expect(onModalShowSpy).toHaveBeenCalled();
         });
       });
     });

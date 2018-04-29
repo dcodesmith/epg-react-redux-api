@@ -1,14 +1,8 @@
 import React from 'react';
-import sinon from 'sinon';
-import { expect } from 'chai';
-import { sortBy } from 'lodash';
 import { shallow } from 'enzyme';
 
 import Body from './Body';
-import ChannelLogo from './ChannelLogo';
-import ProgrammeItem from './ProgrammeItem';
 
-const onModalShowSpy = sinon.spy();
 const mockProgrammes = {
   fv56lj0: [{
     updatedAt: "2017-06-03T20:05:34.181Z",
@@ -100,69 +94,63 @@ const mockProgrammes = {
 
 const DEFAULT_PROPS = {
   programmes: mockProgrammes,
-  onModalShow: onModalShowSpy,
+  onModalShow: () => {},
   transformStyle: {}
 };
 
 const EXPECTED_CHANNELS = Object.keys(mockProgrammes);
-
-const render = (testProps = {}) => {
-  const props = Object.assign({}, DEFAULT_PROPS, testProps);
-
-  return shallow(<Body { ...props } />);
-};
 
 describe('Body', () => {
   describe('Given a Body component', () => {
     describe('When rendered', () => {
       let component;
 
-      beforeEach(() => {
-        component = render();
+      beforeAll(() => {
+        component = shallow(<Body { ...DEFAULT_PROPS } />);
       });
 
       it('should have the expected classes', () => {
-        expect(component.hasClass('programme-guide__body')).to.be.true;
-        expect(component.hasClass('epg-fade')).to.be.true;
+        expect(component.hasClass('programme-guide__body')).toBeTruthy();
+        expect(component.hasClass('epg-fade')).toBeTruthy();
       });
 
-      it('should render 2 rows', () => {
+      it('should render 2 programme rows rows', () => {
         const channelRows = component.find('.programme-guide__row');
 
-        expect(channelRows.length).to.equal(EXPECTED_CHANNELS.length);
+        expect(channelRows).toHaveLength(EXPECTED_CHANNELS.length);
 
         channelRows.forEach((channelRow, index) => {
-          expect(channelRow.props().className).to.contain(EXPECTED_CHANNELS[index]);
+          expect(channelRow.hasClass(EXPECTED_CHANNELS[index])).toBeTruthy();
         });
       });
 
       it('should render 2 row headers', () => {
         const channelRowHeaders = component.find('.programme-guide__row__header');
 
-        expect(channelRowHeaders.length).to.equal(EXPECTED_CHANNELS.length);
+        expect(channelRowHeaders.length).toEqual(EXPECTED_CHANNELS.length);
       });
 
       it('should render 2 ChannelLogo components', () => {
         const channelRowHeaders = component.find('.programme-guide__row__header');
 
         channelRowHeaders.forEach((channelRowHeader, index) => {
-          const ChannelLogoComponent = channelRowHeader.find(ChannelLogo);
+          const ChannelLogoComponent = channelRowHeader.find('ChannelLogo');
 
-          expect(ChannelLogoComponent.props().channel).to.equal(EXPECTED_CHANNELS[index]);
+          expect(ChannelLogoComponent.props().channel).toEqual(EXPECTED_CHANNELS[index]);
         });
       });
 
-      it('should render 2 item row', () => {
+      it('should render 2 item rows', () => {
         const channelRowItems = component.find('.programme-guide__row__items');
 
-        expect(channelRowItems.length).to.be.equal(EXPECTED_CHANNELS.length);
+        expect(channelRowItems).toHaveLength(EXPECTED_CHANNELS.length);
       });
 
       // @TODO -
-      it('should render 4 Programmes components', () => {
-        const ProgrammeItemComponents = component.find(ProgrammeItem);
+      it('should render 4 Programme components', () => {
+        const ProgrammeItemComponents = component.find('ProgrammeItem');
 
-        expect(ProgrammeItemComponents.length).to.equal(4);
+        expect(ProgrammeItemComponents).toHaveLength(4);
 
         ProgrammeItemComponents.forEach((ProgrammeItemComponent, index) => {
           const { programme, onModalShow } = ProgrammeItemComponent.props();

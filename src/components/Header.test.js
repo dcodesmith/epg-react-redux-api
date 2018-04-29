@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 
 import Header from './Header';
 import TimeTrack from './TimeTrack';
@@ -8,13 +7,6 @@ import TimeTrack from './TimeTrack';
 const DEFAULT_PROPS = {
   times: [],
   transformStyle: {}
-
-};
-
-const render = (testProps = {}) => {
-  const props = Object.assign({}, DEFAULT_PROPS, testProps);
-
-  return shallow(<Header {...props} />);
 };
 
 describe('Header', () => {
@@ -22,16 +14,16 @@ describe('Header', () => {
     describe('When rendered', () => {
       let component;
 
-      beforeEach(() => {
-        component = render();
+      beforeAll(() => {
+        component = shallow(<Header { ...DEFAULT_PROPS } />);
       });
 
       it('should render a TimeTrack component with the correct props', () => {
         const timeTrackComponent = component.find(TimeTrack);
         const { times, transformStyle } = timeTrackComponent.props();
 
-        expect(times).to.eql(DEFAULT_PROPS.times);
-        expect(transformStyle).to.eql(DEFAULT_PROPS.transformStyle);
+        expect(times).toEqual(DEFAULT_PROPS.times);
+        expect(transformStyle).toEqual(DEFAULT_PROPS.transformStyle);
       });
     });
   });

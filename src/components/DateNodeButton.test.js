@@ -1,17 +1,11 @@
 import React from 'react';
-import sinon from 'sinon';
 import moment from 'moment';
-import chai, { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinonChai from 'sinon-chai';
-
-chai.use(sinonChai);
 
 import { ORDINAL_MONTH_DAY, DAY_NAME } from '../constants';
-
 import DateNodeButton from './DateNodeButton';
 
-const onSelectSpy = sinon.spy();
+const onSelectSpy = jest.fn();
 const date = { day: 1, value: '2016-03-03', ISOString: '2016-03-03T00:00:00.000Z' };
 const DEFAULT_PROPS = {
   index: 0,
@@ -22,40 +16,32 @@ const DEFAULT_PROPS = {
 const EXPECTED_DAY = moment(date.value).format(DAY_NAME);
 const EXPECTED_DATE = moment(date.value).format(ORDINAL_MONTH_DAY);
 
-const render = (testProps = {}) => {
-  const props = Object.assign({}, DEFAULT_PROPS, testProps);
-
-  return shallow(<DateNodeButton {...props} />);
-};
-
 describe('DateNodeButton', () => {
   describe('Given a DateNodeButton', () => {
     describe('When the component is rendered', () => {
       let component;
 
-      beforeEach(() => {
-        component = render();
+      beforeAll(() => {
+        component = shallow(<DateNodeButton { ...DEFAULT_PROPS } />); //render();
       });
 
       it('should be a button with the appropriate props', () => {
-        expect(component.type()).to.equal('button');
+        expect(component.type()).toEqual('button');
       });
 
       it('should display dates in the correct format', () => {
-        expect(component.childAt(0).text()).to.equal(EXPECTED_DAY);
-        expect(component.childAt(1).text()).to.equal(EXPECTED_DATE);
+        expect(component.childAt(0).text()).toEqual(EXPECTED_DAY);
+        expect(component.childAt(1).text()).toEqual(EXPECTED_DATE);
       });
 
       describe('And the button is clicked', () => {
         beforeAll(() => {
-          onSelectSpy.reset();
           component.simulate('click');
         });
 
         it('should invoke the `onSelect` function with index 0', () => {
-          expect(DEFAULT_PROPS.onSelect)
-            .to.be.calledOnce
-            .and.to.be.calledWithExactly(DEFAULT_PROPS.index);
+          expect(DEFAULT_PROPS.onSelect).toHaveBeenCalledTimes(1);
+          expect(DEFAULT_PROPS.onSelect).toHaveBeenCalledWith(DEFAULT_PROPS.index);
         });
       });
     });

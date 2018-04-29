@@ -1,6 +1,4 @@
 import React from 'react';
-import sinon from 'sinon';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import DateSelector from './DateSelector';
@@ -20,18 +18,12 @@ const MOCK_DATES = [
   { day: 2, value: '2016-03-04', ISOString: '2016-03-04T00:00:00.000Z' }
 ];
 
-const spyOnSelect = sinon.spy();
+const onSelectSpy = jest.fn();
 
 const DEFAULT_PROPS = {
   dates: MOCK_DATES,
   selectedDateIndex: 0,
-  onSelect: spyOnSelect
-};
-
-const render = (testProps = {}) => {
-  const props = Object.assign({}, DEFAULT_PROPS, testProps);
-
-  return shallow(<DateSelector {...props} />);
+  onSelect: onSelectSpy
 };
 
 const testProps = {};
@@ -42,20 +34,22 @@ describe('DateSelector', () => {
       let component;
 
       beforeEach(() => {
-        component = render(testProps);
+        const props = { ...DEFAULT_PROPS, ...testProps };
+
+        component = shallow(<DateSelector { ...props } />);
       });
 
       it('should render 2 DateNodeButton components', () => {
         const dateNodeButtonComponents = component.find(DateNodeButton);
 
-        expect(dateNodeButtonComponents).to.be.length(MOCK_DATES.length);
+        expect(dateNodeButtonComponents).toHaveLength(MOCK_DATES.length);
 
         dateNodeButtonComponents.forEach((dateNodeButtonComponent, position) => {
           const { index, date, onSelect } = dateNodeButtonComponent.props();
 
-          expect(index).to.equal(position);
-          expect(date).to.equal(MOCK_DATES[position]);
-          expect(onSelect).to.equal(spyOnSelect);
+          expect(index).toEqual(position);
+          expect(date).toEqual(MOCK_DATES[position]);
+          expect(onSelect).toEqual(onSelectSpy);
         });
       });
 
@@ -63,19 +57,19 @@ describe('DateSelector', () => {
         const { style } = component.find('span').props();
         const EXPECTED_TRASITION_STYLE = computeTransitionStyle();
 
-        expect(style).to.eql(EXPECTED_TRASITION_STYLE);
+        expect(style).toEqual(EXPECTED_TRASITION_STYLE);
       });
 
       it('should have an active the first list item', () => {
         const listItem = component.find('ul').childAt(0);
 
-        expect(listItem.hasClass('date-selector__list__item--active')).to.be.true;
+        expect(listItem.hasClass('date-selector__list__item--active')).toBeTruthy();
       });
 
       it('should NOT have an active the second list item', () => {
         const listItem = component.find('ul').childAt(1);
 
-        expect(listItem.hasClass('date-selector__list__item--active')).to.be.false;
+        expect(listItem.hasClass('date-selector__list__item--active')).toBeFalsy();
       });
 
       describe('And the 2nd date is selected', () => {
@@ -89,19 +83,19 @@ describe('DateSelector', () => {
           const { style } = component.find('span').props();
           const EXPECTED_TRASITION_STYLE = computeTransitionStyle(selectedDateIndex);
 
-          expect(style).to.eql(EXPECTED_TRASITION_STYLE);
+          expect(style).toEqual(EXPECTED_TRASITION_STYLE);
         });
 
         it('should NOT have an active the first list item', () => {
           const listItem = component.find('ul').childAt(0);
 
-          expect(listItem.hasClass('date-selector__list__item--active')).to.be.false;
+          expect(listItem.hasClass('date-selector__list__item--active')).toBeFalsy()
         });
 
         it('should have an active the second list item', () => {
           const listItem = component.find('ul').childAt(1);
 
-          expect(listItem.hasClass('date-selector__list__item--active')).to.be.true;
+          expect(listItem.hasClass('date-selector__list__item--active')).toBeTruthy();
         });
       });
     });

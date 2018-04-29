@@ -1,13 +1,11 @@
 import React from 'react';
-import sinon from 'sinon';
-import chai, { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import ProgrammeDetails from './ProgrammeDetails';
 
-const capitalizeFirstLetter = string => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
+const capitalizeFirstLetter = string => (
+  string.charAt(0).toUpperCase() + string.slice(1)
+);
 
 const programme = {
   endTime: '12:00',
@@ -26,29 +24,29 @@ describe('ProgrammeDetails', () => {
       let component;
 
       beforeAll(() => {
-        component = shallow(<ProgrammeDetails {...props} />);
+        component = shallow(<ProgrammeDetails { ...props } />);
       });
 
       it('should render the component', () => {
-        expect(component.find('.programme-details')).to.have.lengthOf(1);
+        expect(component.find('.programme-details')).toHaveLength(1);
       });
 
       it('should display the show title', () => {
-        expect(component.find('.programme-details__title').text().trim()).to.equal(programme.show);
+        expect(component.find('.programme-details__title').text().trim()).toEqual(programme.show);
       });
 
       it('should display the show time', () => {
         const { startTime, endTime } = programme;
 
-        expect(component.find('.programme-details__time').text()).to.equal(`${startTime} - ${endTime}`);
+        expect(component.find('.programme-details__time').text()).toEqual(`${startTime} - ${endTime}`);
       });
 
       it('should display the show genre', () => {
-        expect(component.find('.programme-details__genre').text()).to.equal(`Genre: ${capitalizeFirstLetter(programme.genre)}`);
+        expect(component.find('.programme-details__genre').text()).toEqual(`Genre: ${capitalizeFirstLetter(programme.genre)}`);
       });
 
       it('should display the show synopsis', () => {
-        expect(component.find('.programme-details__body p').at(1).text()).to.equal(programme.synopsis);
+        expect(component.find('.programme-details__body p').at(1).text()).toEqual(programme.synopsis);
       });
     });
   });

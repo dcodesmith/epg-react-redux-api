@@ -1,26 +1,20 @@
 import React from 'react';
-import sinon from 'sinon';
-import chai, { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinonChai from 'sinon-chai';
 import Modal from 'react-modal';
-
-chai.use(sinonChai);
 
 import Overlay from './Overlay';
 import ProgrammeDetails from './ProgrammeDetails';
 
-const onHideModalSpy = sinon.spy();
+const onHideModalSpy = jest.fn();
 const modalProps = {
-  isOpen: false, style: {}, contentLabel: 'A modal'
+  isOpen: false,
+  style: {},
+  contentLabel: 'A modal'
 };
-
-const DEFAULT_PROPS = { isOpen: false, onHideModal: onHideModalSpy, data: {} };
-
-const render = (testProps = {}) => {
-  const props = Object.assign({}, DEFAULT_PROPS, testProps);
-
-  return shallow(<Overlay { ...props } />);
+const DEFAULT_PROPS = {
+  isOpen: false,
+  onHideModal: onHideModalSpy,
+  data: {}
 };
 
 describe('Overlay', () => {
@@ -29,18 +23,18 @@ describe('Overlay', () => {
       let component, button, modalComponent, programmeDetailsComponent;
 
       beforeEach(() => {
-        component = render();
+        component = shallow(<Overlay { ...DEFAULT_PROPS } />);
         modalComponent = component.find(Modal);
         programmeDetailsComponent = modalComponent.find(ProgrammeDetails);
         button = modalComponent.find('button');
       });
 
       it('should render a Modal component with the appropriate props', () => {
-        expect(modalComponent.prop('isOpen')).to.be.false;
+        expect(modalComponent.prop('isOpen')).toBeFalsy();
       });
 
       it('should render ProgrammeDetails with the approprate props as a child of the Modal Component', () => {
-        expect(programmeDetailsComponent.prop('data')).to.eql(DEFAULT_PROPS.data);
+        expect(programmeDetailsComponent.prop('data')).toEqual(DEFAULT_PROPS.data);
       });
 
       describe('And the close CTA is clicked', () => {
@@ -49,7 +43,7 @@ describe('Overlay', () => {
         });
 
         it('should invoke the onHideModal method', () => {
-          expect(onHideModalSpy).to.have.been.calledOnce;
+          expect(onHideModalSpy).toHaveBeenCalledTimes(1);
         });
       });
     });

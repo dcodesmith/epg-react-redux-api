@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import moment from 'moment';
 import { getProgrammeDates, getSelectedDatesProgrammes } from './index';
 
@@ -36,7 +35,7 @@ describe('selectors', () => {
 
     it('should return each unique programmes day & value pair', () => {
       programmeDates.forEach((programmeDate, index) => {
-        expect(programmeDate).to.eql({
+        expect(programmeDate).toEqual({
           day: index +  1,
           value: moment().add(index, 'days').format(DATE_FORMAT)
         });
@@ -52,7 +51,7 @@ describe('selectors', () => {
     });
 
     it('should return the shows for the selected day', () => {
-      expect(selectedDatesProgrammes).to.eql({
+      expect(selectedDatesProgrammes).toEqual({
         fv56lj0: [
           {
             day: 1,
@@ -73,7 +72,7 @@ describe('selectors', () => {
       });
 
       it('should return no programmes', () => {
-        expect({}).to.eql(selectedDatesProgrammes);
+        expect({}).toEqual(selectedDatesProgrammes);
       });
     });
   });
