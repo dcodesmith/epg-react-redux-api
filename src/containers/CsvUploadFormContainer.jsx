@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { createProgrammes } from '../actions/programmeActions';
 
-import CsvUploadForm from '../components/CsvUploadForm';
+import CsvUploadForm from '../components/csv-upload-form';
 
 const FILE_CHOOSER_LABEL = 'No File Chosen';
 

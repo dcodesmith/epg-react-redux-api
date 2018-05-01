@@ -4,7 +4,7 @@ import { getProgrammeDates } from '../selectors';
 
 import { move } from '../actions/dateSelectorActions';
 
-import DateSelector from '../components/DateSelector';
+import DateSelector from '../components/date-selector';
 
 const mapStateToProps = state => ({
   selectedDateIndex: state.selectedDateIndex,
