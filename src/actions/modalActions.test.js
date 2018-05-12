@@ -1,8 +1,3 @@
-import chai, { expect } from 'chai';
-import sinonChai from 'sinon-chai';
-
-chai.use(sinonChai);
-
 import { SHOW_MODAL, HIDE_MODAL } from './actionTypes';
 import { showModal, hideModal } from './modalActions';
 
@@ -18,7 +13,7 @@ describe('Modal Actions', () => {
       });
 
       it('should return a type `SHOW_MODAL`', () => {
-        expect(action).to.eql({ type: SHOW_MODAL, data });
+        expect(action).toEqual({ type: SHOW_MODAL, data });
       });
     });
   });
@@ -29,7 +24,7 @@ describe('Modal Actions', () => {
     });
 
     it('should return a type `HIDE_MODAL`', () => {
-      expect(action).to.eql({ type: HIDE_MODAL });
+      expect(action).toEqual({ type: HIDE_MODAL });
     });
   });
 });
