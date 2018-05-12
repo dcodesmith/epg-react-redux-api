@@ -8,7 +8,7 @@ import { getSelectedDatesProgrammes } from '../selectors';
 
 import { ITEM_WIDTH } from '../constants';
 
-import Grid from '../components/Grid';
+import Grid from '../components/grid';
 
 const mapStateToProps = (state) => {
   const { offset } = state;
