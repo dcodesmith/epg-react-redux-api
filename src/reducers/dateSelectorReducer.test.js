@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import reducer from './dateSelectorReducer';
 import { SELECT_DATE } from '../actions/actionTypes';
 import initialState from './initialState';
@@ -13,7 +11,7 @@ describe('navigation reducer', () => {
     });
 
     it('should return the initial state', () => {
-      expect(state).to.eql(initialState.offset);
+      expect(state).toEqual(initialState.offset);
     });
   });
 
@@ -28,7 +26,7 @@ describe('navigation reducer', () => {
       });
 
       it('should return a state of 1', () => {
-        expect(state).to.equal(1);
+        expect(state).toEqual(1);
       });
     });
 
@@ -40,7 +38,7 @@ describe('navigation reducer', () => {
       });
 
       it('should return a state of 0', () => {
-        expect(state).to.equal(1);
+        expect(state).toEqual(1);
       });
     });
   });

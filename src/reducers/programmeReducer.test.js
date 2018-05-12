@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import reducer from './programmeReducer';
 import {
   LOAD_PROGRAMMES_SUCCESS,
@@ -28,7 +26,7 @@ describe('Programme reducer', () => {
     });
 
     it('should return the initial state', () => {
-      expect(state).to.eql(initialState.programmes);
+      expect(state).toEqual(initialState.programmes);
     });
   });
 
@@ -44,7 +42,7 @@ describe('Programme reducer', () => {
         });
 
         it('should return programmes', () => {
-          expect(state).to.eql(programmes);
+          expect(state).toEqual(programmes);
         });
       });
     });
