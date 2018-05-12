@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-// import moment from 'moment';
 
-import { md5ObjectHash } from '../utils';
 // import { ITEM_WIDTH } from '../constants'; computeTransitionStyle
 
 import DateNodeButton from './DateNodeButton';
@@ -16,7 +14,7 @@ const DateSelector = ({ dates, selectedDateIndex, onSelect }) => {
   });
 
   const dateNodes = dates.map((date, index) =>
-    <li key={ md5ObjectHash(date) } className={ isActive(index) }>
+    <li key={ date } className={ isActive(index) }>
       <DateNodeButton index={ index } date={ date } onSelect={ onSelect } />
     </li>
   );

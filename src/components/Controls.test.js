@@ -1,6 +1,4 @@
 import React from 'react';
-import sinon from 'sinon';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import Controls from './Controls';
@@ -15,55 +13,47 @@ import {
   FORWARD
 } from '../constants';
 
-const onNavigateSpy = sinon.spy();
-
+const onNavigateSpy = jest.fn();
 const DEFAULT_PROPS = {
   onNavigate: onNavigateSpy,
   times: new Array(24),
   offset: 0
 };
-
-const render = (testProps) => {
-  const props = Object.assign({}, DEFAULT_PROPS, testProps);
-
-  return shallow(<Controls { ...props } />);
-};
-
 const testProps = {};
 
-describe('Controls', () => {
+describe.only('Controls', () => {
   describe('When the component is rendered', () => {
     let component, controlButtonComponents, nextButton, previousButton;
 
     beforeEach(() => {
-      component = render(testProps);
+      const props = { ...DEFAULT_PROPS, ...testProps };
+
+      component = shallow(<Controls { ...props } />);
       controlButtonComponents = component.find(ControlButton);
       previousButton = controlButtonComponents.at(0);
       nextButton = controlButtonComponents.at(1);
     });
 
-    it('should render 2 `ControlButton` components', () => {
-      expect(controlButtonComponents).to.be.length(2);
-
-      controlButtonComponents.forEach((controlButtonComponent, index) => {
-        expect(controlButtonComponent.props().onNavigate).to.equal(onNavigateSpy);
-      });
+    it('should render 2 ControlButton components', () => {
+      expect(controlButtonComponents).toHaveLength(2);
     });
 
     it('should have a previous ControlButton with the appropriate props', () => {
-      const { title, className, direction } = previousButton.props();
+      const { title, className, direction, onNavigate } = previousButton.props();
 
-      expect(title).to.equal(PREVIOUS_BUTTON_TITLE);
-      expect(className).to.equal(PREVIOUS_BUTTON_CLASS);
-      expect(direction).to.equal(BACKWARD);
+      expect(title).toEqual(PREVIOUS_BUTTON_TITLE);
+      expect(className).toEqual(PREVIOUS_BUTTON_CLASS);
+      expect(direction).toEqual(BACKWARD);
+      expect(onNavigate).toEqual(onNavigateSpy);
     });
 
     it('should have a next ControlButton with the appropriate props', () => {
-      const { title, className, direction } = nextButton.props();
+      const { title, className, direction, onNavigate } = nextButton.props();
 
-      expect(title).to.equal(NEXT_BUTTON_TITLE);
-      expect(className).to.equal(NEXT_BUTTON_CLASS);
-      expect(direction).to.equal(FORWARD);
+      expect(title).toEqual(NEXT_BUTTON_TITLE);
+      expect(className).toEqual(NEXT_BUTTON_CLASS);
+      expect(direction).toEqual(FORWARD);
+      expect(onNavigate).toEqual(onNavigateSpy);
     });
 
     describe('And the offset value is 0', () => {
@@ -71,12 +61,12 @@ describe('Controls', () => {
         testProps.offset = 0;
       });
 
-      it('should set the `isDisabled` previous button to false', () => {
-        expect(nextButton.props().isDisabled).to.be.false;
+      it('should enable the next button', () => {
+        expect(nextButton.props().isDisabled).toBeFalsy();
       });
 
-      it('should set the `isDisabled` next button to true', () => {
-        expect(previousButton.props().isDisabled).to.be.true;
+      it('should disable the previous button', () => {
+        expect(previousButton.props().isDisabled).toBeTruthy();
       });
     });
 
@@ -85,12 +75,12 @@ describe('Controls', () => {
         testProps.offset = 1;
       });
 
-      it('should set the `isDisabled` previous button to false', () => {
-        expect(nextButton.props().isDisabled).to.be.false;
+      it('should enable the next button', () => {
+        expect(nextButton.props().isDisabled).toBeFalsy();
       });
 
-      it('should set the `isDisabled` next button to false', () => {
-        expect(previousButton.props().isDisabled).to.be.false;
+      it('should enable the previous button', () => {
+        expect(previousButton.props().isDisabled).toBeFalsy();
       });
     });
 
@@ -99,12 +89,12 @@ describe('Controls', () => {
         testProps.offset = 6;
       });
 
-      it('should set the `isDisabled` previous button to true', () => {
-        expect(nextButton.props().isDisabled).to.be.true;
+      it('should disable the next button', () => {
+        expect(nextButton.props().isDisabled).toBeTruthy();
       });
 
-      it('should set the `isDisabled` next button to false', () => {
-        expect(previousButton.props().isDisabled).to.be.false;
+      it('should enable the previous button', () => {
+        expect(previousButton.props().isDisabled).toBeFalsy();
       });
     });
   });

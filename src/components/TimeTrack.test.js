@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect } from 'chai';
 import { range } from 'lodash';
 
 import TimeTrack from './TimeTrack';
@@ -14,19 +13,13 @@ const DEFAULT_PROPS = {
   }
 };
 
-const render = (testProps = {}) => {
-  const props = Object.assign({}, DEFAULT_PROPS, testProps);
-
-  return shallow(<TimeTrack {...props} />);
-};
-
 describe('TimeTrack', () => {
   describe('Given a TimeTrack component', () => {
     describe('When rendered', () => {
       let component, showTimeList, timeTracks;
 
-      beforeEach(() => {
-        component = render();
+      beforeAll(() => {
+        component = shallow(<TimeTrack { ...DEFAULT_PROPS } />);
         showTimeList = component.find('ul.programme-guide__showtimes');
         timeTracks = showTimeList.find('li.programme-guide__showtimes__time');
       });
@@ -34,17 +27,16 @@ describe('TimeTrack', () => {
       it('should have the correct CSS inline style applied', () => {
         const { style } = showTimeList.props();
 
-        expect(style).to.eql(DEFAULT_PROPS.transformStyle);
+        expect(style).toEqual(DEFAULT_PROPS.transformStyle);
       });
 
       it('should render a list of number of times', () => {
-        expect(timeTracks).to.have.lengthOf(DEFAULT_PROPS.times.length);
+        expect(timeTracks).toHaveLength(DEFAULT_PROPS.times.length);
       });
 
       it('should render the times in the correct format', () => {
         timeTracks.forEach((time, index) => {
-          expect(time.key()).to.equal(md5ObjectHash(DEFAULT_PROPS.times[index]));
-          expect(time.text()).to.equal(formatTrackTime(DEFAULT_PROPS.times[index]));
+          expect(time.text()).toEqual(formatTrackTime(DEFAULT_PROPS.times[index]));
         });
       });
     });
