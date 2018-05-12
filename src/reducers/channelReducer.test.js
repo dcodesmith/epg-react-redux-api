@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import reducer from './channelReducer';
 import { LOAD_CHANNELS_SUCCESS } from '../actions/actionTypes';
 import initialState from './initialState';
@@ -13,7 +11,7 @@ describe('Channel reducer', () => {
     });
 
     it('should return the initial state', () => {
-      expect(state).to.eql(initialState.channels);
+      expect(state).toEqual(initialState.channels);
     });
   });
 
@@ -28,7 +26,7 @@ describe('Channel reducer', () => {
       });
 
       it('should return channels', () => {
-        expect(state).to.equal(channels);
+        expect(state).toEqual(channels);
       });
     });
   });

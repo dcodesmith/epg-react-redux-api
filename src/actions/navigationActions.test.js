@@ -1,14 +1,7 @@
-import chai, { expect } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-
-chai.use(sinonChai);
-
 import { NAVIGATE_PAGE } from './actionTypes';
 import { navigatePage, navigate } from './navigationActions';
 
-const sandbox = sinon.sandbox.create();
-const dispatch = sandbox.spy();
+const dispatchSpy = jest.fn();
 
 describe('Navigation Actions', () => {
   let action;
@@ -18,11 +11,11 @@ describe('Navigation Actions', () => {
 
     describe('When navigate action creator is invoked', () => {
       beforeAll(() => {
-        action = navigate(direction)(dispatch);
+        action = navigate(direction)(dispatchSpy);
       });
 
       it('should return a type `SHOW_MODAL`', () => {
-        expect(dispatch).to.be.calledWith(navigatePage(direction));
+        expect(dispatchSpy).toHaveBeenCalledWith(navigatePage(direction));
       });
     });
 
@@ -32,7 +25,7 @@ describe('Navigation Actions', () => {
       });
 
       it('should return a type `NAVIGATE_PAGE`', () => {
-        expect(action).to.eql({ type: NAVIGATE_PAGE, direction });
+        expect(action).toEqual({ type: NAVIGATE_PAGE, direction });
       });
     });
   });

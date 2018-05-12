@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import reducer from './modalReducer';
 import { SHOW_MODAL, HIDE_MODAL } from '../actions/actionTypes';
 import initialState from './initialState';
@@ -13,7 +11,7 @@ describe('modal reducer', () => {
     });
 
     it('should return the initial state', () => {
-      expect(state).to.eql(initialState.modal);
+      expect(state).toEqual(initialState.modal);
     });
   });
 
@@ -28,7 +26,7 @@ describe('modal reducer', () => {
       });
 
       it('should return an `isOpen` state of true and the appropriate data', () => {
-        expect(state).to.eql({ isOpen: true, data: { firstName: 'Afees', initials: 'D', surname: 'Kolawole' } });
+        expect(state).toEqual({ isOpen: true, data: { firstName: 'Afees', initials: 'D', surname: 'Kolawole' } });
       });
     });
   });
@@ -41,7 +39,7 @@ describe('modal reducer', () => {
     });
 
     it('should return the initial state', () => {
-      expect(state).to.eql(initialState.modal);
+      expect(state).toEqual(initialState.modal);
     });
   });
 });

@@ -1,7 +1,9 @@
-import { expect } from 'chai';
-
 import reducer from './ajaxStatusReducer';
-import { BEGIN_AJAX_CALL, AJAX_CALL_ERROR, LOAD_CHANNELS_SUCCESS } from '../actions/actionTypes';
+import {
+  BEGIN_AJAX_CALL,
+  AJAX_CALL_ERROR,
+  LOAD_CHANNELS_SUCCESS
+} from '../actions/actionTypes';
 import initialState from './initialState';
 
 describe('AJAX Status Reducer', () => {
@@ -13,7 +15,7 @@ describe('AJAX Status Reducer', () => {
     });
 
     it('should return the initial state', () => {
-      expect(state).to.eql(initialState.ajaxCallsInProgress);
+      expect(state).toEqual(initialState.ajaxCallsInProgress);
     });
   });
 
@@ -28,7 +30,7 @@ describe('AJAX Status Reducer', () => {
       });
 
       it('should have to 1 ajax calls in progress', () => {
-        expect(state).to.equal(1);
+        expect(state).toEqual(1);
       });
     });
   });
@@ -44,7 +46,7 @@ describe('AJAX Status Reducer', () => {
       });
 
       it('should have to 0 ajax calls in progress', () => {
-        expect(state).to.equal(0);
+        expect(state).toEqual(0);
       });
     });
   });
@@ -60,7 +62,7 @@ describe('AJAX Status Reducer', () => {
       });
 
       it('should have to 0 ajax calls in progress', () => {
-        expect(state).to.equal(0);
+        expect(state).toEqual(0);
       });
     });
   });
