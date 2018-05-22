@@ -3,14 +3,11 @@ import { range } from 'lodash';
 
 import { navigate } from '../actions/navigationActions';
 import { showModal } from '../actions/modalActions';
-
 import { getSelectedDatesProgrammes } from '../selectors';
-
 import { ITEM_WIDTH } from '../constants';
-
 import Grid from '../components/grid';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { offset } = state;
   const abscissa = `${-offset * ITEM_WIDTH}px`;
 
