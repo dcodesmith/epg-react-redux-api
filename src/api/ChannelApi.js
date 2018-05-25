@@ -1,10 +1,13 @@
 import fetch from 'isomorphic-fetch';
 
+const host = process.env.NODE_ENV === 'production' ? 'http://localhost:8010' : 'api.dcodesmith.com';
+const API_URL = `${host}/v1/channels`;
+
 class ChannelApi {
   static create(data) {}
 
   static readAll() {
-    return fetch('http://localhost:8010/v1/channels')
+    return fetch(API_URL)
       .then(response => response.json());
   }
 

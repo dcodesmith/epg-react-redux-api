@@ -1,6 +1,7 @@
 import qs from 'querystring';
 
-const API_URL = 'http://localhost:8010/v1/programmes';
+const host = process.env.NODE_ENV === 'production' ? 'http://localhost:8010' : 'api.dcodesmith.com';
+const API_URL = `${host}/v1/programmes`;
 
 class ProgrammeApi {
   static create(data) {
