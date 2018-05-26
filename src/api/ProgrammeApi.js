@@ -1,6 +1,6 @@
 import qs from 'querystring';
 
-const { API_HOST } = process.env;
+const { REACT_APP_API_HOST } = process.env;
 const API_URL = `${API_HOST}/programmes`;
 
 class ProgrammeApi {
