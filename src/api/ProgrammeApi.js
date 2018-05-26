@@ -1,7 +1,7 @@
 import qs from 'querystring';
 
 const { REACT_APP_API_HOST } = process.env;
-const API_URL = `${API_HOST}/programmes`;
+const API_URL = `${REACT_APP_API_HOST}/programmes`;
 
 class ProgrammeApi {
   static create(data) {
