@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
-const host = process.env.NODE_ENV === 'production' ? 'http://localhost:8010' : 'api.dcodesmith.com';
-const API_URL = `${host}/v1/channels`;
+const { API_HOST } = process.env;
+const API_URL = `${API_HOST}/channels`;
 
 class ChannelApi {
   static create(data) {}
