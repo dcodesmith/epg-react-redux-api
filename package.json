@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "http://dcodesmith.github.io/epg-react-redux-ui",
   "dependencies": {
-    "bootstrap": "v4.0.0-beta.3",
+    "bootstrap": "4.1.3",
     "classnames": "^2.2.5",
     "md5": "^2.2.1",
     "moment": "^2.20.1",
