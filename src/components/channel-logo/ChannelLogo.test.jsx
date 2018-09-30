@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import ChannelLogo from './ChannelLogo';
 
-const channelCode = '0lo08w';
+const channelCode = 'fv56lj0';
 const DEFAULT_PROPS = { channel: channelCode };
 
 describe('Given a ChannelLogo component', () => {
@@ -17,7 +17,7 @@ describe('Given a ChannelLogo component', () => {
 
     it('should render the logo', () => {
       expect(channelLogo).toHaveLength(1);
-      expect(channelLogo.prop('src')).toEqual(`../images/${channelCode}.svg`);
+      expect(channelLogo.prop('src')).toEqual(`${channelCode}.svg`);
     });
   });
 });
